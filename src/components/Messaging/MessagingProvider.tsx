@@ -1,12 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { messagingApi } from '../../api/messagingApi';
 import { userApi } from '../../api/userApi';
 import type { ConversationWithLastMessage, MessageResponse } from '../../api/messagingApi';
 import { useWebSocket } from '../../hooks/useWebSocket';
 import { useAuth } from '../../contexts/AuthContext';
-import { useLoader } from '../LoaderContext';
-import { sortMessagesByTimestamp, insertMessageInOrder, mergeMessagesInOrder, debugMessageOrder } from '../../utils/messageOrdering';
+import { sortMessagesByTimestamp, insertMessageInOrder, debugMessageOrder } from '../../utils/messageOrdering';
 
 interface MessagingContextType {
   conversations: ConversationWithLastMessage[];
@@ -25,7 +24,7 @@ interface MessagingContextType {
   loadConversations: () => Promise<void>;
   selectConversation: (conversation: ConversationWithLastMessage) => Promise<void>;
   sendMessage: (content: string) => Promise<void>;
-  startNewConversation: (otherUserId: string, title?: string) => Promise<void>;
+  startNewConversation: (otherUserId: string, title?: string) => Promise<ConversationWithLastMessage>;
   markConversationAsRead: (conversationId: string) => Promise<void>;
   deleteConversation: (conversationId: string) => Promise<void>;
   loadMoreMessages: () => Promise<void>;
@@ -60,21 +59,13 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
     autoConnect: true,
   });
 
-  // Load conversations on mount and when userId changes
-  useEffect(() => {
-    if (userId) {
-      loadConversations();
-      loadUnreadCount();
-    }
-  }, [userId]);
-
   const handleError = (error: any, message: string) => {
     console.error(message, error);
     setError(message);
     setLoading(false);
   };
 
-  const loadConversations = async () => {
+  const loadConversations = useCallback(async () => {
     if (!userId) return;
     
     try {
@@ -87,9 +78,9 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
-  const loadUnreadCount = async () => {
+  const loadUnreadCount = useCallback(async () => {
     if (!userId) return;
     
     try {
@@ -98,7 +89,15 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
     } catch (error) {
       console.error('Failed to load unread count:', error);
     }
-  };
+  }, [userId]);
+
+  // Load conversations on mount and when userId changes
+  useEffect(() => {
+    if (userId) {
+      loadConversations();
+      loadUnreadCount();
+    }
+  }, [userId, loadConversations, loadUnreadCount]);
 
   const selectConversation = async (conversation: ConversationWithLastMessage) => {
     try {
@@ -242,8 +241,10 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
     }
   };
 
-  const startNewConversation = async (otherUserId: string, title?: string) => {
-    if (!userId) return;
+  const startNewConversation = async (otherUserId: string, title?: string): Promise<ConversationWithLastMessage> => {
+    if (!userId) {
+      throw new Error('No authenticated user');
+    }
 
     try {
       setLoading(true);
@@ -261,8 +262,22 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
         const fullConversation = conversations.find(conv => conv.id === existingConversation.id);
         if (fullConversation) {
           await selectConversation(fullConversation);
-          return;
+          return fullConversation;
         }
+
+        const fallbackConversation: ConversationWithLastMessage = {
+          ...existingConversation,
+          unreadCount: 0,
+        };
+
+        setConversations(prev =>
+          prev.some(conv => conv.id === fallbackConversation.id)
+            ? prev
+            : [fallbackConversation, ...prev]
+        );
+
+        await selectConversation(fallbackConversation);
+        return fallbackConversation;
       }
       
       // Create new conversation
@@ -285,11 +300,13 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
       
       // Select the new conversation
       await selectConversation(conversationWithData);
+      return conversationWithData;
       
     } catch (error) {
       console.error('Detailed error in startNewConversation:', error);
       const errorMessage = error instanceof Error ? error.message : String(error);
       handleError(error, `Failed to start new conversation: ${errorMessage}`);
+      throw error;
     } finally {
       setLoading(false);
     }

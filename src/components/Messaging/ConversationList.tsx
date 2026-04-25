@@ -106,7 +106,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({ className = 
     };
 
     fetchUserProfiles();
-  }, [conversations, currentUserId]); // Remove userProfiles and loadingProfiles to prevent infinite loop
+  }, [conversations, currentUserId, userProfiles, loadingProfiles]);
 
   const getOtherParticipant = (conversation: ConversationWithLastMessage) => {
     return conversation.userIds.find(id => id !== currentUserId) || 'Unknown User';

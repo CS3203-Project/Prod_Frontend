@@ -95,11 +95,8 @@ export const useWebSocket = (options: UseWebSocketOptions): UseWebSocketReturn =
       connect();
     }
 
-    // Cleanup on unmount
-    return () => {
-      disconnect();
-    };
-  }, [autoConnect, userId, connect, disconnect]);
+    return undefined;
+  }, [autoConnect, userId, connect]);
 
   // Reconnect when userId changes
   useEffect(() => {

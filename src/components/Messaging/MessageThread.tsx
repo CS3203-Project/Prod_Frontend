@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Clock, Circle, Wifi } from 'lucide-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useMessaging } from './MessagingProvider';
 import { userApi, type UserProfile } from '../../api/userApi';
 import type { MessageResponse } from '../../api/messagingApi';
-import Loader from '../Loader';
 
 interface MessageThreadProps {
   className?: string;
+}
+
+interface MessageGroup {
+  date: string;
+  messages: MessageResponse[];
 }
 
 export const MessageThread: React.FC<MessageThreadProps> = ({ className = '' }) => {
@@ -19,34 +22,19 @@ export const MessageThread: React.FC<MessageThreadProps> = ({ className = '' }) 
     loadMoreMessages,
     currentUserId,
     checkUserOnlineStatus,
-    onlineUsers, // Add onlineUsers to trigger re-renders when it changes
   } = useMessaging();
-  
+
   const [newMessage, setNewMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [contactProfile, setContactProfile] = useState<UserProfile | null>(null);
-  const [isContactOnline, setIsContactOnline] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const previousConversationIdRef = useRef<string | null>(null);
+  const previousMessageCountRef = useRef(0);
+  const preserveScrollRef = useRef<{ height: number; top: number } | null>(null);
+  const loadingOlderMessagesRef = useRef(false);
 
-  // Scroll to bottom when new messages arrive or when conversation changes
-  useEffect(() => {
-    if (messagesEndRef.current && messages.length > 0) {
-      // Add a small delay to ensure messages are fully rendered and ordered
-      const scrollTimeout = setTimeout(() => {
-        if (messagesEndRef.current) {
-          messagesEndRef.current.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'end'
-          });
-        }
-      }, 100); // 100ms delay to ensure DOM is updated
-      
-      return () => clearTimeout(scrollTimeout);
-    }
-  }, [messages.length, activeConversation?.id]); // Depend on message count and conversation change
-
-  // Fetch contact profile when conversation changes
   useEffect(() => {
     const fetchContactProfile = async () => {
       if (!activeConversation || !currentUserId) {
@@ -54,7 +42,7 @@ export const MessageThread: React.FC<MessageThreadProps> = ({ className = '' }) 
         return;
       }
 
-      const otherUserId = activeConversation.userIds.find(id => id !== currentUserId);
+      const otherUserId = activeConversation.userIds.find((id) => id !== currentUserId);
       if (!otherUserId) {
         setContactProfile(null);
         return;
@@ -63,16 +51,14 @@ export const MessageThread: React.FC<MessageThreadProps> = ({ className = '' }) 
       try {
         const profile = await userApi.getUserById(otherUserId);
         setContactProfile(profile);
-      } catch (error) {
-        console.error('Failed to fetch contact profile:', error);
-        // Set fallback profile
+      } catch (fetchError) {
+        console.error('Failed to fetch contact profile:', fetchError);
         setContactProfile({
           id: otherUserId,
-          firstName: `User ${otherUserId.slice(-8)}`,
-          lastName: '',
+          firstName: 'Unknown',
+          lastName: 'User',
           email: `${otherUserId}@example.com`,
-          role: 'user',
-          imageUrl: undefined,
+          role: 'USER',
           location: '',
           phone: '',
           createdAt: '',
@@ -84,161 +70,179 @@ export const MessageThread: React.FC<MessageThreadProps> = ({ className = '' }) 
     fetchContactProfile();
   }, [activeConversation, currentUserId]);
 
-  // Handle load more messages on scroll to top
+  useEffect(() => {
+    const textArea = textAreaRef.current;
+    if (!textArea) {
+      return;
+    }
+
+    textArea.style.height = '0px';
+    textArea.style.height = `${Math.min(textArea.scrollHeight, 140)}px`;
+  }, [newMessage]);
+
   useEffect(() => {
     const container = messagesContainerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
-    const handleScroll = () => {
-      if (container.scrollTop === 0 && !loading) {
-        loadMoreMessages();
-      }
+    if (loadingOlderMessagesRef.current && preserveScrollRef.current) {
+      const { height, top } = preserveScrollRef.current;
+      const heightDelta = container.scrollHeight - height;
+      container.scrollTop = top + heightDelta;
+      loadingOlderMessagesRef.current = false;
+      preserveScrollRef.current = null;
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (!container) {
+      previousConversationIdRef.current = activeConversation?.id ?? null;
+      previousMessageCountRef.current = messages.length;
+      return;
+    }
+
+    const conversationChanged = previousConversationIdRef.current !== (activeConversation?.id ?? null);
+    const messageCountIncreased = messages.length > previousMessageCountRef.current;
+    const nearBottom =
+      container.scrollHeight - container.scrollTop - container.clientHeight < 120;
+
+    if ((conversationChanged || (messageCountIncreased && nearBottom)) && messages.length > 0) {
+      requestAnimationFrame(() => {
+        messagesEndRef.current?.scrollIntoView({ block: 'end' });
+      });
+    }
+
+    previousConversationIdRef.current = activeConversation?.id ?? null;
+    previousMessageCountRef.current = messages.length;
+  }, [messages, activeConversation?.id]);
+
+  const otherUserId = activeConversation?.userIds.find((id) => id !== currentUserId);
+  const isContactOnline = otherUserId ? checkUserOnlineStatus(otherUserId) : false;
+
+  const messageGroups = useMemo<MessageGroup[]>(() => {
+    const groups = new Map<string, MessageResponse[]>();
+
+    messages.forEach((message) => {
+      const dateKey = new Date(message.createdAt).toDateString();
+      const group = groups.get(dateKey) ?? [];
+      group.push(message);
+      groups.set(dateKey, group);
+    });
+
+    return Array.from(groups.entries())
+      .map(([date, groupedMessages]) => ({
+        date,
+        messages: groupedMessages,
+      }))
+      .sort((left, right) => new Date(left.date).getTime() - new Date(right.date).getTime());
+  }, [messages]);
+
+  const formatTime = (dateString: string) =>
+    new Date(dateString).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    if (date.toDateString() === today.toDateString()) {
+      return 'Today';
+    }
+
+    if (date.toDateString() === yesterday.toDateString()) {
+      return 'Yesterday';
+    }
+
+    return date.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+  };
+
+  const handleScroll = async () => {
+    const container = messagesContainerRef.current;
+    if (!container || loading || container.scrollTop > 24) {
+      return;
+    }
+
+    loadingOlderMessagesRef.current = true;
+    preserveScrollRef.current = {
+      height: container.scrollHeight,
+      top: container.scrollTop,
     };
 
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [loading, loadMoreMessages]);
+    await loadMoreMessages();
+  };
 
-    // Track contact online status - updates automatically when onlineUsers changes
-  useEffect(() => {
-    if (!activeConversation || !currentUserId) {
-      setIsContactOnline(false);
+  const submitMessage = async () => {
+    const content = newMessage.trim();
+
+    if (!content || sending) {
       return;
     }
-
-    const otherUserId = activeConversation.userIds.find(id => id !== currentUserId);
-    if (!otherUserId) {
-      setIsContactOnline(false);
-      return;
-    }
-
-    // Update status immediately based on current onlineUsers
-    setIsContactOnline(checkUserOnlineStatus(otherUserId));
-  }, [activeConversation, currentUserId, checkUserOnlineStatus, onlineUsers]);
-
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newMessage.trim() || sending) return;
 
     try {
       setSending(true);
-      await sendMessage(newMessage.trim());
+      await sendMessage(content);
       setNewMessage('');
-    } catch (error) {
-      console.error('Failed to send message:', error);
+    } catch (sendError) {
+      console.error('Failed to send message:', sendError);
     } finally {
       setSending(false);
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage(e);
+  const handleSendMessage = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await submitMessage();
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      void submitMessage();
     }
   };
 
-  const formatTime = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(today.getDate() - 1);
-
-    if (date.toDateString() === today.toDateString()) {
-      return 'Today';
-    } else if (date.toDateString() === yesterday.toDateString()) {
-      return 'Yesterday';
-    } else {
-      return date.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
-    }
-  };
-
-  const groupMessagesByDate = (messages: MessageResponse[]) => {
-    const groups: { [key: string]: MessageResponse[] } = {};
-    
-    messages.forEach(message => {
-      const dateKey = new Date(message.createdAt).toDateString();
-      if (!groups[dateKey]) {
-        groups[dateKey] = [];
-      }
-      groups[dateKey].push(message);
-    });
-    
-    // Sort groups chronologically - oldest dates first, newest dates last
-    return Object.entries(groups)
-      .map(([date, msgs]) => ({
-        date,
-        messages: msgs,
-        sortKey: new Date(date).getTime() // Add sort key for chronological ordering
-      }))
-      .sort((a, b) => a.sortKey - b.sortKey) // Sort by date ascending (oldest first)
-      .map(({ date, messages }) => ({ date, messages })); // Remove sort key from final result
-  };
+  const renderEmptyState = (title: string, description: string) => (
+    <div className="flex h-full items-center justify-center p-6">
+      <div className="max-w-sm rounded-lg border border-white/10 bg-white/5 p-8 text-center shadow-lg">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white/70">
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.8}
+              d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.26-.95L3 20l1.4-3.72A7.94 7.94 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+            />
+          </svg>
+        </div>
+        <p className="text-base font-semibold text-white">{title}</p>
+        <p className="mt-2 text-sm text-white/60">{description}</p>
+      </div>
+    </div>
+  );
 
   if (!activeConversation) {
     return (
-      <div className={`flex flex-col h-full bg-gradient-to-br from-gray-900 via-black to-gray-900 ${className}`}>
-        {/* Header Skeleton */}
-        <div className="p-4 border-b border-white/20 bg-black/40 backdrop-blur-sm">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-8 bg-white/10 rounded-lg animate-pulse"></div>
-            <div className="flex-1 h-6 bg-white/5 rounded-lg animate-pulse"></div>
-            <div className="w-16 h-6 bg-white/10 rounded-full animate-pulse"></div>
-          </div>
-        </div>
-
-        {/* Messages Area Skeleton */}
-        <div className="flex-1 p-4 space-y-4 overflow-hidden">
-          {/* Empty state with skeleton */}
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 max-w-md w-full">
-              <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse rounded-xl"></div>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-white/20 to-white/10 flex items-center justify-center relative z-10">
-                <svg className="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
-              <p className="text-lg font-medium text-white mb-2 relative z-10">No conversation selected</p>
-              <p className="text-sm text-white/60 mb-4 relative z-10">Select a conversation to start messaging</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Input Area Skeleton */}
-        <div className="p-4 border-t border-white/20 bg-black/40 backdrop-blur-sm">
-          <div className="flex space-x-3">
-            <div className="flex-1 h-12 bg-white/5 rounded-xl animate-pulse"></div>
-            <div className="w-20 h-12 bg-white/10 rounded-xl animate-pulse"></div>
-          </div>
-        </div>
+      <div className={`flex h-full flex-col bg-neutral-950 ${className}`}>
+        {renderEmptyState('No conversation selected', 'Choose a conversation to start messaging.')}
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className={`flex flex-col h-full bg-gradient-to-br from-gray-900 via-black to-gray-900 ${className}`}>
-        <div className="flex items-center justify-center h-full p-4">
-          <div className="text-center p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 relative overflow-hidden max-w-md w-full">
-            <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse rounded-xl"></div>
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-white/20 to-white/10 flex items-center justify-center relative z-10">
-              <svg className="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-            </div>
-            <p className="text-lg font-medium text-white mb-2 relative z-10">Connection error</p>
-            <p className="text-sm text-white/60 mb-6 relative z-10">{error}</p>
+      <div className={`flex h-full flex-col bg-neutral-950 ${className}`}>
+        <div className="flex h-full items-center justify-center p-6">
+          <div className="max-w-sm rounded-lg border border-red-400/20 bg-red-500/10 p-8 text-center">
+            <p className="text-base font-semibold text-white">Connection error</p>
+            <p className="mt-2 text-sm text-white/70">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-white/20 text-white rounded-xl hover:bg-white/30 transition-all duration-300 font-medium border border-white/30 hover:border-white/40 relative overflow-hidden group"
+              className="mt-5 rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/15"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
-              <span className="relative z-10">Retry connection</span>
+              Retry
             </button>
           </div>
         </div>
@@ -246,203 +250,132 @@ export const MessageThread: React.FC<MessageThreadProps> = ({ className = '' }) 
     );
   }
 
-  const messageGroups = groupMessagesByDate(messages);
-  const otherUserId = activeConversation.userIds.find(id => id !== currentUserId);
-  const contactName = contactProfile 
-    ? `${contactProfile.firstName} ${contactProfile.lastName}`.trim() 
-    : `User ${otherUserId?.slice(-8) || 'Unknown'}`;
+  const contactName = contactProfile
+    ? `${contactProfile.firstName} ${contactProfile.lastName}`.trim()
+    : `User ${otherUserId?.slice(-8) ?? 'Unknown'}`;
 
   return (
-    <div className={`flex flex-col h-full bg-gradient-to-br from-gray-900 via-black to-gray-900 ${className}`}>
-      {/* Header */}
-      <div className="p-4 border-b border-white/20 bg-black/40 backdrop-blur-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-white font-medium text-sm">{contactName}</h3>
-              <div className="flex items-center space-x-2">
-                <div className={`w-2 h-2 rounded-full ${isContactOnline ? 'bg-green-400 animate-pulse' : 'bg-white/40'}`}></div>
-                <span className={`text-xs ${isContactOnline ? 'text-green-400' : 'text-white/60'}`}>
-                  {isContactOnline ? 'Online' : 'Offline'}
-                </span>
-              </div>
+    <div className={`flex h-full flex-col bg-neutral-950 ${className}`}>
+      <div className="border-b border-white/10 bg-neutral-900/80 px-4 py-3 backdrop-blur">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white">
+            {contactName.charAt(0).toUpperCase()}
+          </div>
+          <div className="min-w-0">
+            <h3 className="truncate text-sm font-semibold text-white">{contactName}</h3>
+            <div className="mt-1 flex items-center gap-2 text-xs">
+              <span
+                className={`h-2 w-2 rounded-full ${
+                  isContactOnline ? 'bg-emerald-400' : 'bg-white/25'
+                }`}
+              />
+              <span className={isContactOnline ? 'text-emerald-300' : 'text-white/55'}>
+                {isContactOnline ? 'Online' : 'Offline'}
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Messages */}
-      <div 
+      <div
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4"
+        onScroll={() => {
+          void handleScroll();
+        }}
+        className="flex-1 overflow-y-auto bg-neutral-950 px-4 py-4"
       >
-        {loading && messages.length === 0 && (
-          <div className="space-y-4">
-            {/* Skeleton messages loading */}
-            <div className="flex justify-start">
-              <div className="max-w-xs lg:max-w-md px-4 py-3 bg-white/5 rounded-2xl animate-pulse">
-                <div className="space-y-2">
-                  <div className="h-4 bg-white/10 rounded-lg"></div>
-                  <div className="h-4 bg-white/10 rounded-lg w-3/4"></div>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <div className="max-w-xs lg:max-w-md px-4 py-3 bg-white/10 rounded-2xl animate-pulse">
-                <div className="space-y-2">
-                  <div className="h-4 bg-white/5 rounded-lg"></div>
-                  <div className="h-4 bg-white/5 rounded-lg w-5/6"></div>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-start">
-              <div className="max-w-xs lg:max-w-md px-4 py-3 bg-white/5 rounded-2xl animate-pulse">
-                <div className="space-y-2">
-                  <div className="h-4 bg-white/10 rounded-lg"></div>
-                  <div className="h-4 bg-white/10 rounded-lg w-4/6"></div>
-                  <div className="h-4 bg-white/10 rounded-lg w-2/6"></div>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <div className="max-w-xs lg:max-w-md px-4 py-3 bg-white/10 rounded-2xl animate-pulse">
-                <div className="space-y-2">
-                  <div className="h-4 bg-white/5 rounded-lg"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
         {loading && messages.length > 0 && (
-          <div className="text-center py-4">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl">
-              <div className="animate-spin rounded-full h-4 w-4 border-2 border-white/20 border-t-white"></div>
-              <span className="text-white/90 text-sm">Loading more messages...</span>
+          <div className="mb-4 flex justify-center">
+            <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+              Loading older messages...
             </div>
           </div>
         )}
 
-        {messageGroups.map(({ date, messages: groupMessages }) => (
-          <div key={date} className="space-y-4">
-            {/* Date separator */}
-            <div className="flex items-center justify-center py-2">
-              <div className="text-white/60 text-xs px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">
-                {formatDate(date)}
+        {loading && messages.length === 0 ? (
+          <div className="space-y-3">
+            {[0, 1, 2].map((row) => (
+              <div key={row} className={`flex ${row % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+                <div className="w-full max-w-xs rounded-2xl bg-white/6 px-4 py-3 md:max-w-md">
+                  <div className="h-3 animate-pulse rounded bg-white/10" />
+                  <div className="mt-2 h-3 w-3/4 animate-pulse rounded bg-white/10" />
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+        ) : messageGroups.length === 0 ? (
+          renderEmptyState('No messages yet', 'Start the conversation by sending a message.')
+        ) : (
+          <div className="space-y-6">
+            {messageGroups.map((group) => (
+              <section key={group.date} className="space-y-3">
+                <div className="flex justify-center">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/50">
+                    {formatDate(group.date)}
+                  </span>
+                </div>
 
-            {/* Messages for this date */}
-            <div className="space-y-3">
-              {groupMessages.map((message, index) => {
-                const isOwnMessage = message.fromId === currentUserId;
-                
-                return (
-                  <div key={`${message.id}-${index}`} className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-xs lg:max-w-md xl:max-w-lg ${
-                      isOwnMessage 
-                        ? 'bg-white/20 border-white/30' 
-                        : 'bg-white/10 border-white/20'
-                    } backdrop-blur-sm rounded-2xl px-4 py-3 border shadow-lg relative overflow-hidden group transition-all duration-300 hover:${
-                      isOwnMessage 
-                        ? 'border-white/40 bg-white/30' 
-                        : 'border-white/30 bg-white/15'
-                    }`}>
-                      
-                      {/* Shimmering gradient effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 group-hover:animate-pulse rounded-2xl"></div>
-                      
-                      {/* Message content */}
-                      <div className="text-white relative z-10 break-words">
-                        {message.content}
-                      </div>
+                <div className="space-y-2">
+                  {group.messages.map((message) => {
+                    const isOwnMessage = message.fromId === currentUserId;
 
-                      {/* Timestamp */}
-                      <div className="flex items-center justify-end mt-2 relative z-10">
-                        <span className="text-xs text-white/60">
-                          {formatTime(message.createdAt)}
-                        </span>
-                        {isOwnMessage && (
-                          <div className="ml-2">
-                            {message.receivedAt ? (
-                              <svg className="w-3 h-3 text-white/80" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L4 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                            ) : (
-                              <svg className="w-3 h-3 text-white/40" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                            )}
+                    return (
+                      <div
+                        key={message.id}
+                        className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`}
+                      >
+                        <div
+                          className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-sm md:max-w-[70%] ${
+                            isOwnMessage
+                              ? 'bg-emerald-500 text-emerald-950'
+                              : 'border border-white/10 bg-white/6 text-white'
+                          }`}
+                        >
+                          <p className="whitespace-pre-wrap break-words text-sm leading-6">
+                            {message.content}
+                          </p>
+                          <div
+                            className={`mt-2 flex items-center justify-end gap-2 text-[11px] ${
+                              isOwnMessage ? 'text-emerald-950/70' : 'text-white/45'
+                            }`}
+                          >
+                            <span>{formatTime(message.createdAt)}</span>
+                            {isOwnMessage && <span>{message.receivedAt ? 'Seen' : 'Sent'}</span>}
                           </div>
-                        )}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-
-        {messages.length === 0 && !loading && (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 max-w-md w-full">
-              <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse rounded-xl"></div>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-white/20 to-white/10 flex items-center justify-center relative z-10">
-                <svg className="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
-              <p className="text-lg font-medium text-white mb-2 relative z-10">No messages yet</p>
-              <p className="text-sm text-white/60 relative z-10">Start the conversation by sending a message</p>
-            </div>
+                    );
+                  })}
+                </div>
+              </section>
+            ))}
           </div>
         )}
 
-        <div ref={messagesEndRef} className="h-1 mt-2" />
+        <div ref={messagesEndRef} />
       </div>
 
-      {/* Message Input */}
-      <div className="p-4 border-t border-white/20 bg-black/40 backdrop-blur-sm">
-        <form onSubmit={handleSendMessage} className="flex items-end space-x-3">
-          <div className="flex-1">
-            <textarea
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
-              rows={1}
-              className="w-full p-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/60 resize-none focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all duration-300 min-h-[44px] max-h-[120px]"
-              disabled={sending}
-            />
-          </div>
-          
+      <div className="border-t border-white/10 bg-neutral-900/80 px-4 py-3 backdrop-blur">
+        <form onSubmit={handleSendMessage} className="flex items-end gap-3">
+          <textarea
+            ref={textAreaRef}
+            value={newMessage}
+            onChange={(event) => setNewMessage(event.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type your message"
+            rows={1}
+            disabled={sending}
+            className="min-h-[44px] max-h-[140px] flex-1 resize-none rounded-xl border border-white/10 bg-white/6 px-3 py-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-emerald-400/50 focus:bg-white/8"
+          />
           <button
             type="submit"
             disabled={!newMessage.trim() || sending}
-            className="px-6 py-3 bg-white/20 text-white rounded-xl hover:bg-white/30 transition-all duration-300 font-medium border border-white/30 hover:border-white/40 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-[80px] relative overflow-hidden group"
+            className="flex h-11 min-w-[88px] items-center justify-center rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-emerald-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/35"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
-            {sending ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-2 border-white/20 border-t-white"></div>
-            ) : (
-              <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-              </svg>
-            )}
+            {sending ? 'Sending...' : 'Send'}
           </button>
         </form>
-        
-        {/* Helper text */}
-        <div className="mt-2 text-xs text-white/60 text-center">
-          Press Enter to send • Shift+Enter for new line
-        </div>
+        <p className="mt-2 text-xs text-white/40">Enter to send. Shift+Enter for a new line.</p>
       </div>
     </div>
   );

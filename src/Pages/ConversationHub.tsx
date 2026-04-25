@@ -88,33 +88,14 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
     };
 
     fetchUserProfiles();
-  }, [conversations, currentUserId]);
+  }, [conversations, currentUserId, userProfiles, loadingProfiles]);
 
   const handleStartNewConversation = async (otherUserId: string) => {
     try {
-      await startNewConversation(otherUserId);
+      const conversation = await startNewConversation(otherUserId);
       setShowNewConversation(false);
-      // Reload conversations to get the latest list
       await loadConversations();
-      // After creating/finding conversation, navigate to it
-      setTimeout(() => {
-        const conversation = conversations.find(conv => 
-          conv.userIds.includes(otherUserId) && conv.userIds.includes(currentUserId)
-        );
-        if (conversation) {
-          navigate(`/conversation/${conversation.id}`);
-        } else {
-          // If we can't find it in the current list, reload and try again
-          loadConversations().then(() => {
-            const updatedConversation = conversations.find(conv => 
-              conv.userIds.includes(otherUserId) && conv.userIds.includes(currentUserId)
-            );
-            if (updatedConversation) {
-              navigate(`/conversation/${updatedConversation.id}`);
-            }
-          });
-        }
-      }, 500);
+      navigate(`/conversation/${conversation.id}`);
     } catch (error) {
       console.error('Failed to start new conversation:', error);
     }
@@ -193,17 +174,9 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 animate-pulse"></div>
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-      
-      {/* Floating orbs for visual appeal - Black and White only */}
-      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-white/5 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
-      
+    <div className="flex flex-col min-h-screen bg-neutral-950 text-white">
       <Navbar />
-      <main className="flex-grow container mx-auto px-4 py-8 mt-16 relative z-10">
+      <main className="container mx-auto mt-16 flex-grow px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-8 text-center">
@@ -222,11 +195,9 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
           <div className="mb-8 flex justify-center">
             <button
               onClick={() => setShowNewConversation(true)}
-              className="px-8 py-4 bg-gradient-to-r from-white to-white/80 backdrop-blur-xl text-dark-primary rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl flex items-center space-x-3 border border-white/20 hover:border-white/40 relative overflow-hidden group font-semibold"
+              className="flex items-center space-x-3 rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-emerald-950 transition hover:bg-emerald-400"
             >
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
-              <div className="relative z-10 flex items-center space-x-3">
+              <div className="flex items-center space-x-3">
                 <div className="w-6 h-6 rounded-lg bg-black/20 flex items-center justify-center">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -240,11 +211,8 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
           {/* New Conversation Modal */}
           {showNewConversation && (
             <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-white/20 p-8 w-full max-w-lg shadow-2xl relative overflow-hidden">
-                {/* Glittering border effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse"></div>
-                
-                <div className="relative z-10">
+              <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-neutral-900 p-8 shadow-2xl">
+                <div>
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-2xl font-bold text-white">Start New Conversation</h3>
                     <button
@@ -267,11 +235,8 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
           )}
 
           {/* Conversations List */}
-          <div className="bg-black/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 relative overflow-hidden">
-            {/* Glittering border effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse"></div>
-            
-            <div className="relative z-10">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl">
+            <div>
               {loading && conversations.length === 0 ? (
                 <div className="divide-y divide-white/10">
                   {/* Skeleton Loaders */}

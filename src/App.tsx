@@ -93,8 +93,6 @@ function App() {
             <Route path="/provider-earnings" element={<ProviderEarnings />} />
             <Route path="/notifications" element={<NotificationsPage />} />
 
-            <Route path="/provider/online/:id" element={<OnlineServiceProviderProfile />} />
-            <Route path="/provider/printing/:id" element={<PrintingServiceProviderProfile />} />
             <Route path="/service-request" element={<ServiceRequestPage />} />
             <Route path="/service-request/:id/matches" element={<ServiceRequestMatchesPage />} />
                     
