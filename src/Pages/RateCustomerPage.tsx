@@ -38,7 +38,7 @@ const RateCustomerPage: React.FC = () => {
   if (error) return <div className="p-8 text-center text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-xl mx-auto mt-16 p-6 bg-white rounded shadow">
+    <div className="max-w-xl mx-auto mt-16 p-6 bg-dark-card rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Rate and Review Customer</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -75,3 +75,4 @@ const RateCustomerPage: React.FC = () => {
 };
 
 export default RateCustomerPage;
+

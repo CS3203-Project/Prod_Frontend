@@ -122,22 +122,22 @@ export default function SignIn() {
           <div className="hidden lg:flex flex-col justify-center items-center text-center p-8">
             <div className="relative">
               {/* Glowing Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm border border-black/20 dark:border-white/20 text-gray-700 dark:text-gray-300 text-sm font-medium mb-8">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm border border-black/20 dark:border-white/20 text-dark-secondary dark:text-dark-muted text-sm font-medium mb-8">
                 <span className="relative flex h-2 w-2 mr-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black/60 dark:bg-white/60 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-black dark:bg-white"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-black dark:bg-dark-card"></span>
                 </span>
                 Secure Platform
               </div>
 
-              <h1 className="text-4xl lg:text-5xl font-bold text-black dark:text-white mb-6 leading-tight">
+              <h1 className="text-4xl lg:text-5xl font-bold text-dark-primary dark:text-white mb-6 leading-tight">
                 Welcome Back to
                 <span className="block bg-gradient-to-r from-black/80 to-black/40 dark:from-white/80 dark:to-white/40 bg-clip-text text-transparent">
                   Zia
                 </span>
               </h1>
 
-              <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-lg mx-auto leading-relaxed">
+              <p className="text-xl text-dark-secondary dark:text-dark-muted mb-8 max-w-lg mx-auto leading-relaxed">
                 Continue your journey with trusted professionals and exceptional services
               </p>
 
@@ -145,21 +145,21 @@ export default function SignIn() {
               <div className="grid grid-cols-1 gap-4 max-w-md mx-auto">
                 <div className="flex items-center p-4 bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-xl border border-black/10 dark:border-white/10">
                   <div className="p-2 bg-black/10 dark:bg-white/10 rounded-lg mr-4">
-                    <Shield className="h-5 w-5 text-black dark:text-white" />
+                    <Shield className="h-5 w-5 text-dark-primary dark:text-white" />
                   </div>
                   <div className="text-left">
-                    <p className="text-black dark:text-white font-medium">Secure & Trusted</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Verified professionals</p>
+                    <p className="text-dark-primary dark:text-white font-medium">Secure & Trusted</p>
+                    <p className="text-dark-secondary dark:text-dark-muted text-sm">Verified professionals</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center p-4 bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-xl border border-black/10 dark:border-white/10">
                   <div className="p-2 bg-black/10 dark:bg-white/10 rounded-lg mr-4">
-                    <Star className="h-5 w-5 text-black dark:text-white" />
+                    <Star className="h-5 w-5 text-dark-primary dark:text-white" />
                   </div>
                   <div className="text-left">
-                    <p className="text-black dark:text-white font-medium">Quality Services</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Rated by community</p>
+                    <p className="text-dark-primary dark:text-white font-medium">Quality Services</p>
+                    <p className="text-dark-secondary dark:text-dark-muted text-sm">Rated by community</p>
                   </div>
                 </div>
               </div>
@@ -170,30 +170,30 @@ export default function SignIn() {
           <div className="flex items-center justify-center">
             <div className="w-full max-w-md">
               {/* Glass Card Container */}
-              <div className="bg-white/80 dark:bg-black/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-gray-200 dark:border-white/10 relative overflow-hidden">
+              <div className="bg-white/80 dark:bg-black/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-dark-secondary dark:border-white/10 relative overflow-hidden">
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-100/50 dark:from-white/5 via-transparent to-gray-200/30 dark:to-white/5 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-br from-dark-secondary/50 dark:from-white/5 via-transparent to-dark-tertiary/30 dark:to-white/5 pointer-events-none" />
                 
                 {/* Logo */}
                 <div className="relative z-10 text-center mb-8">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-lg">
                     <img src="/logo_svg_only_light.svg" alt="Logo" className="h-20 w-20" />
                   </div>
-                  <h2 className="text-2xl font-bold text-black dark:text-white mb-2">Sign In</h2>
-                  <p className="text-gray-600 dark:text-gray-400">Welcome back! Please enter your details</p>
+                  <h2 className="text-2xl font-bold text-dark-primary dark:text-white mb-2">Sign In</h2>
+                  <p className="text-dark-secondary dark:text-dark-muted">Welcome back! Please enter your details</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                    <label className="block text-sm font-medium text-dark-secondary dark:text-dark-muted mb-2">Email Address</label>
                     <div className="relative">
-                      <Mail className="absolute left-4 top-4 h-5 w-5 text-gray-500 dark:text-gray-400" />
+                      <Mail className="absolute left-4 top-4 h-5 w-5 text-dark-muted dark:text-dark-muted" />
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className={`w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-white/5 backdrop-blur-sm border rounded-xl text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:bg-white dark:focus:bg-white/10 focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-200 ${
-                          error ? 'border-red-500/50 focus:ring-red-500' : 'border-gray-300 dark:border-white/20 hover:border-gray-400 dark:hover:border-white/30'
+                        className={`w-full pl-12 pr-4 py-4 bg-dark-secondary dark:bg-white/5 backdrop-blur-sm border rounded-xl text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted focus:bg-dark-card dark:focus:bg-white/10 focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-200 ${
+                          error ? 'border-red-500/50 focus:ring-red-500' : 'border-dark-primary dark:border-white/20 hover:border-gray-400 dark:hover:border-white/30'
                         }`}
                         placeholder="name@email.com"
                         required
@@ -202,15 +202,15 @@ export default function SignIn() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                    <label className="block text-sm font-medium text-dark-secondary dark:text-dark-muted mb-2">Password</label>
                     <div className="relative">
-                      <Lock className="absolute left-4 top-4 h-5 w-5 text-gray-500 dark:text-gray-400" />
+                      <Lock className="absolute left-4 top-4 h-5 w-5 text-dark-muted dark:text-dark-muted" />
                       <input
                         type={showPassword ? 'text' : 'password'}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className={`w-full pl-12 pr-12 py-4 bg-gray-50 dark:bg-white/5 backdrop-blur-sm border rounded-xl text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:bg-white dark:focus:bg-white/10 focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-200 ${
-                          error ? 'border-red-500/50 focus:ring-red-500' : 'border-gray-300 dark:border-white/20 hover:border-gray-400 dark:hover:border-white/30'
+                        className={`w-full pl-12 pr-12 py-4 bg-dark-secondary dark:bg-white/5 backdrop-blur-sm border rounded-xl text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted focus:bg-dark-card dark:focus:bg-white/10 focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-200 ${
+                          error ? 'border-red-500/50 focus:ring-red-500' : 'border-dark-primary dark:border-white/20 hover:border-gray-400 dark:hover:border-white/30'
                         }`}
                         placeholder="Enter your password"
                         required
@@ -219,21 +219,21 @@ export default function SignIn() {
                         type="button"
                         aria-label={showPassword ? 'Hide password' : 'Show password'}
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-4 h-5 w-5 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+                        className="absolute right-4 top-4 h-5 w-5 text-dark-muted dark:text-dark-muted hover:text-dark-primary dark:hover:text-white transition-colors"
                       >
                         {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                       </button>
                     </div>
                     
                     <div className="mt-4 flex items-center justify-between text-sm">
-                      <label className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 cursor-pointer">
+                      <label className="inline-flex items-center gap-2 text-dark-secondary dark:text-dark-muted cursor-pointer">
                         <input 
                           type="checkbox" 
-                          className="rounded border-gray-300 dark:border-white/20 bg-gray-50 dark:bg-white/5 text-black dark:text-white focus:ring-black dark:focus:ring-white focus:ring-offset-0" 
+                          className="rounded border-dark-primary dark:border-white/20 bg-dark-secondary dark:bg-white/5 text-dark-primary dark:text-white focus:ring-black dark:focus:ring-white focus:ring-offset-0" 
                         />
                         Remember me
                       </label>
-                      <a href="/forgot" className="text-black dark:text-white font-medium hover:underline transition-colors">
+                      <a href="/forgot" className="text-dark-primary dark:text-white font-medium hover:underline transition-colors">
                         Forgot Password?
                       </a>
                     </div>
@@ -241,7 +241,7 @@ export default function SignIn() {
 
                   {error && (
                     <div className="p-4 bg-red-500/10 backdrop-blur-sm border border-red-500/20 rounded-xl">
-                      <p className="text-red-600 dark:text-red-400 text-sm text-center">{error}</p>
+                      <p className="text-red-400 dark:text-red-400 text-sm text-center">{error}</p>
                     </div>
                   )}
 
@@ -250,7 +250,7 @@ export default function SignIn() {
                     disabled={isLoading}
                     className="group relative w-full overflow-hidden"
                   >
-                    <div className="w-full flex items-center justify-center px-6 py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-black/25 dark:hover:shadow-white/25 disabled:opacity-50 disabled:cursor-not-allowed group-hover:scale-[1.02]">
+                    <div className="w-full flex items-center justify-center px-6 py-4 bg-black dark:bg-dark-card text-white dark:text-dark-primary rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-black/25 dark:hover:shadow-white/25 disabled:opacity-50 disabled:cursor-not-allowed group-hover:scale-[1.02]">
                       {isLoading ? (
                         <>
                           <Loader className="h-5 w-5 mr-2 animate-spin" />
@@ -263,22 +263,22 @@ export default function SignIn() {
                         </>
                       )}
                     </div>
-                    <div className="absolute inset-0 rounded-xl bg-black dark:bg-white opacity-0 group-hover:opacity-20 blur transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 rounded-xl bg-black dark:bg-dark-card opacity-0 group-hover:opacity-20 blur transition-opacity duration-300"></div>
                   </button>
 
                   <div className="text-center">
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-dark-secondary dark:text-dark-muted">
                       Don't have an account?{' '}
-                      <a href="/signup" className="text-black dark:text-white font-semibold hover:underline transition-colors">
+                      <a href="/signup" className="text-dark-primary dark:text-white font-semibold hover:underline transition-colors">
                         Sign up
                       </a>
                     </p>
                   </div>
 
-                  <p className="text-xs text-gray-500 dark:text-gray-500 text-center leading-relaxed">
+                  <p className="text-xs text-dark-muted dark:text-dark-muted text-center leading-relaxed">
                     By signing in, you agree to our{' '}
-                    <a className="underline hover:text-gray-700 dark:hover:text-gray-400 transition-colors" href="/terms">Terms of Service</a> and{' '}
-                    <a className="underline hover:text-gray-700 dark:hover:text-gray-400 transition-colors" href="/privacy">Privacy Policy</a>.
+                    <a className="underline hover:text-dark-secondary dark:hover:text-dark-muted transition-colors" href="/terms">Terms of Service</a> and{' '}
+                    <a className="underline hover:text-dark-secondary dark:hover:text-dark-muted transition-colors" href="/privacy">Privacy Policy</a>.
                   </p>
                 </form>
               </div>
@@ -289,3 +289,6 @@ export default function SignIn() {
     </div>
   );
 }
+
+
+

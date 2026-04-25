@@ -593,7 +593,7 @@ export default function CreateService() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-black overflow-hidden">
+    <div className="relative min-h-screen bg-dark-primary dark:bg-black overflow-hidden">
       {/* Glass Morphism Background - Homepage Style */}
       <div className="absolute inset-0 z-0">
         {/* Main gradient background */}
@@ -627,12 +627,12 @@ export default function CreateService() {
           {/* Enhanced Header */}
           <div className="relative bg-gradient-to-r from-white/50 to-white/30 dark:from-black/50 dark:to-black/30 backdrop-blur-lg px-8 py-8 border-b border-white/20 dark:border-white/10">
             <div className="relative flex items-center space-x-4">
-              <div className="p-3 bg-white dark:bg-black rounded-xl border border-white/40 dark:border-white/20 shadow-lg hover:scale-105 transition-all duration-300">
-                <FiPlus className="h-8 w-8 text-black dark:text-white" />
+              <div className="p-3 bg-dark-card dark:bg-black rounded-xl border border-white/40 dark:border-white/20 shadow-lg hover:scale-105 transition-all duration-300">
+                <FiPlus className="h-8 w-8 text-dark-primary dark:text-white" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold bg-gradient-to-br from-black from-30% to-black/40 dark:from-white dark:to-white/40 bg-clip-text text-transparent">Create New Service</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">Share your expertise with the world. Create a service that showcases your skills.</p>
+                <p className="text-dark-secondary dark:text-dark-muted mt-2">Share your expertise with the world. Create a service that showcases your skills.</p>
               </div>
             </div>
           </div>
@@ -642,13 +642,13 @@ export default function CreateService() {
             <div className="relative bg-white/50 dark:bg-black/50 backdrop-blur-lg p-8 rounded-3xl border border-white/30 dark:border-white/20 shadow-xl">
               
               <h2 className="text-xl font-bold bg-gradient-to-br from-black from-30% to-black/40 dark:from-white dark:to-white/40 bg-clip-text text-transparent mb-6 flex items-center">
-                <div className="w-3 h-3 bg-black dark:bg-white rounded-full mr-4"></div>
+                <div className="w-3 h-3 bg-black dark:bg-dark-card rounded-full mr-4"></div>
                 Category Selection
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Main Category */}
                 <div>
-                  <label htmlFor="categoryId" className="block text-sm font-semibold text-black dark:text-white mb-3">
+                  <label htmlFor="categoryId" className="block text-sm font-semibold text-dark-primary dark:text-white mb-3">
                     Category <span className="text-red-500 dark:text-red-500 dark:text-red-400">*</span>
                   </label>
                   <div className="relative">
@@ -657,19 +657,19 @@ export default function CreateService() {
                       name="categoryId"
                       value={formData.categoryId}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-4 bg-white dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 appearance-none text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                      className={`w-full px-4 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 appearance-none text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted ${
                         errors.categoryId ? 'border-red-400/50 ring-red-400/20' : 'border-white/40 dark:border-white/20'
                       }`}
                     >
-                      <option value="" className="bg-white dark:bg-black text-black dark:text-white">Select a category</option>
+                      <option value="" className="bg-dark-card dark:bg-black text-dark-primary dark:text-white">Select a category</option>
                       {categories.map((category) => (
-                        <option key={category.id} value={category.id} className="bg-white dark:bg-black text-black dark:text-white">
+                        <option key={category.id} value={category.id} className="bg-dark-card dark:bg-black text-dark-primary dark:text-white">
                           {category.name || category.slug}
                         </option>
                       ))}
                     </select>
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                      <FiChevronDown className="text-gray-600 dark:text-gray-400 w-5 h-5" />
+                      <FiChevronDown className="text-dark-secondary dark:text-dark-muted w-5 h-5" />
                     </div>
                   </div>
                   {errors.categoryId && <p className="mt-2 text-sm text-red-500 dark:text-red-500 dark:text-red-400 flex items-center">
@@ -681,7 +681,7 @@ export default function CreateService() {
                 {/* Subcategory */}
                 {subcategories.length > 0 && (
                   <div>
-                    <label htmlFor="subcategoryId" className="block text-sm font-semibold text-black dark:text-white mb-3">
+                    <label htmlFor="subcategoryId" className="block text-sm font-semibold text-dark-primary dark:text-white mb-3">
                       Subcategory
                     </label>
                     <div className="relative">
@@ -691,13 +691,13 @@ export default function CreateService() {
                         value={formData.subcategoryId}
                         onChange={handleInputChange}
                         disabled={!formData.categoryId || subcategories.length === 0}
-                        className={`w-full px-4 py-4 bg-white dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 appearance-none text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                        className={`w-full px-4 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 appearance-none text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted ${
                           !formData.categoryId || subcategories.length === 0 
-                            ? 'bg-gray-100 dark:bg-gray-900 text-gray-400 cursor-not-allowed border-gray-300 dark:border-gray-700' 
+                            ? 'bg-dark-tertiary dark:bg-gray-900 text-dark-muted cursor-not-allowed border-dark-primary dark:border-gray-700' 
                             : 'border-white/40 dark:border-white/20'
                         }`}
                       >
-                        <option value="" className="bg-white dark:bg-black text-black dark:text-white">
+                        <option value="" className="bg-dark-card dark:bg-black text-dark-primary dark:text-white">
                           {!formData.categoryId 
                             ? 'Select a category first' 
                             : subcategories.length === 0 
@@ -706,13 +706,13 @@ export default function CreateService() {
                           }
                         </option>
                         {subcategories.map((subcategory) => (
-                          <option key={subcategory.id} value={subcategory.id} className="bg-white dark:bg-black text-black dark:text-white">
+                          <option key={subcategory.id} value={subcategory.id} className="bg-dark-card dark:bg-black text-dark-primary dark:text-white">
                             {subcategory.name || subcategory.slug}
                           </option>
                         ))}
                       </select>
                       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <FiChevronDown className={!formData.categoryId || subcategories.length === 0 ? 'text-gray-400 w-5 h-5' : 'text-gray-600 dark:text-gray-400 w-5 h-5'} />
+                        <FiChevronDown className={!formData.categoryId || subcategories.length === 0 ? 'text-dark-muted w-5 h-5' : 'text-dark-secondary dark:text-dark-muted w-5 h-5'} />
                       </div>
                     </div>
                   </div>
@@ -724,13 +724,13 @@ export default function CreateService() {
             <div className="relative bg-white/50 dark:bg-black/50 backdrop-blur-lg p-8 rounded-3xl border border-white/30 dark:border-white/20 shadow-xl">
               
               <h2 className="text-xl font-bold bg-gradient-to-br from-black from-30% to-black/40 dark:from-white dark:to-white/40 bg-clip-text text-transparent mb-6 flex items-center">
-                <div className="w-3 h-3 bg-black dark:bg-white rounded-full mr-4"></div>
+                <div className="w-3 h-3 bg-black dark:bg-dark-card rounded-full mr-4"></div>
                 Service Details
               </h2>
               <div className="space-y-8">
                 {/* Title */}
                 <div className="relative">
-                  <label htmlFor="title" className="block text-sm font-semibold text-black dark:text-white mb-3">
+                  <label htmlFor="title" className="block text-sm font-semibold text-dark-primary dark:text-white mb-3">
                     Service Title <span className="text-red-500 dark:text-red-500 dark:text-red-400">*</span>
                   </label>
                   <div className="relative">
@@ -741,7 +741,7 @@ export default function CreateService() {
                       value={formData.title}
                       onChange={handleInputChange}
                       placeholder="Enter a descriptive title for your service"
-                      className={`w-full px-4 py-4 bg-white dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                      className={`w-full px-4 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted ${
                         errors.title ? 'border-red-400/50 ring-red-400/20' : 'border-white/40 dark:border-white/20'
                       }`}
                     /></div>
@@ -753,7 +753,7 @@ export default function CreateService() {
 
                 {/* Description */}
                 <div className="relative">
-                  <label htmlFor="description" className="block text-sm font-semibold text-black dark:text-white mb-3">
+                  <label htmlFor="description" className="block text-sm font-semibold text-dark-primary dark:text-white mb-3">
                     Description <span className="text-red-500 dark:text-red-400">*</span>
                   </label>
                   <div className="relative">
@@ -764,7 +764,7 @@ export default function CreateService() {
                       onChange={handleInputChange}
                       rows={6}
                       placeholder="Describe your service in detail. Include what's included, your experience, and what makes your service unique."
-                      className={`w-full px-4 py-4 bg-white dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 resize-none text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                      className={`w-full px-4 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 resize-none text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted ${
                         errors.description ? 'border-red-400/50 ring-red-400/20' : 'border-white/20'
                       }`}
                     />
@@ -778,7 +778,7 @@ export default function CreateService() {
                 {/* Price and Currency */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative">
-                    <label htmlFor="price" className="block text-sm font-semibold text-black dark:text-white mb-3">
+                    <label htmlFor="price" className="block text-sm font-semibold text-dark-primary dark:text-white mb-3">
                       Price <span className="text-red-500 dark:text-red-400">*</span>
                     </label>
                     <div className="relative">
@@ -791,7 +791,7 @@ export default function CreateService() {
                         step="0.01"
                         min="0"
                         placeholder="0.00"
-                        className={`w-full px-4 py-4 bg-white dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                        className={`w-full px-4 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted ${
                           errors.price ? 'border-red-400/50 ring-red-400/20' : 'border-white/20'
                         }`}
                       /></div>
@@ -802,7 +802,7 @@ export default function CreateService() {
                   </div>
 
                   <div className="relative">
-                    <label htmlFor="currency" className="block text-sm font-semibold text-black dark:text-white mb-3">
+                    <label htmlFor="currency" className="block text-sm font-semibold text-dark-primary dark:text-white mb-3">
                       Currency
                     </label>
                     <div className="relative">
@@ -811,7 +811,7 @@ export default function CreateService() {
                         name="currency"
                         value={formData.currency}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 bg-white dark:bg-black backdrop-blur-sm border border-white/20 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 appearance-none text-white"
+                        className="w-full px-4 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border border-white/20 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 appearance-none text-white"
                       >
                         <option value="USD" className="bg-gray-900 text-white">USD ($)</option>
                         <option value="EUR" className="bg-gray-900 text-white">EUR (€)</option>
@@ -896,7 +896,7 @@ export default function CreateService() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                   {formData.images.map((file, index) => (
                     <div key={index} className="relative group">
-                      <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 border-2 border-black hover:border-gray-700 transition-all duration-200">
+                      <div className="aspect-square rounded-lg overflow-hidden bg-dark-tertiary border-2 border-black hover:border-gray-700 transition-all duration-200">
                         <img
                           src={previewImages[index] || URL.createObjectURL(file)}
                           alt={`Preview ${index + 1}`}
@@ -1035,7 +1035,7 @@ export default function CreateService() {
                       onChange={(e) => setCurrentTag(e.target.value)}
                       placeholder="e.g., photography, wedding, portrait"
                       maxLength={30}
-                      className="w-full px-4 py-4 bg-white dark:bg-black backdrop-blur-sm border border-white/20 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                      className="w-full px-4 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border border-white/20 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted"
                       onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
                     /></div>
                   <Button 
@@ -1094,7 +1094,7 @@ export default function CreateService() {
                           className="h-5 w-5 rounded-md bg-black/30 border border-white/20 focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 text-white transition-all duration-200"
                         />
                       </div>
-                      <label htmlFor={`working-${key}`} className="ml-3 text-sm font-semibold text-black dark:text-white">
+                      <label htmlFor={`working-${key}`} className="ml-3 text-sm font-semibold text-dark-primary dark:text-white">
                         {label}
                       </label>
                     </div>
@@ -1108,7 +1108,7 @@ export default function CreateService() {
                             value={formData.workingTime[key as keyof WorkingHours].startTime}
                             onChange={(e) => handleWorkingHoursChange(key as keyof WorkingHours, 'startTime', e.target.value)}
                             disabled={!formData.workingTime[key as keyof WorkingHours].enabled}
-                            className={`px-3 py-2 bg-white dark:bg-black backdrop-blur-sm border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-white ${
+                            className={`px-3 py-2 bg-dark-card dark:bg-black backdrop-blur-sm border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-white ${
                               formData.workingTime[key as keyof WorkingHours].enabled 
                                 ? 'border-white/20' 
                                 : 'border-white/10 bg-black/10 text-white/40 cursor-not-allowed'
@@ -1122,7 +1122,7 @@ export default function CreateService() {
                           value={formData.workingTime[key as keyof WorkingHours].endTime}
                           onChange={(e) => handleWorkingHoursChange(key as keyof WorkingHours, 'endTime', e.target.value)}
                           disabled={!formData.workingTime[key as keyof WorkingHours].enabled}
-                          className={`px-3 py-2 bg-white dark:bg-black backdrop-blur-sm border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-white ${
+                          className={`px-3 py-2 bg-dark-card dark:bg-black backdrop-blur-sm border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-black/50 dark:focus:border-white/50 transition-all duration-300 text-white ${
                             formData.workingTime[key as keyof WorkingHours].enabled 
                               ? 'border-white/20' 
                               : 'border-white/10 bg-black/10 text-white/40 cursor-not-allowed'
@@ -1136,7 +1136,7 @@ export default function CreateService() {
               </div>
               {formatWorkingHoursForAPI(formData.workingTime).length > 0 && (
                 <div className="mt-6 p-4 bg-black/20 backdrop-blur-sm rounded-xl border border-white/10">
-                  <div className="text-sm font-semibold text-black dark:text-white mb-3 flex items-center">
+                  <div className="text-sm font-semibold text-dark-primary dark:text-white mb-3 flex items-center">
                     Preview (as saved):
                   </div>
                   <div className="text-sm text-white/70 space-y-1">
@@ -1157,19 +1157,19 @@ export default function CreateService() {
               <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
               <h2 className="text-xl font-bold bg-gradient-to-br from-black from-30% to-black/40 dark:from-white dark:to-white/40 bg-clip-text text-transparent mb-6 flex items-center relative z-10">
-              <div className="w-3 h-3 bg-black dark:bg-white rounded-full mr-4"></div>
+              <div className="w-3 h-3 bg-black dark:bg-dark-card rounded-full mr-4"></div>
               Service Status
               </h2>
               <div className="flex items-center justify-between p-6 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10 relative z-10">
               <div className="flex items-center space-x-3">
                 <div className={`p-2 rounded-lg border ${formData.isActive ? 'bg-black/30 dark:bg-white/20 border-white/30 dark:border-white/20' : 'bg-black/10 dark:bg-white/5 border-white/10 dark:border-white/10'}`}>
-                <FiEye className={`w-5 h-5 ${formData.isActive ? 'text-black dark:text-white' : 'text-black/40 dark:text-white/40'}`} />
+                <FiEye className={`w-5 h-5 ${formData.isActive ? 'text-dark-primary dark:text-white' : 'text-dark-primary/40 dark:text-white/40'}`} />
                 </div>
                 <div>
-                <p className={`font-medium ${formData.isActive ? 'text-black dark:text-white' : 'text-black/60 dark:text-white/60'}`}>
+                <p className={`font-medium ${formData.isActive ? 'text-dark-primary dark:text-white' : 'text-dark-primary/60 dark:text-white/60'}`}>
                   {formData.isActive ? 'Service Active' : 'Service Inactive'}
                 </p>
-                <p className="text-sm text-black/50 dark:text-white/50">
+                <p className="text-sm text-dark-primary/50 dark:text-white/50">
                   {formData.isActive 
                   ? 'Your service will be visible to customers and available for booking'
                   : 'Your service will be hidden from customers and unavailable for booking'
@@ -1187,9 +1187,9 @@ export default function CreateService() {
                   aria-label="Toggle service active status"
                 />
                 <div className={`w-12 h-6 rounded-full shadow-inner transition-colors duration-300 border-2 ${
-                  formData.isActive ? 'bg-black dark:bg-white border-black dark:border-white' : 'bg-black/10 dark:bg-white/10 border-black/20 dark:border-white/20'
+                  formData.isActive ? 'bg-black dark:bg-dark-card border-black dark:border-white' : 'bg-black/10 dark:bg-white/10 border-black/20 dark:border-white/20'
                 }`}>
-                  <div className={`w-5 h-5 bg-white dark:bg-black rounded-full shadow mt-0.5 ml-0.5 transition-transform duration-300 border ${
+                  <div className={`w-5 h-5 bg-dark-card dark:bg-black rounded-full shadow mt-0.5 ml-0.5 transition-transform duration-300 border ${
                   formData.isActive ? 'transform translate-x-6 border-black dark:border-white' : 'border-black/20 dark:border-white/20'
                   }`}></div>
                 </div>
@@ -1240,7 +1240,7 @@ export default function CreateService() {
                   variant="outline"
                   onClick={() => navigate('/profile')}
                   disabled={loading || uploading}
-                  className="px-10 py-4 bg-white dark:bg-black backdrop-blur-sm border border-white/40 dark:border-white/20 text-black dark:text-white transition-all duration-300 rounded-full shadow-lg hover:scale-105"
+                  className="px-10 py-4 bg-dark-card dark:bg-black backdrop-blur-sm border border-white/40 dark:border-white/20 text-dark-primary dark:text-white transition-all duration-300 rounded-full shadow-lg hover:scale-105"
                 >
                   <span className="font-semibold">Cancel</span>
                 </Button>
@@ -1284,6 +1284,9 @@ export default function CreateService() {
     </div>
   );
 }
+
+
+
 
 
 

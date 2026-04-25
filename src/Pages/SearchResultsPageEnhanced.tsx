@@ -140,7 +140,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
   const hasLocationResults = sortedResults.some(service => service.distance_km !== null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-dark-900 via-black to-dark-900">
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 mt-20">
@@ -149,7 +149,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
               onClick={() => navigate(-1)}
               className="mr-4 p-2 hover:bg-white/10 rounded-full transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-gray-300" />
+              <ArrowLeft className="w-5 h-5 text-dark-muted" />
             </button>
             <div className="flex items-center gap-2">
               <Sparkles className="w-6 h-6 text-white" />
@@ -165,12 +165,12 @@ const SearchResultsPageEnhanced: React.FC = () => {
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   {query && (
-                    <p className="text-gray-300">
+                    <p className="text-dark-muted">
                       Searched for: <span className="font-semibold text-white">"{query}"</span>
                     </p>
                   )}
                   {locationFilter && (
-                    <p className="text-gray-300 flex items-center gap-1">
+                    <p className="text-dark-muted flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
                       Location: <span className="font-semibold text-white">
                         {locationFilter.address || `${locationFilter.latitude?.toFixed(3)}, ${locationFilter.longitude?.toFixed(3)}`}
@@ -200,7 +200,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
                     className={`px-3 py-2 rounded-lg text-sm border transition-colors ${
                       showFilters 
                         ? 'bg-blue-600 text-white border-blue-600' 
-                        : 'bg-white/10 text-gray-300 border-white/20 hover:bg-white/20'
+                        : 'bg-white/10 text-dark-muted border-white/20 hover:bg-white/20'
                     }`}
                   >
                     <SlidersHorizontal className="w-4 h-4 mr-1 inline" />
@@ -228,7 +228,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
                       className={`p-2 rounded-md transition-colors ${
                         viewMode === 'grid' 
                           ? 'bg-white/20 text-white shadow-sm' 
-                          : 'text-gray-400 hover:text-gray-300'
+                          : 'text-dark-muted hover:text-dark-muted'
                       }`}
                     >
                       <Grid3X3 className="w-4 h-4" />
@@ -238,7 +238,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
                       className={`p-2 rounded-md transition-colors ${
                         viewMode === 'list' 
                           ? 'bg-white/20 text-white shadow-sm' 
-                          : 'text-gray-400 hover:text-gray-300'
+                          : 'text-dark-muted hover:text-dark-muted'
                       }`}
                     >
                       <List className="w-4 h-4" />
@@ -253,7 +253,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {/* Location Filter */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-dark-muted mb-2">
                         Refine Location
                       </label>
                       <LocationPickerAdvanced
@@ -268,7 +268,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
 
                     {/* Price Range Filter */}
                     <div className="space-y-3">
-                      <label className="block text-sm font-medium text-gray-300">
+                      <label className="block text-sm font-medium text-dark-muted">
                         Price Range (LKR)
                       </label>
                       <div className="grid grid-cols-2 gap-2">
@@ -280,7 +280,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
                             ...prev,
                             min: e.target.value ? parseFloat(e.target.value) : undefined
                           }))}
-                          className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+                          className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-dark-muted focus:ring-2 focus:ring-blue-500"
                         />
                         <input
                           type="number"
@@ -290,7 +290,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
                             ...prev,
                             max: e.target.value ? parseFloat(e.target.value) : undefined
                           }))}
-                          className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+                          className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-dark-muted focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                     </div>
@@ -315,9 +315,9 @@ const SearchResultsPageEnhanced: React.FC = () => {
         {/* Results */}
         {sortedResults.length === 0 ? (
           <div className="text-center py-12">
-            <Sparkles className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+            <Sparkles className="w-16 h-16 text-dark-muted mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">No results found</h3>
-            <p className="text-gray-400 mb-4">
+            <p className="text-dark-muted mb-4">
               Try adjusting your search terms, location, or price range
             </p>
             <Link
@@ -407,14 +407,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
           </div>
 
           {service.description && (
-            <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+            <p className="text-dark-muted text-sm mb-3 line-clamp-2">
               {service.description}
             </p>
           )}
 
           {/* Location and Distance */}
           {(service.address || service.distance_km !== null) && (
-            <div className="flex items-center space-x-2 mb-2 text-xs text-gray-400">
+            <div className="flex items-center space-x-2 mb-2 text-xs text-dark-muted">
               <MapPin className="w-3 h-3" />
               <span>
                 {service.address || 'Location available'}
@@ -433,13 +433,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
               {service.tags.slice(0, 3).map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 bg-white/10 text-gray-300 text-xs rounded-full"
+                  className="px-2 py-1 bg-white/10 text-dark-muted text-xs rounded-full"
                 >
                   {tag}
                 </span>
               ))}
               {service.tags.length > 3 && (
-                <span className="px-2 py-1 bg-white/10 text-gray-300 text-xs rounded-full">
+                <span className="px-2 py-1 bg-white/10 text-dark-muted text-xs rounded-full">
                   +{service.tags.length - 3} more
                 </span>
               )}
@@ -448,7 +448,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
 
           {/* Footer */}
           <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-dark-muted">
               By {service.provider.user.firstName} {service.provider.user.lastName}
             </div>
             <div className="text-right">
@@ -467,3 +467,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
 };
 
 export default SearchResultsPageEnhanced;
+
+
+

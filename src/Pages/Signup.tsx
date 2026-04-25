@@ -188,25 +188,25 @@ export default function SignupForm() {
         return (
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-dark-muted mb-2">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
+                <Mail className="absolute left-4 top-4 h-5 w-5 text-dark-muted" />
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) => updateFormData('email', e.target.value)}
-                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
+                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
                     errors.email ? 'border-white/50 focus:ring-white/50' : 'border-white/20 hover:border-white/30'
                   }`}
                   placeholder="name@email.com"
                 />
                 <div className="absolute right-4 top-4 h-5 w-5 flex items-center justify-center">
                   {emailCheckLoading ? (
-                    <Loader className="h-4 w-4 animate-spin text-gray-400" />
+                    <Loader className="h-4 w-4 animate-spin text-dark-muted" />
                   ) : emailExists === false ? (
                     <Check className="h-4 w-4 text-white" />
                   ) : emailExists === true ? (
-                    <span className="h-2 w-2 bg-white rounded-full" />
+                    <span className="h-2 w-2 bg-dark-card rounded-full" />
                   ) : null}
                 </div>
               </div>
@@ -218,14 +218,14 @@ export default function SignupForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+              <label className="block text-sm font-medium text-dark-muted mb-2">Password</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
+                <Lock className="absolute left-4 top-4 h-5 w-5 text-dark-muted" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={(e) => updateFormData('password', e.target.value)}
-                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
+                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
                     errors.password ? 'border-white/50 focus:ring-white/50' : 'border-white/20 hover:border-white/30'
                   }`}
                   placeholder="Create a strong password"
@@ -233,14 +233,14 @@ export default function SignupForm() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-4 top-4 h-5 w-5 text-gray-400 hover:text-white transition-colors"
+                  className="absolute right-4 top-4 h-5 w-5 text-dark-muted hover:text-white transition-colors"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
               {/* Password feedback */}
               {formData.password && (
-                <div className="mt-2 text-xs text-gray-400">
+                <div className="mt-2 text-xs text-dark-muted">
                   Characters: {formData.password.length} {formData.password.length < 6 ? '(Need at least 6)' : ''}
                 </div>
               )}
@@ -253,7 +253,7 @@ export default function SignupForm() {
                   <p className={`text-sm font-semibold flex items-center ${
                     formData.password && formData.password.length < 6 
                       ? 'text-white' 
-                      : 'text-gray-300'
+                      : 'text-dark-muted'
                   }`}>
                     <span className="mr-2 text-lg">
                       {formData.password && formData.password.length < 6 ? '🚨' : '⚠️'}
@@ -273,14 +273,14 @@ export default function SignupForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
+              <label className="block text-sm font-medium text-dark-muted mb-2">Confirm Password</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
+                <Lock className="absolute left-4 top-4 h-5 w-5 text-dark-muted" />
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   value={formData.confirmPassword}
                   onChange={(e) => updateFormData('confirmPassword', e.target.value)}
-                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
+                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
                     errors.confirmPassword ? 'border-white/50 focus:ring-white/50' : 'border-white/20 hover:border-white/30'
                   }`}
                   placeholder="Confirm your password"
@@ -288,7 +288,7 @@ export default function SignupForm() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword((v) => !v)}
-                  className="absolute right-4 top-4 h-5 w-5 text-gray-400 hover:text-white transition-colors"
+                  className="absolute right-4 top-4 h-5 w-5 text-dark-muted hover:text-white transition-colors"
                 >
                   {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -312,14 +312,14 @@ export default function SignupForm() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+                <label className="block text-sm font-medium text-dark-muted mb-2">First Name</label>
                 <div className="relative">
-                  <User className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
+                  <User className="absolute left-4 top-4 h-5 w-5 text-dark-muted" />
                   <input
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => updateFormData('firstName', e.target.value)}
-                    className={`w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
+                    className={`w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
                       errors.firstName ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 hover:border-white/30'
                     }`}
                     placeholder="John"
@@ -332,12 +332,12 @@ export default function SignupForm() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+                <label className="block text-sm font-medium text-dark-muted mb-2">Last Name</label>
                 <input
                   type="text"
                   value={formData.lastName}
                   onChange={(e) => updateFormData('lastName', e.target.value)}
-                  className={`w-full px-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
+                  className={`w-full px-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
                     errors.lastName ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 hover:border-white/30'
                   }`}
                   placeholder="Doe"
@@ -351,9 +351,9 @@ export default function SignupForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+              <label className="block text-sm font-medium text-dark-muted mb-2">Phone Number</label>
               <div className="relative">
-                <Phone className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
+                <Phone className="absolute left-4 top-4 h-5 w-5 text-dark-muted" />
                 <input
                   type="tel"
                   value={formData.phone}
@@ -364,7 +364,7 @@ export default function SignupForm() {
                     if (value.length > 2) value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{3})/, '$1 $2 $3 $4');
                     updateFormData('phone', value);
                   }}
-                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
+                  className={`w-full pl-12 pr-12 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
                     errors.phone ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 hover:border-white/30'
                   }`}
                   placeholder="94 712 345 678"
@@ -388,9 +388,9 @@ export default function SignupForm() {
         return (
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Location</label>
+              <label className="block text-sm font-medium text-dark-muted mb-2">Location</label>
               <div className="relative">
-                <MapPin className="absolute left-4 top-4 h-5 w-5 text-gray-400 z-10" />
+                <MapPin className="absolute left-4 top-4 h-5 w-5 text-dark-muted z-10" />
                 <input
                   type="text"
                   value={formData.location}
@@ -400,7 +400,7 @@ export default function SignupForm() {
                   }}
                   onBlur={() => setTimeout(() => setShowLocationSuggestions(false), 180)}
                   onFocus={() => setShowLocationSuggestions(!!formData.location)}
-                  className={`w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
+                  className={`w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 ${
                     errors.location ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 hover:border-white/30'
                   }`}
                   placeholder="City, District (e.g., Colombo, Western)"
@@ -421,14 +421,14 @@ export default function SignupForm() {
                           }}
                         >
                           <div className="flex items-center gap-2">
-                            <MapPin className="h-4 w-4 text-gray-400" />
+                            <MapPin className="h-4 w-4 text-dark-muted" />
                             <span>{city}</span>
                           </div>
                         </button>
                       ))}
                     {sriLankanCities.filter((c) => c.toLowerCase().includes(formData.location.toLowerCase())).length === 0 &&
                       formData.location.length > 0 && (
-                        <div className="px-4 py-3 text-gray-400 text-sm">No matching locations found</div>
+                        <div className="px-4 py-3 text-dark-muted text-sm">No matching locations found</div>
                       )}
                   </div>
                 )}
@@ -441,14 +441,14 @@ export default function SignupForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Address (Optional)</label>
+              <label className="block text-sm font-medium text-dark-muted mb-2">Address (Optional)</label>
               <div className="relative">
-                <Home className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
+                <Home className="absolute left-4 top-4 h-5 w-5 text-dark-muted" />
                 <input
                   type="text"
                   value={formData.address}
                   onChange={(e) => updateFormData('address', e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border border-white/20 hover:border-white/30 rounded-xl text-white placeholder-gray-400 focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200"
+                  className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-sm border border-white/20 hover:border-white/30 rounded-xl text-white placeholder-dark-muted focus:bg-white/10 focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200"
                   placeholder="Street address (optional)"
                 />
               </div>
@@ -461,23 +461,23 @@ export default function SignupForm() {
           <div className="space-y-6">
             <div className="rounded-xl p-6 bg-gradient-to-r from-white/20 to-white/20 backdrop-blur-sm border border-white/30">
               <div className="flex items-center">
-                <div className="p-2 bg-white rounded-full mr-3">
+                <div className="p-2 bg-dark-card rounded-full mr-3">
                   <Check className="h-5 w-5 text-white" />
                 </div>
                 <h3 className="font-medium text-white">Almost done!</h3>
               </div>
-              <p className="text-sm text-gray-300 mt-2">
+              <p className="text-sm text-dark-muted mt-2">
                 Review your information and use the button on the right panel to create your account.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-sm">
-              <div><span className="text-gray-400">Email:</span> <span className="font-medium text-white">{formData.email || '-'}</span></div>
-              <div><span className="text-gray-400">Name:</span> <span className="font-medium text-white">{formData.firstName} {formData.lastName}</span></div>
-              <div><span className="text-gray-400">Phone:</span> <span className="font-medium text-white">{formData.phone || '-'}</span></div>
-              <div><span className="text-gray-400">Location:</span> <span className="font-medium text-white">{formData.location || '-'}</span></div>
+              <div><span className="text-dark-muted">Email:</span> <span className="font-medium text-white">{formData.email || '-'}</span></div>
+              <div><span className="text-dark-muted">Name:</span> <span className="font-medium text-white">{formData.firstName} {formData.lastName}</span></div>
+              <div><span className="text-dark-muted">Phone:</span> <span className="font-medium text-white">{formData.phone || '-'}</span></div>
+              <div><span className="text-dark-muted">Location:</span> <span className="font-medium text-white">{formData.location || '-'}</span></div>
               {formData.address && (
-                <div className="col-span-2"><span className="text-gray-400">Address:</span> <span className="font-medium text-white">{formData.address}</span></div>
+                <div className="col-span-2"><span className="text-dark-muted">Address:</span> <span className="font-medium text-white">{formData.address}</span></div>
               )}
             </div>
           </div>
@@ -575,7 +575,7 @@ export default function SignupForm() {
                   <h2 className="text-xl font-bold text-white mb-1">
                     {['Create Account', 'Personal Info', 'Set Location', 'Review & Finish'][currentStep - 1]}
                   </h2>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-dark-muted">
                     {['Join our community today', 'Tell us about yourself', 'Where are you located?', 'Almost done!'][currentStep - 1]}
                   </p>
                 </div>
@@ -588,7 +588,7 @@ export default function SignupForm() {
                 <div className="relative z-10 lg:hidden mt-6 space-y-4">
                   {/* Progress Bar */}
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs text-gray-400">
+                    <div className="flex items-center justify-between text-xs text-dark-muted">
                       <span>Step {currentStep} of {totalSteps}</span>
                       <span>{Math.round((currentStep / totalSteps) * 100)}% Complete</span>
                     </div>
@@ -611,7 +611,7 @@ export default function SignupForm() {
                       disabled={currentStep === 1 || isLoading}
                       className={`flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                         currentStep === 1 || isLoading
-                          ? 'text-gray-500 cursor-not-allowed bg-white/5'
+                          ? 'text-dark-muted cursor-not-allowed bg-white/5'
                           : 'text-white bg-white/10 hover:bg-white/20 hover:text-gray-200'
                       }`}
                     >
@@ -626,7 +626,7 @@ export default function SignupForm() {
                         className={`group relative overflow-hidden flex items-center px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 flex-1 justify-center ${
                           !canProceed || isLoading
                             ? 'bg-white/20 text-white/60 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-white to-white/80 text-black hover:scale-105 shadow-lg hover:shadow-white/25'
+                            : 'bg-gradient-to-r from-white to-white/80 text-dark-primary hover:scale-105 shadow-lg hover:shadow-white/25'
                         }`}
                       >
                         {!canProceed || isLoading ? (
@@ -649,7 +649,7 @@ export default function SignupForm() {
                         className={`group relative overflow-hidden flex items-center px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 flex-1 justify-center ${
                           !canProceed || isLoading
                             ? 'bg-white/20 text-white/60 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-white to-white/80 text-black hover:scale-105 shadow-lg hover:shadow-white/25'
+                            : 'bg-gradient-to-r from-white to-white/80 text-dark-primary hover:scale-105 shadow-lg hover:shadow-white/25'
                         }`}
                       >
                         {isLoading ? (
@@ -676,9 +676,9 @@ export default function SignupForm() {
 
                 {/* Footer link */}
                 <div className="relative z-10 pt-4 text-center">
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-dark-muted">
                     Already have an account?{' '}
-                    <a href="/signin" className="text-white hover:text-gray-300 font-semibold hover:underline transition-colors">
+                    <a href="/signin" className="text-white hover:text-dark-muted font-semibold hover:underline transition-colors">
                       Sign in
                     </a>
                   </p>
@@ -700,7 +700,7 @@ export default function SignupForm() {
                   </span>
                 </h1>
 
-                <p className="text-base text-gray-300 mb-4 max-w-md mx-auto leading-relaxed">
+                <p className="text-base text-dark-muted mb-4 max-w-md mx-auto leading-relaxed">
                   Connect with trusted professionals and discover exceptional services in your area
                 </p>
               </div>
@@ -714,7 +714,7 @@ export default function SignupForm() {
                     </div>
                     <div className="text-left flex-1">
                       <h3 className="text-white font-semibold text-sm mb-0.5">Verified Professionals</h3>
-                      <p className="text-gray-400 text-xs">All service providers are thoroughly vetted and verified</p>
+                      <p className="text-dark-muted text-xs">All service providers are thoroughly vetted and verified</p>
                     </div>
                   </div>
                 </div>
@@ -726,7 +726,7 @@ export default function SignupForm() {
                     </div>
                     <div className="text-left flex-1">
                       <h3 className="text-white font-semibold text-sm mb-0.5">Quality Guarantee</h3>
-                      <p className="text-gray-400 text-xs">Rated and reviewed by our community members</p>
+                      <p className="text-dark-muted text-xs">Rated and reviewed by our community members</p>
                     </div>
                   </div>
                 </div>
@@ -738,7 +738,7 @@ export default function SignupForm() {
                     </div>
                     <div className="text-left flex-1">
                       <h3 className="text-white font-semibold text-sm mb-0.5">Instant Booking</h3>
-                      <p className="text-gray-400 text-xs">Book services instantly with real-time availability</p>
+                      <p className="text-dark-muted text-xs">Book services instantly with real-time availability</p>
                     </div>
                   </div>
                 </div>
@@ -746,7 +746,7 @@ export default function SignupForm() {
 
               {/* Step Navigation */}
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-gray-400">
+                <div className="flex items-center justify-between text-xs text-dark-muted">
                   <span>Step {currentStep} of {totalSteps}</span>
                   <span>{Math.round((currentStep / totalSteps) * 100)}% Complete</span>
                 </div>
@@ -767,8 +767,8 @@ export default function SignupForm() {
                     disabled={currentStep === 1 || isLoading}
                     className={`flex items-center px-3 py-2 rounded-xl text-xs font-medium transition-all duration-200 ${
                       currentStep === 1 || isLoading
-                        ? 'text-gray-500 cursor-not-allowed'
-                        : 'text-white hover:bg-white/10 hover:text-gray-300'
+                        ? 'text-dark-muted cursor-not-allowed'
+                        : 'text-white hover:bg-white/10 hover:text-dark-muted'
                     }`}
                   >
                     <ArrowRight className="h-3 w-3 mr-1 rotate-180" />
@@ -782,7 +782,7 @@ export default function SignupForm() {
                       className={`group relative overflow-hidden flex items-center px-4 py-2 rounded-xl font-semibold text-xs transition-all duration-300 ${
                         !canProceed || isLoading
                           ? 'bg-white/20 text-white/60 cursor-not-allowed'
-                          : 'bg-gradient-to-r from-white to-white/80 text-black hover:scale-105 shadow-lg hover:shadow-white/25'
+                          : 'bg-gradient-to-r from-white to-white/80 text-dark-primary hover:scale-105 shadow-lg hover:shadow-white/25'
                       }`}
                     >
                       {!canProceed || isLoading ? (
@@ -805,7 +805,7 @@ export default function SignupForm() {
                       className={`group relative overflow-hidden flex items-center px-4 py-2 rounded-xl font-semibold text-xs transition-all duration-300 ${
                         !canProceed || isLoading
                           ? 'bg-white/20 text-white/60 cursor-not-allowed'
-                          : 'bg-gradient-to-r from-white to-white/80 text-black hover:scale-105 shadow-lg hover:shadow-white/25'
+                          : 'bg-gradient-to-r from-white to-white/80 text-dark-primary hover:scale-105 shadow-lg hover:shadow-white/25'
                       }`}
                     >
                       {isLoading ? (
@@ -840,6 +840,9 @@ export default function SignupForm() {
     </div>
   );
 }
+
+
+
 
 
 

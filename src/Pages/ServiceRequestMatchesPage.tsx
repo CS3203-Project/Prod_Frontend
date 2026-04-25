@@ -99,10 +99,10 @@ const ServiceRequestMatchesPage = () => {
                 {serviceRequest.title || 'Untitled Request'}
               </h1>
               <div className="p-4 bg-white/5 rounded-lg border border-white/10">
-                <p className="text-gray-300 mb-4">{serviceRequest.description}</p>
+                <p className="text-dark-muted mb-4">{serviceRequest.description}</p>
                 {serviceRequest.address && (
-                  <p className="text-sm text-gray-400">
-                    <span className="font-medium text-gray-300">Location:</span> {serviceRequest.address}
+                  <p className="text-sm text-dark-muted">
+                    <span className="font-medium text-dark-muted">Location:</span> {serviceRequest.address}
                     {serviceRequest.city && `, ${serviceRequest.city}`}
                     {serviceRequest.state && `, ${serviceRequest.state}`}
                     {serviceRequest.country && `, ${serviceRequest.country}`}
@@ -113,7 +113,7 @@ const ServiceRequestMatchesPage = () => {
                     serviceRequest.status === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
                     serviceRequest.status === 'MATCHED' ? 'bg-green-500/20 text-green-400' :
                     serviceRequest.status === 'COMPLETED' ? 'bg-blue-500/20 text-blue-400' :
-                    'bg-gray-500/20 text-gray-400'
+                    'bg-dark-secondary0/20 text-dark-muted'
                   }`}>
                     {serviceRequest.status}
                   </span>
@@ -135,11 +135,11 @@ const ServiceRequestMatchesPage = () => {
             {loading ? (
               <div className="text-center py-8">
                 <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-white border-solid border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-                <p className="mt-2 text-gray-400">Finding matching services...</p>
+                <p className="mt-2 text-dark-muted">Finding matching services...</p>
               </div>
             ) : matchingResult?.matchingServices.length === 0 ? (
               <div className="text-center py-8 bg-white/5 rounded-lg border border-white/10">
-                <p className="text-gray-400">No matching services found.</p>
+                <p className="text-dark-muted">No matching services found.</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -154,16 +154,16 @@ const ServiceRequestMatchesPage = () => {
                           {service.title || 'Untitled Service'}
                         </h3>
                         {service.similarity !== undefined && (
-                          <p className="text-sm text-gray-400 mt-1">
+                          <p className="text-sm text-dark-muted mt-1">
                             Match Score: <span className="font-medium text-green-400">{Math.round(service.similarity * 100)}%</span>
                           </p>
                         )}
-                        <p className="text-gray-300 mt-3">{service.description}</p>
+                        <p className="text-dark-muted mt-3">{service.description}</p>
                         
                         {/* Location information - more prominently displayed */}
                         {(service.address || service.city || service.state || service.country) && (
                           <div className="mt-3 p-2 bg-white/5 rounded-lg border border-white/10">
-                            <p className="flex items-center text-gray-300">
+                            <p className="flex items-center text-dark-muted">
                               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />

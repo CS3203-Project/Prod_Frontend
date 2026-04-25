@@ -29,18 +29,18 @@ const RatingDebugPage: React.FC = () => {
   }
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="p-8 bg-dark-tertiary min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Service Rating Debug Page</h1>
       
       <div className="space-y-6">
         {services.map((service) => (
-          <div key={service.id} className="bg-white p-6 rounded-lg shadow">
+          <div key={service.id} className="bg-dark-card p-6 rounded-lg shadow">
             <h2 className="text-xl font-bold mb-4">{service.title}</h2>
             
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="font-semibold">Service ID:</p>
-                <p className="text-sm text-gray-600">{service.id}</p>
+                <p className="text-sm text-dark-secondary">{service.id}</p>
               </div>
               
               <div>
@@ -50,7 +50,7 @@ const RatingDebugPage: React.FC = () => {
                     ? service.averageRating 
                     : 'undefined'} ⭐
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-dark-muted">
                   Type: {typeof service.averageRating}
                 </p>
               </div>
@@ -62,7 +62,7 @@ const RatingDebugPage: React.FC = () => {
                     ? service.reviewCount 
                     : 'undefined'}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-dark-muted">
                   Type: {typeof service.reviewCount}
                 </p>
               </div>
@@ -77,7 +77,7 @@ const RatingDebugPage: React.FC = () => {
               </div>
             </div>
             
-            <div className="mt-4 p-4 bg-gray-100 rounded">
+            <div className="mt-4 p-4 bg-dark-tertiary rounded">
               <p className="font-semibold mb-2">Raw Data:</p>
               <pre className="text-xs overflow-auto">
                 {JSON.stringify({
@@ -103,3 +103,4 @@ const RatingDebugPage: React.FC = () => {
 };
 
 export default RatingDebugPage;
+

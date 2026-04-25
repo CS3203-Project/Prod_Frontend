@@ -265,7 +265,7 @@ const BrowseServicesEnhanced: React.FC = () => {
 
   if (state.loading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-black relative overflow-hidden">
+      <div className="min-h-screen bg-dark-primary dark:bg-black relative overflow-hidden">
         {/* Square Grid Background */}
         <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#e5e7eb_0.5px,transparent_0.5px),linear-gradient(to_bottom,#e5e7eb_0.5px,transparent_0.5px)] dark:bg-[linear-gradient(to_right,#374151_0.5px,transparent_0.5px),linear-gradient(to_bottom,#374151_0.5px,transparent_0.5px)] bg-[size:4rem_4rem] opacity-30 [mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)]" />
 
@@ -275,12 +275,12 @@ const BrowseServicesEnhanced: React.FC = () => {
             {/* Header Section */}
             <div className="text-center mb-12 pt-20">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-white/70 dark:bg-black/30 backdrop-blur-lg rounded-full mb-4 border border-white/30 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.08)]">
-                <Loader2 className="w-8 h-8 text-black dark:text-white animate-spin" />
+                <Loader2 className="w-8 h-8 text-dark-primary dark:text-white animate-spin" />
               </div>
               <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-br from-black from-30% to-black/40 dark:from-white dark:to-white/40 bg-clip-text text-transparent mb-4">
                 Loading Services
               </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-dark-secondary dark:text-dark-muted">
                 Please wait while we fetch the latest categories...
               </p>
             </div>
@@ -291,10 +291,10 @@ const BrowseServicesEnhanced: React.FC = () => {
                 {/* Main Search Bar Skeleton */}
                 <div className="relative mb-4">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <div className="w-5 h-5 bg-gray-300 dark:bg-gray-700 rounded"></div>
+                    <div className="w-5 h-5 bg-dark-tertiary dark:bg-gray-700 rounded"></div>
                   </div>
                   <div className="block w-full pl-12 pr-4 py-4 bg-white/50 dark:bg-white/10 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-xl">
-                    <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded w-3/4"></div>
+                    <div className="h-5 bg-dark-tertiary dark:bg-gray-700 rounded w-3/4"></div>
                   </div>
                 </div>
 
@@ -303,14 +303,14 @@ const BrowseServicesEnhanced: React.FC = () => {
                   {/* Location Filter Skeleton */}
                   <div className="flex-1">
                     <div className="w-full sm:w-auto px-4 py-2 rounded-xl border border-white/30 dark:border-white/20 bg-white/50 dark:bg-white/10">
-                      <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-24"></div>
+                      <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-24"></div>
                     </div>
                   </div>
 
                   {/* Action Buttons Skeleton */}
                   <div className="flex gap-2">
                     <div className="px-4 py-2 bg-white/50 dark:bg-white/10 rounded-xl">
-                      <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-12"></div>
+                      <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-12"></div>
                     </div>
                   </div>
                 </div>
@@ -320,20 +320,20 @@ const BrowseServicesEnhanced: React.FC = () => {
             {/* Controls Skeleton */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
               <div className="flex items-center gap-4">
-                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-16"></div>
+                <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-16"></div>
                 <div className="px-3 py-2 bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-xl">
-                  <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-16"></div>
+                  <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-16"></div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-12"></div>
+                <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-12"></div>
                 <div className="flex items-center bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-xl p-1 border border-white/30 dark:border-white/20">
                   <div className="p-2 rounded-lg">
-                    <div className="w-4 h-4 bg-gray-300 dark:bg-gray-700 rounded"></div>
+                    <div className="w-4 h-4 bg-dark-tertiary dark:bg-gray-700 rounded"></div>
                   </div>
                   <div className="p-2 rounded-lg">
-                    <div className="w-4 h-4 bg-gray-300 dark:bg-gray-700 rounded"></div>
+                    <div className="w-4 h-4 bg-dark-tertiary dark:bg-gray-700 rounded"></div>
                   </div>
                 </div>
               </div>
@@ -345,12 +345,12 @@ const BrowseServicesEnhanced: React.FC = () => {
                 <div key={index} className="animate-pulse">
                   <div className="rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-white/30 dark:border-gray-700 p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.08)]">
                     <div className="flex items-start">
-                      <div className="w-14 h-14 bg-gray-300 dark:bg-gray-700 rounded-xl"></div>
+                      <div className="w-14 h-14 bg-dark-tertiary dark:bg-gray-700 rounded-xl"></div>
                       <div className="ml-4 flex-1">
-                        <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-                        <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/2 mb-3"></div>
-                        <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-full mb-1"></div>
-                        <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-2/3"></div>
+                        <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                        <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-1/2 mb-3"></div>
+                        <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-full mb-1"></div>
+                        <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-2/3"></div>
                       </div>
                     </div>
                   </div>
@@ -365,7 +365,7 @@ const BrowseServicesEnhanced: React.FC = () => {
 
   if (state.error) {
     return (
-      <div className="bg-white dark:bg-black min-h-screen relative overflow-hidden">
+      <div className="bg-dark-card dark:bg-black min-h-screen relative overflow-hidden">
         {/* Square Grid Background */}
         <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#e5e7eb_0.5px,transparent_0.5px),linear-gradient(to_bottom,#e5e7eb_0.5px,transparent_0.5px)] dark:bg-[linear-gradient(to_right,#374151_0.5px,transparent_0.5px),linear-gradient(to_bottom,#374151_0.5px,transparent_0.5px)] bg-[size:4rem_4rem] opacity-30" />
         
@@ -374,12 +374,12 @@ const BrowseServicesEnhanced: React.FC = () => {
             <h1 className="text-4xl font-extrabold bg-gradient-to-br from-black from-30% to-black/40 dark:from-white dark:to-white/40 bg-clip-text text-transparent mb-4">
               Something went wrong
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-lg text-dark-secondary dark:text-dark-muted mb-6">
               {state.error}
             </p>
             <button
               onClick={() => fetchCategories()}
-              className="inline-flex items-center px-8 py-4 bg-black hover:bg-black/90 dark:bg-white dark:hover:bg-white/90 text-white dark:text-black font-semibold rounded-full transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.12)] hover:scale-105 border border-black dark:border-white"
+              className="inline-flex items-center px-8 py-4 bg-black hover:bg-black/90 dark:bg-dark-card dark:hover:bg-white/90 text-white dark:text-dark-primary font-semibold rounded-full transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.12)] hover:scale-105 border border-black dark:border-white"
             >
               <RefreshCw className="w-5 h-5 mr-2" />
               Try Again
@@ -391,7 +391,7 @@ const BrowseServicesEnhanced: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-dark-primary dark:bg-black relative overflow-hidden">
       {/* Square Grid Background - Subtle with Smooth Fade */}
       <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#e5e7eb_0.5px,transparent_0.5px),linear-gradient(to_bottom,#e5e7eb_0.5px,transparent_0.5px)] dark:bg-[linear-gradient(to_right,#374151_0.5px,transparent_0.5px),linear-gradient(to_bottom,#374151_0.5px,transparent_0.5px)] bg-[size:4rem_4rem] opacity-30 [mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)]" />
 
@@ -401,12 +401,12 @@ const BrowseServicesEnhanced: React.FC = () => {
           {/* Header Section */}
           <div className="text-center mb-12 pt-20">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/70 dark:bg-black/30 backdrop-blur-lg rounded-full mb-4 border border-white/30 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.08)]">
-              <Sparkles className="w-8 h-8 text-black dark:text-white" />
+              <Sparkles className="w-8 h-8 text-dark-primary dark:text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-br from-black from-30% to-black/40 dark:from-white dark:to-white/40 bg-clip-text text-transparent mb-4">
               {getSearchTypeLabel()}
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-lg text-dark-secondary dark:text-dark-muted">
               {state.isHybridSearchActive
                 ? `Found ${state.hybridSearchResults.length} matching services`
                 : 'Discover amazing services from verified providers'
@@ -415,7 +415,7 @@ const BrowseServicesEnhanced: React.FC = () => {
             {/* Add search message notification */}
             {state.searchMessage && (
               <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mt-4">
-                <p className="text-sm text-blue-800 dark:text-blue-200">
+                <p className="text-sm text-blue-400 dark:text-blue-200">
                   {state.searchMessage}
                 </p>
               </div>
@@ -428,18 +428,18 @@ const BrowseServicesEnhanced: React.FC = () => {
               {/* Main Search Bar */}
               <div className="relative mb-4">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Search className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                  <Search className="h-5 w-5 text-dark-muted dark:text-dark-muted" />
                 </div>
                 <input
                   type="text"
                   placeholder="Search for services (e.g., 'web development', 'plumbing', 'graphic design')"
                   value={state.searchTerm}
                   onChange={(e) => handleSearch(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-4 bg-white/50 dark:bg-white/10 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-xl text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent text-lg"
+                  className="block w-full pl-12 pr-4 py-4 bg-white/50 dark:bg-white/10 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-xl text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent text-lg"
                 />
                 {state.isSearching && (
                   <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                    <Loader2 className="h-5 w-5 text-gray-400 dark:text-gray-500 animate-spin" />
+                    <Loader2 className="h-5 w-5 text-dark-muted dark:text-dark-muted animate-spin" />
                   </div>
                 )}
               </div>
@@ -452,8 +452,8 @@ const BrowseServicesEnhanced: React.FC = () => {
                     onClick={() => setState(prev => ({ ...prev, showLocationFilter: !prev.showLocationFilter }))}
                     className={`w-full sm:w-auto px-4 py-2 rounded-xl border text-sm font-medium transition-all duration-300 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.08)] hover:scale-105 ${
                       state.showLocationFilter || state.locationFilter
-                        ? 'bg-black text-white border-black dark:bg-white dark:text-black dark:border-white'
-                        : 'bg-white/50 dark:bg-white/10 text-black dark:text-gray-300 border-white/30 dark:border-white/20 hover:bg-white/70 dark:hover:bg-white/20'
+                        ? 'bg-black text-white border-black dark:bg-dark-card dark:text-dark-primary dark:border-white'
+                        : 'bg-white/50 dark:bg-white/10 text-dark-primary dark:text-dark-muted border-white/30 dark:border-white/20 hover:bg-white/70 dark:hover:bg-white/20'
                     }`}
                   >
                     <MapPin className="w-4 h-4 mr-2 inline" />
@@ -481,7 +481,7 @@ const BrowseServicesEnhanced: React.FC = () => {
                   {(state.searchTerm || state.locationFilter) && (
                     <button
                       onClick={clearSearch}
-                      className="px-4 py-2 bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/20 text-black dark:text-white rounded-xl transition-all duration-300 text-sm border border-white/30 dark:border-white/20 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.08)] hover:scale-105 font-medium"
+                      className="px-4 py-2 bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/20 text-dark-primary dark:text-white rounded-xl transition-all duration-300 text-sm border border-white/30 dark:border-white/20 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.08)] hover:scale-105 font-medium"
                     >
                       Clear
                     </button>
@@ -490,7 +490,7 @@ const BrowseServicesEnhanced: React.FC = () => {
                   {state.isHybridSearchActive && state.hybridSearchResults.length > 0 && (
                     <button
                       onClick={handleViewSearchResults}
-                      className="px-4 py-2 bg-black hover:bg-black/90 dark:bg-white dark:hover:bg-white/90 text-white dark:text-black rounded-xl transition-all duration-300 text-sm font-medium border border-black dark:border-white shadow-[0_4px_16px_0_rgba(0,0,0,0.12)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.12)] hover:scale-105"
+                      className="px-4 py-2 bg-black hover:bg-black/90 dark:bg-dark-card dark:hover:bg-white/90 text-white dark:text-dark-primary rounded-xl transition-all duration-300 text-sm font-medium border border-black dark:border-white shadow-[0_4px_16px_0_rgba(0,0,0,0.12)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.12)] hover:scale-105"
                     >
                       View All Results
                       <ArrowRight className="w-4 h-4 ml-1 inline" />
@@ -505,11 +505,11 @@ const BrowseServicesEnhanced: React.FC = () => {
           {state.isHybridSearchActive && state.hybridSearchResults.length > 0 && (
             <div className="mb-12">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white flex items-center gap-2">
+                <h2 className="text-2xl md:text-3xl font-bold text-dark-primary dark:text-white flex items-center gap-2">
                   <Sparkles className="w-6 h-6" />
                   Search Results
                 </h2>
-                <span className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                <span className="text-dark-secondary dark:text-dark-muted text-sm md:text-base">
                   Showing {Math.min(6, state.hybridSearchResults.length)} of {state.hybridSearchResults.length} results
                 </span>
               </div>
@@ -519,13 +519,13 @@ const BrowseServicesEnhanced: React.FC = () => {
                   [...Array(6)].map((_, index) => (
                     <div key={index} className="animate-pulse">
                       <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-white/30 dark:border-gray-700 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.08)] p-6">
-                        <div className="w-full h-48 bg-gray-300 dark:bg-gray-700 rounded-xl mb-4"></div>
-                        <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-                        <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-full mb-1"></div>
-                        <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-2/3 mb-3"></div>
+                        <div className="w-full h-48 bg-dark-tertiary dark:bg-gray-700 rounded-xl mb-4"></div>
+                        <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                        <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-full mb-1"></div>
+                        <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-2/3 mb-3"></div>
                         <div className="flex items-center justify-between">
-                          <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/3"></div>
-                          <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/4"></div>
+                          <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-1/3"></div>
+                          <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-1/4"></div>
                         </div>
                       </div>
                     </div>
@@ -546,7 +546,7 @@ const BrowseServicesEnhanced: React.FC = () => {
                 <div className="text-center">
                   <button
                     onClick={handleViewSearchResults}
-                    className="inline-flex items-center px-8 py-4 bg-black hover:bg-black/90 dark:bg-white dark:hover:bg-white/90 text-white dark:text-black font-semibold rounded-full transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.12)] hover:scale-105 border border-black dark:border-white"
+                    className="inline-flex items-center px-8 py-4 bg-black hover:bg-black/90 dark:bg-dark-card dark:hover:bg-white/90 text-white dark:text-dark-primary font-semibold rounded-full transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.12)] hover:scale-105 border border-black dark:border-white"
                   >
                     View All {state.hybridSearchResults.length} Results
                     <ArrowRight className="w-5 h-5 ml-2" />
@@ -562,29 +562,29 @@ const BrowseServicesEnhanced: React.FC = () => {
               {/* Controls */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Sort by:</span>
+                  <span className="text-sm font-medium text-dark-secondary dark:text-dark-muted">Sort by:</span>
                   <select
                     value={state.sortBy}
                     onChange={(e) => handleSortChange(e.target.value as 'name' | 'services' | 'popular')}
                     title="Sort categories"
-                    className="px-3 py-2 bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-xl text-sm text-black dark:text-white focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-300"
+                    className="px-3 py-2 bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-white/30 dark:border-white/20 rounded-xl text-sm text-dark-primary dark:text-white focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-300"
                   >
-                    <option value="name" className="bg-white dark:bg-gray-800 text-black dark:text-white">Name</option>
-                    <option value="services" className="bg-white dark:bg-gray-800 text-black dark:text-white">Most Services</option>
-                    <option value="popular" className="bg-white dark:bg-gray-800 text-black dark:text-white">Most Popular</option>
+                    <option value="name" className="bg-dark-card dark:bg-gray-800 text-dark-primary dark:text-white">Name</option>
+                    <option value="services" className="bg-dark-card dark:bg-gray-800 text-dark-primary dark:text-white">Most Services</option>
+                    <option value="popular" className="bg-dark-card dark:bg-gray-800 text-dark-primary dark:text-white">Most Popular</option>
                   </select>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">View:</span>
+                  <span className="text-sm font-medium text-dark-secondary dark:text-dark-muted">View:</span>
                   <div className="flex items-center bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-xl p-1 border border-white/30 dark:border-white/20 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.08)]">
                     <button
                       onClick={() => handleViewModeChange('grid')}
                       title="Grid view"
                       className={`p-2 rounded-lg transition-all duration-300 ${
                         state.viewMode === 'grid' 
-                          ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm' 
-                          : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
+                          ? 'bg-black dark:bg-dark-card text-white dark:text-dark-primary shadow-sm' 
+                          : 'text-dark-secondary dark:text-dark-muted hover:text-dark-primary dark:hover:text-white'
                       }`}
                     >
                       <Grid3X3 className="w-4 h-4" />
@@ -594,8 +594,8 @@ const BrowseServicesEnhanced: React.FC = () => {
                       title="List view"
                       className={`p-2 rounded-lg transition-all duration-300 ${
                         state.viewMode === 'list' 
-                          ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm' 
-                          : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
+                          ? 'bg-black dark:bg-dark-card text-white dark:text-dark-primary shadow-sm' 
+                          : 'text-dark-secondary dark:text-dark-muted hover:text-dark-primary dark:hover:text-white'
                       }`}
                     >
                       <List className="w-4 h-4" />
@@ -614,14 +614,14 @@ const BrowseServicesEnhanced: React.FC = () => {
                     <div key={index} className="animate-pulse">
                       <div className={`bg-white/50 dark:bg-gray-800/50 backdrop-blur-lg border border-white/30 dark:border-gray-700 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_0_rgba(255,255,255,0.08)] ${state.viewMode === 'grid' ? 'p-6' : 'p-4'}`}>
                         <div className={`flex items-start ${state.viewMode === 'list' ? 'space-x-4' : ''}`}>
-                          <div className={`flex-shrink-0 ${state.viewMode === 'list' ? 'w-16 h-16' : 'w-14 h-14'} bg-gray-300 dark:bg-gray-700 rounded-xl`}></div>
+                          <div className={`flex-shrink-0 ${state.viewMode === 'list' ? 'w-16 h-16' : 'w-14 h-14'} bg-dark-tertiary dark:bg-gray-700 rounded-xl`}></div>
                           <div className={`flex-1 ${state.viewMode === 'list' ? '' : 'ml-4'}`}>
-                            <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-                            <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/2 mb-3"></div>
+                            <div className="h-4 bg-dark-tertiary dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                            <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-1/2 mb-3"></div>
                             {state.viewMode === 'grid' && (
                               <>
-                                <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-full mb-1"></div>
-                                <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-2/3"></div>
+                                <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-full mb-1"></div>
+                                <div className="h-3 bg-dark-tertiary dark:bg-gray-700 rounded w-2/3"></div>
                               </>
                             )}
                           </div>
@@ -632,14 +632,14 @@ const BrowseServicesEnhanced: React.FC = () => {
                 </div>
               ) : filteredAndSortedCategories.length === 0 ? (
                 <div className="text-center py-12">
-                  <Sparkles className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-black dark:text-white mb-2">No categories found</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  <Sparkles className="w-16 h-16 text-dark-muted dark:text-dark-muted mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-dark-primary dark:text-white mb-2">No categories found</h3>
+                  <p className="text-dark-secondary dark:text-dark-muted mb-4">
                     Try adjusting your search terms or clear the search to see all categories
                   </p>
                   <button
                     onClick={clearSearch}
-                    className="inline-flex items-center px-6 py-3 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 text-black dark:text-white rounded-full border border-white/30 dark:border-white/20 hover:border-white/50 dark:hover:border-white/30 transition-all duration-300 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.08)] hover:scale-105 font-medium"
+                    className="inline-flex items-center px-6 py-3 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 text-dark-primary dark:text-white rounded-full border border-white/30 dark:border-white/20 hover:border-white/50 dark:hover:border-white/30 transition-all duration-300 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_0_rgba(255,255,255,0.08)] hover:scale-105 font-medium"
                   >
                     Clear Search
                   </button>
@@ -687,7 +687,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
       <div className={`${viewMode === 'list' ? 'flex items-start space-x-4' : ''}`}>
         {/* Service Image */}
         <div className={`flex-shrink-0 ${viewMode === 'list' ? 'w-24 h-24' : 'w-full h-48 mb-4'}`}>
-          <div className={`w-full h-full bg-gradient-to-br from-gray-200/50 to-gray-300/50 dark:from-gray-800/50 dark:to-gray-900/50 rounded-xl overflow-hidden ${
+          <div className={`w-full h-full bg-gradient-to-br from-dark-tertiary/50 to-dark-tertiary/50 dark:from-dark-800/50 dark:to-dark-900/50 rounded-xl overflow-hidden ${
             viewMode === 'list' ? '' : ''
           }`}>
             {service.images && service.images.length > 0 ? (
@@ -711,17 +711,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
         {/* Service Content */}
         <div className={`flex-1 ${viewMode === 'list' ? '' : ''}`}>
           <div className="flex items-start justify-between mb-2">
-            <h3 className="text-lg font-semibold text-black dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors line-clamp-2">
+            <h3 className="text-lg font-semibold text-dark-primary dark:text-white group-hover:text-dark-secondary dark:group-hover:text-dark-muted transition-colors line-clamp-2">
               {service.title}
             </h3>
             {service.similarity && (
-              <div className="ml-2 px-2 py-1 bg-black/10 dark:bg-white/10 text-black dark:text-white text-xs rounded-full font-medium">
+              <div className="ml-2 px-2 py-1 bg-black/10 dark:bg-white/10 text-dark-primary dark:text-white text-xs rounded-full font-medium">
                 {Math.round(service.similarity * 100)}% match
               </div>
             )}
           </div>
 
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-3">
+          <p className="text-dark-secondary dark:text-dark-muted text-sm mb-3 line-clamp-3">
             {service.description}
           </p>
 
@@ -731,13 +731,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
               {service.tags.slice(0, 3).map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 bg-white/50 dark:bg-white/10 text-gray-700 dark:text-gray-300 text-xs rounded-full border border-white/30 dark:border-white/10"
+                  className="px-2 py-1 bg-white/50 dark:bg-white/10 text-dark-secondary dark:text-dark-muted text-xs rounded-full border border-white/30 dark:border-white/10"
                 >
                   {tag}
                 </span>
               ))}
               {service.tags.length > 3 && (
-                <span className="px-2 py-1 bg-white/50 dark:bg-white/10 text-gray-600 dark:text-gray-400 text-xs rounded-full border border-white/30 dark:border-white/10">
+                <span className="px-2 py-1 bg-white/50 dark:bg-white/10 text-dark-secondary dark:text-dark-muted text-xs rounded-full border border-white/30 dark:border-white/10">
                   +{service.tags.length - 3} more
                 </span>
               )}
@@ -745,7 +745,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
           )}
 
           {/* Provider and Category */}
-          <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <div className="flex items-center text-sm text-dark-secondary dark:text-dark-muted mb-3">
             <span>
               by {service.provider.user.firstName} {service.provider.user.lastName}
             </span>
@@ -757,7 +757,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               {showDistance && service.distance_km !== undefined && service.distance_km !== null && (
-                <div className="flex items-center text-sm text-black dark:text-white">
+                <div className="flex items-center text-sm text-dark-primary dark:text-white">
                   <MapPin className="w-4 h-4 mr-1" />
                   <span>{service.distance_km.toFixed(1)} km away</span>
                 </div>
@@ -765,11 +765,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, viewMode, showDistan
             </div>
             
             <div className="text-right">
-              <div className="text-lg font-bold text-black dark:text-white">
+              <div className="text-lg font-bold text-dark-primary dark:text-white">
                 {service.currency} {price?.toLocaleString()}
               </div>
               {service.address && (
-                <div className="text-xs text-gray-600 dark:text-gray-400 line-clamp-1">
+                <div className="text-xs text-dark-secondary dark:text-dark-muted line-clamp-1">
                   {service.address}
                 </div>
               )}
@@ -911,21 +911,21 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, viewMode, getTota
           {/* Icon */}
           <div className={`flex-shrink-0 ${viewMode === 'list' ? 'w-14 h-14' : 'w-16 h-16 mb-4'}`}>
             <div className={`w-full h-full bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-2xl border border-white/30 dark:border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-              <Icon className={`${viewMode === 'list' ? 'w-6 h-6' : 'w-8 h-8'} text-black dark:text-white`} />
+              <Icon className={`${viewMode === 'list' ? 'w-6 h-6' : 'w-8 h-8'} text-dark-primary dark:text-white`} />
             </div>
           </div>
 
           {/* Content */}
           <div className={`flex-1 flex flex-col ${viewMode === 'list' ? 'justify-center' : 'justify-between'}`}>
             <div className="flex-grow">
-              <h3 className={`font-bold text-black dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors mb-2 ${
+              <h3 className={`font-bold text-dark-primary dark:text-white group-hover:text-dark-secondary dark:group-hover:text-dark-muted transition-colors mb-2 ${
                 viewMode === 'list' ? 'text-base line-clamp-1' : 'text-xl line-clamp-2'
               }`}>
                 {category.name}
               </h3>
               
               {category.description && (
-                <p className={`text-gray-600 dark:text-gray-400 text-sm leading-relaxed ${
+                <p className={`text-dark-secondary dark:text-dark-muted text-sm leading-relaxed ${
                   viewMode === 'list' ? 'line-clamp-1' : 'line-clamp-3 mb-4'
                 }`}>
                   {category.description}
@@ -936,19 +936,19 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, viewMode, getTota
             {/* Footer Section - Always at bottom */}
             <div className="mt-auto">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-1 text-black dark:text-white">
+                <div className="flex items-center space-x-1 text-dark-primary dark:text-white">
                   <Users className="w-4 h-4" />
                   <span className="text-sm font-semibold">
                     {totalServices} {totalServices === 1 ? 'service' : 'services'}
                   </span>
                 </div>
                 
-                <ArrowRight className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+                <ArrowRight className="w-5 h-5 text-dark-secondary dark:text-dark-muted group-hover:text-dark-primary dark:group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
               </div>
 
               {/* Subcategories indicator */}
               {category.children && category.children.length > 0 && (
-                <div className="mt-2 text-xs text-gray-500 dark:text-gray-600 font-medium">
+                <div className="mt-2 text-xs text-dark-muted dark:text-dark-secondary font-medium">
                   +{category.children.length} subcategories
                 </div>
               )}
@@ -961,3 +961,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, viewMode, getTota
 };
 
 export default BrowseServicesEnhanced;
+
+
+
+
+

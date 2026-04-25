@@ -179,7 +179,7 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
               <p className="text-sm text-white/70 mb-6">{error}</p>
               <button 
                 onClick={() => loadConversations()} 
-                className="px-6 py-3 bg-gradient-to-r from-white to-white/80 text-black font-semibold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg relative overflow-hidden group"
+                className="px-6 py-3 bg-gradient-to-r from-white to-white/80 text-dark-primary font-semibold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg relative overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
                 <span className="relative z-10">Retry</span>
@@ -222,7 +222,7 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
           <div className="mb-8 flex justify-center">
             <button
               onClick={() => setShowNewConversation(true)}
-              className="px-8 py-4 bg-gradient-to-r from-white to-white/80 backdrop-blur-xl text-black rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl flex items-center space-x-3 border border-white/20 hover:border-white/40 relative overflow-hidden group font-semibold"
+              className="px-8 py-4 bg-gradient-to-r from-white to-white/80 backdrop-blur-xl text-dark-primary rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl flex items-center space-x-3 border border-white/20 hover:border-white/40 relative overflow-hidden group font-semibold"
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
@@ -314,7 +314,7 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
                   <p className="text-white/60">Start your first conversation to begin messaging with others</p>
                   <button
                     onClick={() => setShowNewConversation(true)}
-                    className="mt-6 px-6 py-3 bg-gradient-to-r from-white to-white/80 text-black font-semibold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
+                    className="mt-6 px-6 py-3 bg-gradient-to-r from-white to-white/80 text-dark-primary font-semibold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
                   >
                     Start Messaging
                   </button>
@@ -333,12 +333,12 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
                       <div className="flex items-center space-x-4 relative z-10">
                         {/* Avatar with enhanced styling */}
                         <div className="flex-shrink-0 relative">
-                          <div className="w-14 h-14 bg-gradient-to-br from-white to-white/60 rounded-full flex items-center justify-center text-black font-semibold text-lg shadow-lg group-hover:shadow-xl transition-all duration-300 border-2 border-white/20 group-hover:border-white/40">
+                          <div className="w-14 h-14 bg-gradient-to-br from-white to-white/60 rounded-full flex items-center justify-center text-dark-primary font-semibold text-lg shadow-lg group-hover:shadow-xl transition-all duration-300 border-2 border-white/20 group-hover:border-white/40">
                             {getContactDisplayName(conversation).charAt(0).toUpperCase()}
                           </div>
                           {/* Enhanced online status indicator */}
                           {checkUserOnlineStatus(getOtherParticipant(conversation)) && (
-                            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white border-3 border-black rounded-full shadow-lg animate-pulse">
+                            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-dark-card border-3 border-black rounded-full shadow-lg animate-pulse">
                               <div className="absolute inset-0 bg-white/80 rounded-full animate-ping"></div>
                             </div>
                           )}
@@ -391,7 +391,7 @@ const ConversationHubInner: React.FC<{ currentUserId: string }> = ({ currentUser
                               )}
                               
                               {conversation.unreadCount && conversation.unreadCount > 0 && (
-                                <div className="bg-gradient-to-r from-white to-white/80 text-black text-xs rounded-full h-7 w-7 flex items-center justify-center font-bold shadow-lg animate-pulse">
+                                <div className="bg-gradient-to-r from-white to-white/80 text-dark-primary text-xs rounded-full h-7 w-7 flex items-center justify-center font-bold shadow-lg animate-pulse">
                                   {conversation.unreadCount > 99 ? '99+' : conversation.unreadCount}
                                 </div>
                               )}
@@ -522,7 +522,7 @@ const ConversationHub: React.FC = () => {
           <div className="min-h-screen bg-black to-purple-50 dark:bg-black  flex flex-col">
                   <div className="flex-1 flex items-center justify-center mt-16">
                     <div className="text-center">
-                  <p className="text-black dark:text-white mb-4">Please log in to access your profile.</p>
+                  <p className="text-dark-primary dark:text-white mb-4">Please log in to access your profile.</p>
                   <Button
                     onClick={() => {
                   localStorage.setItem('RedirectAfterLogin', window.location.pathname);
@@ -545,3 +545,5 @@ const ConversationHub: React.FC = () => {
 };
 
 export default ConversationHub;
+
+

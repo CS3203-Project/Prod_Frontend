@@ -138,30 +138,30 @@ export default function Articles() {
   const featuredArticles = articles.filter(article => article.featured)
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-dark-primary">
       <Navbar />
       
       {/* Header Section */}
-      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+      <div className="bg-gradient-to-br from-dark-900 via-dark-800 to-black text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-8">
               Help Articles
             </h1>
-            <p className="text-xl mb-8 text-gray-300">
+            <p className="text-xl mb-8 text-dark-muted">
               Browse our comprehensive knowledge base to find answers to your questions
             </p>
             
             {/* Search Bar */}
             <div className="max-w-2xl mx-auto relative">
               <div className="relative">
-                <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-dark-muted w-5 h-5" />
                 <input
                   type="text"
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 text-gray-900 bg-white rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-4 text-dark-primary bg-dark-card rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -173,8 +173,8 @@ export default function Articles() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar - Categories */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
+            <div className="bg-dark-card rounded-lg shadow-md p-6 sticky top-8">
+              <h3 className="text-lg font-semibold text-dark-primary mb-4">Categories</h3>
               <div className="space-y-2">
                 {categories.map((category) => (
                   <button
@@ -183,7 +183,7 @@ export default function Articles() {
                     className={`w-full flex items-center px-3 py-2 rounded-lg text-left transition-colors ${
                       selectedCategory === category.id
                         ? 'bg-black text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        : 'text-dark-secondary hover:bg-dark-tertiary'
                     }`}
                   >
                     {category.icon}
@@ -199,32 +199,32 @@ export default function Articles() {
             {/* Featured Articles Section */}
             {selectedCategory === 'all' && (
               <div className="mb-12">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Articles</h2>
+                <h2 className="text-2xl font-bold text-dark-primary mb-6">Featured Articles</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {featuredArticles.map((article) => (
-                    <div key={article.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div key={article.id} className="bg-dark-card rounded-lg shadow-md overflow-hidden border border-dark-secondary hover:shadow-lg transition-shadow">
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-3">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-black text-white">
                             Featured
                           </span>
-                          <div className="flex items-center text-sm text-gray-500">
+                          <div className="flex items-center text-sm text-dark-muted">
                             <FiClock className="w-4 h-4 mr-1" />
                             {article.readTime}
                           </div>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                        <h3 className="text-xl font-semibold text-dark-primary mb-2">
                           {article.title}
                         </h3>
-                        <p className="text-gray-600 mb-4">
+                        <p className="text-dark-secondary mb-4">
                           {article.excerpt}
                         </p>
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center text-sm text-gray-500">
+                          <div className="flex items-center text-sm text-dark-muted">
                             <FiEye className="w-4 h-4 mr-1" />
                             {article.views}
                           </div>
-                          <button className="inline-flex items-center text-black hover:text-gray-700 font-medium">
+                          <button className="inline-flex items-center text-dark-primary hover:text-dark-secondary font-medium">
                             Read More
                             <FiChevronRight className="w-4 h-4 ml-1" />
                           </button>
@@ -239,26 +239,26 @@ export default function Articles() {
             {/* All Articles Section */}
             <div>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-dark-primary">
                   {selectedCategory === 'all' ? 'All Articles' : categories.find(c => c.id === selectedCategory)?.name + ' Articles'}
                 </h2>
-                <span className="text-gray-500">
+                <span className="text-dark-muted">
                   {filteredArticles.length} article{filteredArticles.length !== 1 ? 's' : ''}
                 </span>
               </div>
 
               <div className="space-y-4">
                 {filteredArticles.map((article) => (
-                  <div key={article.id} className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                  <div key={article.id} className="bg-dark-card rounded-lg shadow-md p-6 border border-dark-secondary hover:shadow-lg transition-shadow">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                        <h3 className="text-xl font-semibold text-dark-primary mb-2">
                           {article.title}
                         </h3>
-                        <p className="text-gray-600 mb-4">
+                        <p className="text-dark-secondary mb-4">
                           {article.excerpt}
                         </p>
-                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                        <div className="flex items-center space-x-4 text-sm text-dark-muted">
                           <div className="flex items-center">
                             <FiClock className="w-4 h-4 mr-1" />
                             {article.readTime}
@@ -270,7 +270,7 @@ export default function Articles() {
                           <span>Updated {article.lastUpdated}</span>
                         </div>
                       </div>
-                      <button className="ml-6 inline-flex items-center text-black hover:text-gray-700 font-medium">
+                      <button className="ml-6 inline-flex items-center text-dark-primary hover:text-dark-secondary font-medium">
                         Read More
                         <FiChevronRight className="w-4 h-4 ml-1" />
                       </button>
@@ -281,11 +281,11 @@ export default function Articles() {
 
               {filteredArticles.length === 0 && (
                 <div className="text-center py-12">
-                  <div className="text-gray-400 mb-4">
+                  <div className="text-dark-muted mb-4">
                     <FiSearch className="w-12 h-12 mx-auto" />
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No articles found</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-lg font-medium text-dark-primary mb-2">No articles found</h3>
+                  <p className="text-dark-secondary">
                     Try adjusting your search or browse different categories.
                   </p>
                 </div>
@@ -299,3 +299,6 @@ export default function Articles() {
     </div>
   )
 }
+
+
+

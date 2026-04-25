@@ -94,7 +94,7 @@ const ServiceRequestPage = () => {
       <div className="min-h-screen bg-black to-purple-50 dark:bg-black  flex flex-col">
         <div className="flex-1 flex items-center justify-center mt-16">
           <div className="text-center">
-        <p className="text-black dark:text-white mb-4">Please log in to access your profile.</p>
+        <p className="text-dark-primary dark:text-white mb-4">Please log in to access your profile.</p>
         <Button
           onClick={() => {
         localStorage.setItem('RedirectAfterLogin', window.location.pathname);
@@ -139,7 +139,7 @@ const ServiceRequestPage = () => {
               <h2 className="text-xl font-bold mb-4 text-white">Create New Service Request</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-dark-muted mb-1">
                     Title (Optional)
                   </label>
                   <input
@@ -148,11 +148,11 @@ const ServiceRequestPage = () => {
                     value={formData.title}
                     onChange={handleChange}
                     placeholder="Title for your service request"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-dark-muted mb-1">
                     Description <span className="text-red-400">*</span>
                   </label>
                   <textarea
@@ -162,12 +162,12 @@ const ServiceRequestPage = () => {
                     required
                     placeholder="Describe what service you need..."
                     rows={4}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-white/20"
                   />
                 </div>
                 {/* Category field removed as requested */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className="block text-sm font-medium text-dark-muted mb-1">
                     Address (Optional)
                   </label>
                   <input
@@ -176,7 +176,7 @@ const ServiceRequestPage = () => {
                     value={formData.address}
                     onChange={handleChange}
                     placeholder="Your address for local services"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-white/20"
                   />
                 </div>
                 <div className="flex justify-end">
@@ -198,11 +198,11 @@ const ServiceRequestPage = () => {
             {loading && !formVisible ? (
               <div className="text-center py-8">
                 <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-white border-solid border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-                <p className="mt-2 text-gray-400">Loading your requests...</p>
+                <p className="mt-2 text-dark-muted">Loading your requests...</p>
               </div>
             ) : serviceRequests.length === 0 ? (
               <div className="text-center py-8 bg-white/5 rounded-lg border border-white/10">
-                <p className="text-gray-400">You haven't created any service requests yet.</p>
+                <p className="text-dark-muted">You haven't created any service requests yet.</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -216,7 +216,7 @@ const ServiceRequestPage = () => {
                         <h3 className="text-lg font-medium text-white">
                           {request.title || 'Untitled Request'}
                         </h3>
-                        <p className="text-sm text-gray-400 mt-1">
+                        <p className="text-sm text-dark-muted mt-1">
                           Created: {new Date(request.createdAt).toLocaleDateString()}
                         </p>
                         <div className="mt-2">
@@ -224,12 +224,12 @@ const ServiceRequestPage = () => {
                             request.status === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
                             request.status === 'MATCHED' ? 'bg-green-500/20 text-green-400' :
                             request.status === 'COMPLETED' ? 'bg-blue-500/20 text-blue-400' :
-                            'bg-gray-500/20 text-gray-400'
+                            'bg-dark-secondary0/20 text-dark-muted'
                           }`}>
                             {request.status}
                           </span>
                         </div>
-                        <p className="mt-4 text-gray-300">{request.description}</p>
+                        <p className="mt-4 text-dark-muted">{request.description}</p>
                       </div>
                     </div>
                     <div className="flex space-x-2 mt-4">
@@ -258,3 +258,5 @@ const ServiceRequestPage = () => {
 };
 
 export default ServiceRequestPage;
+
+

@@ -108,7 +108,7 @@ export default function Support() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-purple-900">
+    <div className="min-h-screen bg-gradient-to-br from-black via-dark-900 to-purple-900">
       {/* Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -126,7 +126,7 @@ export default function Support() {
               <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent"> help you?</span>
             </h1>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+          <p className="text-xl text-dark-muted max-w-3xl mx-auto mb-12">
             Find answers to your questions and get the support you need to succeed on our platform
           </p>
           
@@ -141,8 +141,8 @@ export default function Support() {
                   {stat.icon}
                 </div>
                 <div className="text-2xl font-bold text-white mb-1">{stat.number}</div>
-                <div className="text-sm font-semibold text-gray-200 mb-1">{stat.label}</div>
-                <div className="text-gray-400 text-xs">{stat.description}</div>
+                <div className="text-sm font-semibold text-dark-muted mb-1">{stat.label}</div>
+                <div className="text-dark-muted text-xs">{stat.description}</div>
               </div>
             ))}
           </div>
@@ -155,7 +155,7 @@ export default function Support() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Browse Help Topics
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             Find comprehensive guides and tutorials for every aspect of our platform
           </p>
         </div>
@@ -173,7 +173,7 @@ export default function Support() {
               <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
                 {category.title}
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-dark-muted mb-4">
                 {category.description}
               </p>
               <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 inline-block border border-white/20">
@@ -190,7 +190,7 @@ export default function Support() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             Quick answers to the most common questions about our platform
           </p>
         </div>
@@ -209,14 +209,14 @@ export default function Support() {
                   {openFAQ === index ? (
                     <ChevronUp className="w-5 h-5 text-purple-400" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
+                    <ChevronDown className="w-5 h-5 text-dark-muted group-hover:text-purple-400 transition-colors duration-300" />
                   )}
                 </div>
               </button>
               {openFAQ === index && (
                 <div className="px-8 pb-6">
                   <div className="border-t border-white/10 pt-6">
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-dark-muted leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
@@ -233,7 +233,7 @@ export default function Support() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Still Need Help?
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             Choose your preferred way to get in touch with our support team
           </p>
         </div>
@@ -247,14 +247,14 @@ export default function Support() {
             <h3 className="text-xl font-semibold text-white mb-3">
               Live Chat
             </h3>
-            <p className="text-gray-300 mb-6">
+            <p className="text-dark-muted mb-6">
               Chat with our support team in real-time. Average response time: 2 minutes
             </p>
             <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 hover:from-green-600 hover:to-emerald-700 transition-all duration-300 mb-4">
               Start Live Chat
             </Button>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 inline-block border border-white/20">
-              <span className="text-sm text-gray-300">Available 24/7</span>
+              <span className="text-sm text-dark-muted">Available 24/7</span>
             </div>
           </div>
 
@@ -266,7 +266,7 @@ export default function Support() {
             <h3 className="text-xl font-semibold text-white mb-3">
               Email Support
             </h3>
-            <p className="text-gray-300 mb-6">
+            <p className="text-dark-muted mb-6">
               Send us an email and we'll get back to you within 4 hours
             </p>
             <Button 
@@ -276,7 +276,7 @@ export default function Support() {
               Send Email
             </Button>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 inline-block border border-white/20">
-              <span className="text-sm text-gray-300">zia.contact.team@gmail.com</span>
+              <span className="text-sm text-dark-muted">zia.contact.team@gmail.com</span>
             </div>
           </div>
 
@@ -288,7 +288,7 @@ export default function Support() {
             <h3 className="text-xl font-semibold text-white mb-3">
               Phone Support
             </h3>
-            <p className="text-gray-300 mb-6">
+            <p className="text-dark-muted mb-6">
               Speak directly with a support representative
             </p>
             <Button 
@@ -298,7 +298,7 @@ export default function Support() {
               Call Support
             </Button>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 inline-block border border-white/20">
-              <span className="text-sm text-gray-300">+94 355 3579</span>
+              <span className="text-sm text-dark-muted">+94 355 3579</span>
             </div>
           </div>
         </div>
@@ -313,7 +313,7 @@ export default function Support() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Need Priority Support?
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted mb-8 max-w-2xl mx-auto">
             Upgrade to our Premium plan for priority support, dedicated account management, and enhanced features
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -352,7 +352,7 @@ export default function Support() {
                   Call Our Support Team
                 </h4>
                 
-                <p className="text-gray-300 mb-8">
+                <p className="text-dark-muted mb-8">
                   Speak directly with our support representatives for immediate assistance.
                 </p>
 
@@ -364,12 +364,12 @@ export default function Support() {
                     </div>
                     <div className="border-t border-white/10 pt-4">
                       <p className="text-sm font-medium text-purple-300 mb-2">Business Hours</p>
-                      <p className="text-gray-300 text-sm">Monday - Friday: 8:00 AM - 8:00 PM EST</p>
-                      <p className="text-gray-300 text-sm">Saturday - Sunday: 10:00 AM - 6:00 PM EST</p>
+                      <p className="text-dark-muted text-sm">Monday - Friday: 8:00 AM - 8:00 PM EST</p>
+                      <p className="text-dark-muted text-sm">Saturday - Sunday: 10:00 AM - 6:00 PM EST</p>
                     </div>
                     <div className="border-t border-white/10 pt-4">
                       <p className="text-sm font-medium text-purple-300 mb-2">After Hours</p>
-                      <p className="text-gray-300 text-sm">24/7 Emergency Support: +94 713553579</p>
+                      <p className="text-dark-muted text-sm">24/7 Emergency Support: +94 713553579</p>
                     </div>
                   </div>
                 </div>
@@ -424,3 +424,6 @@ export default function Support() {
     </div>
   )
 }
+
+
+

@@ -85,7 +85,7 @@ export default function Homepage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-dark-primary dark:bg-black relative overflow-hidden">
       {/* Content Overlay */}
       <div className="relative">
         {/* Hero Section */}
@@ -94,12 +94,12 @@ export default function Homepage() {
           <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#e5e7eb_0.5px,transparent_0.5px),linear-gradient(to_bottom,#e5e7eb_0.5px,transparent_0.5px)] dark:bg-[linear-gradient(to_right,#374151_0.5px,transparent_0.5px),linear-gradient(to_bottom,#374151_0.5px,transparent_0.5px)] bg-[size:4rem_4rem] opacity-30 [mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)]" />
 
           {/* Radial Accent */}
-          <div className="absolute left-1/2 top-[calc(100%-90px)] lg:top-[calc(100%-150px)] h-[500px] w-[700px] md:h-[500px] md:w-[1100px] lg:h-[750px] lg:w-[140%] -translate-x-1/2 rounded-[100%] border-[#B48CDE] bg-white dark:bg-black bg-[radial-gradient(closest-side,#fff_82%,#000000)] dark:bg-[radial-gradient(closest-side,#000_82%,#ffffff)]" />
+          <div className="absolute left-1/2 top-[calc(100%-90px)] lg:top-[calc(100%-150px)] h-[500px] w-[700px] md:h-[500px] md:w-[1100px] lg:h-[750px] lg:w-[140%] -translate-x-1/2 rounded-[100%] border-[#B48CDE] bg-dark-card dark:bg-black bg-[radial-gradient(closest-side,#fff_82%,#000000)] dark:bg-[radial-gradient(closest-side,#000_82%,#ffffff)]" />
 
           <div className="max-w-7xl mx-auto relative z-10">
             {/* Eyebrow */}
             <a href="#" className="group inline-block mb-6">
-              <span className="text-sm text-gray-600 dark:text-gray-400 font-medium mx-auto px-5 py-2 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent border-[2px] border-gray-300/20 dark:border-white/5 rounded-3xl w-fit tracking-tight uppercase flex items-center justify-center">
+              <span className="text-sm text-dark-secondary dark:text-dark-muted font-medium mx-auto px-5 py-2 bg-gradient-to-tr from-zinc-300/5 via-dark-muted/5 to-transparent border-[2px] border-dark-primary/20 dark:border-white/5 rounded-3xl w-fit tracking-tight uppercase flex items-center justify-center">
                 Next-Gen Productivity
                 <ChevronRight className="inline w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
@@ -112,19 +112,19 @@ export default function Homepage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="animate-fade-in mb-12 text-balance text-lg tracking-tight text-gray-600 dark:text-gray-400 md:text-xl max-w-3xl mx-auto leading-relaxed">
+            <p className="animate-fade-in mb-12 text-balance text-lg tracking-tight text-dark-secondary dark:text-dark-muted md:text-xl max-w-3xl mx-auto leading-relaxed">
               Connect with verified professionals and get high-quality services 
               delivered with excellence and reliability
             </p>
 
             {/* Enhanced Search Bar with Geolocation */}
             <div className="max-w-3xl mx-auto mb-6 rounded-3xl">
-              <div className="bg-white/80 dark:bg-black/30 backdrop-blur-lg rounded-2xl p-2 shadow-2xl border border-gray-200 dark:border-white/10">
+              <div className="bg-white/80 dark:bg-black/30 backdrop-blur-lg rounded-2xl p-2 shadow-2xl border border-dark-secondary dark:border-white/10">
                 <div className="flex flex-col sm:flex-row gap-2">
                   {/* Service Search Input */}
                   <div className="flex-1 relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <Search className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                      <Search className="h-5 w-5 text-dark-muted dark:text-dark-muted" />
                     </div>
                     <input
                       type="text"
@@ -137,7 +137,7 @@ export default function Homepage() {
                           doSearch();
                         }
                       }}
-                      className="w-full pl-12 pr-4 py-4 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 bg-transparent border-none rounded-xl focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white text-base font-medium"
+                      className="w-full pl-12 pr-4 py-4 text-dark-primary dark:text-white placeholder-dark-muted dark:placeholder-dark-muted bg-transparent border-none rounded-xl focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white text-base font-medium"
                     />
                   </div>
 
@@ -180,7 +180,7 @@ export default function Homepage() {
 
               {/* Popular Searches */}
               <div className="mt-4 text-center">
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">Popular searches:</p>
+                <p className="text-dark-secondary dark:text-dark-muted text-sm mb-2">Popular searches:</p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {popularSearches.map((search, index) => (
                     <button
@@ -197,7 +197,7 @@ export default function Homepage() {
                           }
                         }, 100);
                       }}
-                      className="px-4 py-2 bg-white/70 text-black backdrop-blur-md text-sm rounded-full hover:bg-white/90 transition-all duration-300 border border-white/20 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] hover:shadow-[0_4px_16px_0_rgba(0,0,0,0.15)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-medium"
+                      className="px-4 py-2 bg-white/70 text-dark-primary backdrop-blur-md text-sm rounded-full hover:bg-white/90 transition-all duration-300 border border-white/20 shadow-[0_4px_16px_0_rgba(0,0,0,0.08)] hover:shadow-[0_4px_16px_0_rgba(0,0,0,0.15)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-medium"
                     >
                       {search}
                     </button>
@@ -221,14 +221,14 @@ export default function Homepage() {
         </section>
 
         {/* Interactive Feature Cards Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black relative">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card dark:bg-black relative">
           <div className="max-w-7xl mx-auto">
             {/* Section Header */}
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-dark-primary dark:text-white mb-4">
                 Why Choose Our Platform
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg text-dark-secondary dark:text-dark-muted max-w-2xl mx-auto">
                 Experience a seamless way to connect with professionals and grow your business
               </p>
             </div>
@@ -240,12 +240,12 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-black/10 dark:from-white/5 dark:to-white/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
                 <div className="relative h-full backdrop-blur-md bg-white/70 dark:bg-black/30 border border-white/20 dark:border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex flex-col">
                   <div className="mb-6 inline-block p-4 bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-2xl border border-white/30 dark:border-white/20 w-fit">
-                    <Sparkles className="w-8 h-8 text-black dark:text-white" />
+                    <Sparkles className="w-8 h-8 text-dark-primary dark:text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black dark:text-white mb-4">
+                  <h3 className="text-2xl font-bold text-dark-primary dark:text-white mb-4">
                     AI-Powered Search
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed flex-grow">
+                  <p className="text-dark-secondary dark:text-dark-muted leading-relaxed flex-grow">
                     Find exactly what you need with our intelligent search algorithm that understands your requirements and delivers relevant results instantly.
                   </p>
                 </div>
@@ -256,12 +256,12 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-black/10 dark:from-white/5 dark:to-white/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
                 <div className="relative h-full backdrop-blur-md bg-white/70 dark:bg-black/30 border border-white/20 dark:border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex flex-col">
                   <div className="mb-6 inline-block p-4 bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-2xl border border-white/30 dark:border-white/20 w-fit">
-                    <Search className="w-8 h-8 text-black dark:text-white" />
+                    <Search className="w-8 h-8 text-dark-primary dark:text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black dark:text-white mb-4">
+                  <h3 className="text-2xl font-bold text-dark-primary dark:text-white mb-4">
                     Location-Based Discovery
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed flex-grow">
+                  <p className="text-dark-secondary dark:text-dark-muted leading-relaxed flex-grow">
                     Connect with service providers near you. Our advanced geolocation features help you find local professionals within your preferred radius.
                   </p>
                 </div>
@@ -272,12 +272,12 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-black/10 dark:from-white/5 dark:to-white/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
                 <div className="relative h-full backdrop-blur-md bg-white/70 dark:bg-black/30 border border-white/20 dark:border-white/10 rounded-3xl p-8 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex flex-col">
                   <div className="mb-6 inline-block p-4 bg-white/50 dark:bg-white/10 backdrop-blur-sm rounded-2xl border border-white/30 dark:border-white/20 w-fit">
-                    <ArrowRight className="w-8 h-8 text-black dark:text-white" />
+                    <ArrowRight className="w-8 h-8 text-dark-primary dark:text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black dark:text-white mb-4">
+                  <h3 className="text-2xl font-bold text-dark-primary dark:text-white mb-4">
                     Verified Professionals
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed flex-grow">
+                  <p className="text-dark-secondary dark:text-dark-muted leading-relaxed flex-grow">
                     Every service provider is thoroughly vetted and verified. Work with confidence knowing you're hiring trusted and qualified professionals.
                   </p>
                 </div>
@@ -287,13 +287,13 @@ export default function Homepage() {
         </section>
         
         {/* Services Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-card dark:bg-black">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-dark-primary dark:text-white mb-6">
                 Featured Services
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-dark-secondary dark:text-dark-muted max-w-3xl mx-auto leading-relaxed">
                 Discover professional services from our verified providers. 
                 Quality guaranteed, satisfaction assured.
               </p>
@@ -317,7 +317,7 @@ export default function Homepage() {
                   {error ? 'Try Again' : 'Refresh Services'}
                 </Button>
                 {error && (
-                  <p className="text-red-600 dark:text-red-400 text-lg mt-4 font-medium">
+                  <p className="text-red-400 dark:text-red-400 text-lg mt-4 font-medium">
                     Error: {error}
                   </p>
                 )}
@@ -331,3 +331,6 @@ export default function Homepage() {
     </div>
   );
 }
+
+
+

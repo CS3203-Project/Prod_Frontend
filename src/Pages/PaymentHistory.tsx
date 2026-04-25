@@ -108,43 +108,43 @@ const PaymentHistory: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-dark-secondary to-blue-50">
       <Navbar />
       
       <main className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
+          <h1 className="text-3xl font-bold text-dark-primary mb-2 flex items-center">
             <CreditCard className="w-8 h-8 mr-3 text-blue-600" />
             Payment History
           </h1>
-          <p className="text-gray-600">
+          <p className="text-dark-secondary">
             View and manage all your payment transactions
           </p>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-dark-card rounded-xl shadow-lg p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-muted w-4 h-4" />
               <input
                 type="text"
                 placeholder="Search payments..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-dark-primary rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             {/* Status Filter */}
             <div className="relative">
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-muted w-4 h-4" />
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value as PaymentStatus | 'all')}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                className="w-full pl-10 pr-4 py-2 border border-dark-primary rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
               >
                 <option value="all">All Status</option>
                 <option value={PaymentStatus.SUCCEEDED}>Succeeded</option>
@@ -157,11 +157,11 @@ const PaymentHistory: React.FC = () => {
 
             {/* Date Filter */}
             <div className="relative">
-              <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-muted w-4 h-4" />
               <select
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                className="w-full pl-10 pr-4 py-2 border border-dark-primary rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
               >
                 <option value="all">All Time</option>
                 <option value="today">Today</option>
@@ -184,20 +184,20 @@ const PaymentHistory: React.FC = () => {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-dark-card rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-500 text-sm">Total Payments</p>
-                <p className="text-2xl font-bold text-gray-900">{totalCount}</p>
+                <p className="text-dark-muted text-sm">Total Payments</p>
+                <p className="text-2xl font-bold text-dark-primary">{totalCount}</p>
               </div>
               <DollarSign className="w-8 h-8 text-blue-600" />
             </div>
           </div>
           
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-dark-card rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-500 text-sm">Successful</p>
+                <p className="text-dark-muted text-sm">Successful</p>
                 <p className="text-2xl font-bold text-green-600">
                   {payments.filter(p => p.status === PaymentStatus.SUCCEEDED).length}
                 </p>
@@ -206,11 +206,11 @@ const PaymentHistory: React.FC = () => {
             </div>
           </div>
           
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-dark-card rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-500 text-sm">Total Amount</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-dark-muted text-sm">Total Amount</p>
+                <p className="text-2xl font-bold text-dark-primary">
                   {currencyConfig.formatCurrency(
                     payments
                       .filter(p => p.status === PaymentStatus.SUCCEEDED)
@@ -225,9 +225,9 @@ const PaymentHistory: React.FC = () => {
         </div>
 
         {/* Payment List */}
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">
+        <div className="bg-dark-card rounded-xl shadow-lg overflow-hidden">
+          <div className="p-6 border-b border-dark-secondary">
+            <h2 className="text-xl font-semibold text-dark-primary">
               Payments ({filteredPayments.length})
             </h2>
           </div>
@@ -235,13 +235,13 @@ const PaymentHistory: React.FC = () => {
           {loading ? (
             <div className="p-12 text-center">
               <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
-              <p className="text-gray-600">Loading payment history...</p>
+              <p className="text-dark-secondary">Loading payment history...</p>
             </div>
           ) : filteredPayments.length === 0 ? (
             <div className="p-12 text-center">
-              <CreditCard className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No payments found</h3>
-              <p className="text-gray-600">You haven't made any payments yet.</p>
+              <CreditCard className="w-16 h-16 text-dark-muted mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-dark-primary mb-2">No payments found</h3>
+              <p className="text-dark-secondary">You haven't made any payments yet.</p>
             </div>
           ) : (
             <div className="divide-y divide-gray-200">
@@ -251,22 +251,22 @@ const PaymentHistory: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center space-x-4 mb-3">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900">
+                          <h3 className="text-lg font-semibold text-dark-primary">
                             {payment.service?.title || 'Service Payment'}
                           </h3>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-dark-muted">
                             Payment ID: {payment.id}
                           </p>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-dark-muted">
                             {new Date(payment.createdAt).toLocaleDateString()} at {new Date(payment.createdAt).toLocaleTimeString()}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-semibold text-gray-900">
+                          <p className="text-lg font-semibold text-dark-primary">
                             {currencyConfig.formatCurrency(payment.amount, payment.currency)}
                           </p>
                           {payment.platformFee && (
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-dark-muted">
                               Platform fee: {currencyConfig.formatCurrency(payment.platformFee, payment.currency)}
                             </p>
                           )}
@@ -292,9 +292,9 @@ const PaymentHistory: React.FC = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="p-6 border-t border-gray-200">
+            <div className="p-6 border-t border-dark-secondary">
               <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-dark-secondary">
                   Showing {((currentPage - 1) * 10) + 1} to {Math.min(currentPage * 10, totalCount)} of {totalCount} payments
                 </p>
                 
@@ -302,7 +302,7 @@ const PaymentHistory: React.FC = () => {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="flex items-center px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center px-3 py-2 text-sm text-dark-muted hover:text-dark-secondary disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft className="w-4 h-4 mr-1" />
                     Previous
@@ -318,7 +318,7 @@ const PaymentHistory: React.FC = () => {
                           className={`px-3 py-2 text-sm rounded-md ${
                             currentPage === page
                               ? 'bg-blue-600 text-white'
-                              : 'text-gray-500 hover:text-gray-700'
+                              : 'text-dark-muted hover:text-dark-secondary'
                           }`}
                         >
                           {page}
@@ -330,7 +330,7 @@ const PaymentHistory: React.FC = () => {
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="flex items-center px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center px-3 py-2 text-sm text-dark-muted hover:text-dark-secondary disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Next
                     <ChevronRight className="w-4 h-4 ml-1" />
@@ -348,3 +348,4 @@ const PaymentHistory: React.FC = () => {
 };
 
 export default PaymentHistory;
+

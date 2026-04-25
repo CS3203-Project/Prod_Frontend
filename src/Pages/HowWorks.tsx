@@ -158,7 +158,7 @@ export default function HowWorks() {
   const currentSteps = activeTab === 'buyers' ? buyerSteps : sellerSteps
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-purple-900">
+    <div className="min-h-screen bg-gradient-to-br from-black via-dark-900 to-purple-900">
       {/* Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -176,7 +176,7 @@ export default function HowWorks() {
               <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent"> Works</span>
             </h1>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+          <p className="text-xl text-dark-muted max-w-3xl mx-auto mb-12">
             Discover how our platform connects buyers and sellers in a simple, 
             secure, and efficient marketplace for digital services.
           </p>
@@ -188,7 +188,7 @@ export default function HowWorks() {
               <div className="relative z-10">
                 <div className="mb-4 text-center">
                   <h3 className="text-xl font-semibold text-white mb-2">Watch How Our Platform Works</h3>
-                  <p className="text-gray-300 text-sm">See our marketplace in action</p>
+                  <p className="text-dark-muted text-sm">See our marketplace in action</p>
                 </div>
                 <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
                   <iframe
@@ -215,7 +215,7 @@ export default function HowWorks() {
               className={`px-8 py-4 rounded-xl font-medium transition-all duration-300 relative overflow-hidden group ${
                 activeTab === 'buyers'
                   ? 'bg-gradient-to-r from-purple-500 to-blue-600 text-white shadow-lg'
-                  : 'text-gray-300 hover:text-white hover:bg-white/10'
+                  : 'text-dark-muted hover:text-white hover:bg-white/10'
               }`}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
@@ -229,7 +229,7 @@ export default function HowWorks() {
               className={`px-8 py-4 rounded-xl font-medium transition-all duration-300 relative overflow-hidden group ${
                 activeTab === 'sellers'
                   ? 'bg-gradient-to-r from-purple-500 to-blue-600 text-white shadow-lg'
-                  : 'text-gray-300 hover:text-white hover:bg-white/10'
+                  : 'text-dark-muted hover:text-white hover:bg-white/10'
               }`}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
@@ -248,7 +248,7 @@ export default function HowWorks() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {activeTab === 'buyers' ? 'How to Buy Services' : 'How to Sell Services'}
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             {activeTab === 'buyers' 
               ? 'Follow these simple steps to find and purchase the perfect service for your needs'
               : 'Start your freelancing journey and build a successful business on our platform'
@@ -288,7 +288,7 @@ export default function HowWorks() {
                 {step.title}
               </h3>
               
-              <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+              <p className="text-dark-muted group-hover:text-dark-muted transition-colors duration-300">
                 {step.description}
               </p>
             </div>
@@ -302,7 +302,7 @@ export default function HowWorks() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Why Choose Our Platform?
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             We provide a secure, reliable, and user-friendly environment for all your service needs
           </p>
         </div>
@@ -316,7 +316,7 @@ export default function HowWorks() {
               <h3 className="text-xl font-semibold text-white mb-3">
                 {feature.title}
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-dark-muted mb-4">
                 {feature.description}
               </p>
               <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 inline-block border border-white/20">
@@ -333,7 +333,7 @@ export default function HowWorks() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted mb-8 max-w-2xl mx-auto">
             Join millions of users who trust our platform for their service needs
           </p>
           
@@ -373,7 +373,7 @@ export default function HowWorks() {
               </div>
 
               <div className="mb-8">
-                <p className="text-gray-300 leading-relaxed mb-6">
+                <p className="text-dark-muted leading-relaxed mb-6">
                   {selectedStep.details}
                 </p>
                 
@@ -384,7 +384,7 @@ export default function HowWorks() {
                   </h4>
                   <ul className="space-y-3">
                     {selectedStep.features.map((feature: string, index: number) => (
-                      <li key={index} className="flex items-center text-gray-300">
+                      <li key={index} className="flex items-center text-dark-muted">
                         <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
                         {feature}
                       </li>
@@ -408,3 +408,5 @@ export default function HowWorks() {
     </div>
   )
 }
+
+

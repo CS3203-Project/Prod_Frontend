@@ -102,7 +102,7 @@ const ProviderEarningsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-dark-secondary to-blue-50">
       <Navbar />
       
       <main className="container mx-auto px-4 py-8">
@@ -110,11 +110,11 @@ const ProviderEarningsPage: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
+              <h1 className="text-3xl font-bold text-dark-primary mb-2 flex items-center">
                 <Wallet className="w-8 h-8 mr-3 text-green-600" />
                 Earnings Dashboard
               </h1>
-              <p className="text-gray-600">
+              <p className="text-dark-secondary">
                 Track your earnings and manage your payments
               </p>
             </div>
@@ -132,18 +132,18 @@ const ProviderEarningsPage: React.FC = () => {
         {loading ? (
           <div className="text-center py-12">
             <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
-            <p className="text-gray-600">Loading earnings data...</p>
+            <p className="text-dark-secondary">Loading earnings data...</p>
           </div>
         ) : earnings ? (
           <>
             {/* Earnings Overview Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {/* Total Earnings */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-dark-card rounded-xl shadow-lg p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm">Total Earnings</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-dark-muted text-sm">Total Earnings</p>
+                    <p className="text-2xl font-bold text-dark-primary">
                       {currencyConfig.formatCurrency(earnings.totalEarnings, earnings.currency)}
                     </p>
                   </div>
@@ -152,10 +152,10 @@ const ProviderEarningsPage: React.FC = () => {
               </div>
 
               {/* Available Balance */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-dark-card rounded-xl shadow-lg p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm">Available Balance</p>
+                    <p className="text-dark-muted text-sm">Available Balance</p>
                     <p className="text-2xl font-bold text-green-600">
                       {currencyConfig.formatCurrency(earnings.availableBalance, earnings.currency)}
                     </p>
@@ -172,10 +172,10 @@ const ProviderEarningsPage: React.FC = () => {
               </div>
 
               {/* Pending Balance */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-dark-card rounded-xl shadow-lg p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm">Pending</p>
+                    <p className="text-dark-muted text-sm">Pending</p>
                     <p className="text-2xl font-bold text-yellow-600">
                       {currencyConfig.formatCurrency(earnings.pendingBalance, earnings.currency)}
                     </p>
@@ -185,10 +185,10 @@ const ProviderEarningsPage: React.FC = () => {
               </div>
 
               {/* Total Withdrawn */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-dark-card rounded-xl shadow-lg p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm">Total Withdrawn</p>
+                    <p className="text-dark-muted text-sm">Total Withdrawn</p>
                     <p className="text-2xl font-bold text-blue-600">
                       {currencyConfig.formatCurrency(earnings.totalWithdrawn, earnings.currency)}
                     </p>
@@ -201,26 +201,26 @@ const ProviderEarningsPage: React.FC = () => {
             {/* Earnings Breakdown */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Earnings Summary */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+              <div className="bg-dark-card rounded-xl shadow-lg p-6">
+                <h2 className="text-xl font-semibold text-dark-primary mb-4 flex items-center">
                   <BarChart3 className="w-5 h-5 mr-2" />
                   Earnings Summary
                 </h2>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Total Revenue</span>
-                    <span className="font-semibold text-gray-900">
+                  <div className="flex justify-between items-center p-3 bg-dark-secondary rounded-lg">
+                    <span className="text-dark-secondary">Total Revenue</span>
+                    <span className="font-semibold text-dark-primary">
                       {currencyConfig.formatCurrency(earnings.totalEarnings, earnings.currency)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-                    <span className="text-gray-700">Available to Withdraw</span>
+                    <span className="text-dark-secondary">Available to Withdraw</span>
                     <span className="font-semibold text-green-600">
                       {currencyConfig.formatCurrency(earnings.availableBalance, earnings.currency)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
-                    <span className="text-gray-700">Processing</span>
+                    <span className="text-dark-secondary">Processing</span>
                     <span className="font-semibold text-yellow-600">
                       {currencyConfig.formatCurrency(earnings.pendingBalance, earnings.currency)}
                     </span>
@@ -229,15 +229,15 @@ const ProviderEarningsPage: React.FC = () => {
               </div>
 
               {/* Account Information */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+              <div className="bg-dark-card rounded-xl shadow-lg p-6">
+                <h2 className="text-xl font-semibold text-dark-primary mb-4 flex items-center">
                   <CreditCard className="w-5 h-5 mr-2" />
                   Payment Account
                 </h2>
                 <div className="space-y-4">
                   {earnings.stripeAccountId ? (
                     <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                      <div className="flex items-center text-green-800 mb-2">
+                      <div className="flex items-center text-green-400 mb-2">
                         <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
                         Account Connected
                       </div>
@@ -250,7 +250,7 @@ const ProviderEarningsPage: React.FC = () => {
                     </div>
                   ) : (
                     <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                      <div className="flex items-center text-yellow-800 mb-2">
+                      <div className="flex items-center text-yellow-400 mb-2">
                         <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
                         Setup Required
                       </div>
@@ -264,7 +264,7 @@ const ProviderEarningsPage: React.FC = () => {
                   )}
                   
                   {earnings.lastPayoutAt && (
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-dark-secondary">
                       <span className="font-medium">Last payout:</span> {' '}
                       {new Date(earnings.lastPayoutAt).toLocaleDateString()}
                     </div>
@@ -274,10 +274,10 @@ const ProviderEarningsPage: React.FC = () => {
             </div>
 
             {/* Recent Payments */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="p-6 border-b border-gray-200">
+            <div className="bg-dark-card rounded-xl shadow-lg overflow-hidden">
+              <div className="p-6 border-b border-dark-secondary">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-gray-900">
+                  <h2 className="text-xl font-semibold text-dark-primary">
                     Recent Payments
                   </h2>
                   <button
@@ -293,13 +293,13 @@ const ProviderEarningsPage: React.FC = () => {
               {paymentsLoading ? (
                 <div className="p-12 text-center">
                   <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
-                  <p className="text-gray-600">Loading recent payments...</p>
+                  <p className="text-dark-secondary">Loading recent payments...</p>
                 </div>
               ) : recentPayments.length === 0 ? (
                 <div className="p-12 text-center">
-                  <CreditCard className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No payments yet</h3>
-                  <p className="text-gray-600">Your recent payments will appear here.</p>
+                  <CreditCard className="w-16 h-16 text-dark-muted mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-dark-primary mb-2">No payments yet</h3>
+                  <p className="text-dark-secondary">Your recent payments will appear here.</p>
                 </div>
               ) : (
                 <div className="divide-y divide-gray-200">
@@ -307,15 +307,15 @@ const ProviderEarningsPage: React.FC = () => {
                     <div key={payment.id} className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900">
+                          <h3 className="text-lg font-semibold text-dark-primary">
                             {payment.service?.title || 'Service Payment'}
                           </h3>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-dark-muted">
                             {new Date(payment.createdAt).toLocaleDateString()} at {new Date(payment.createdAt).toLocaleTimeString()}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-semibold text-gray-900">
+                          <p className="text-lg font-semibold text-dark-primary">
                             {currencyConfig.formatCurrency(payment.providerAmount || payment.amount, payment.currency)}
                           </p>
                           <PaymentStatusCard
@@ -332,9 +332,9 @@ const ProviderEarningsPage: React.FC = () => {
           </>
         ) : (
           <div className="text-center py-12">
-            <Wallet className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No earnings data</h3>
-            <p className="text-gray-600">Unable to load your earnings information.</p>
+            <Wallet className="w-16 h-16 text-dark-muted mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-dark-primary mb-2">No earnings data</h3>
+            <p className="text-dark-secondary">Unable to load your earnings information.</p>
           </div>
         )}
       </main>
@@ -345,3 +345,5 @@ const ProviderEarningsPage: React.FC = () => {
 };
 
 export default ProviderEarningsPage;
+
+

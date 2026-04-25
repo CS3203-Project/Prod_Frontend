@@ -65,11 +65,11 @@ const CategoryCard: React.FC<{
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-full transition-all duration-500"></div>
               </h3>
               {category.description && (
-                <p className="text-sm text-gray-300 group-hover:text-gray-200 mt-1 line-clamp-1 transition-colors duration-300">
+                <p className="text-sm text-dark-muted group-hover:text-dark-muted mt-1 line-clamp-1 transition-colors duration-300">
                   {category.description}
                 </p>
               )}
-              <div className="flex items-center space-x-4 mt-2 text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+              <div className="flex items-center space-x-4 mt-2 text-sm text-dark-muted group-hover:text-dark-muted transition-colors duration-300">
                 <span className="flex items-center space-x-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-purple-400 opacity-60"></div>
                   <span>{subcategoryCount} subcategories</span>
@@ -82,7 +82,7 @@ const CategoryCard: React.FC<{
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all duration-500" />
+            <ChevronRight className="h-5 w-5 text-dark-muted group-hover:text-purple-400 group-hover:translate-x-1 transition-all duration-500" />
             <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
               <ChevronRight className="h-3 w-3 text-white" />
             </div>
@@ -98,7 +98,7 @@ const CategoryCard: React.FC<{
               {category.children.slice(0, 5).map((sub, index) => (
                 <span
                   key={sub.id}
-                  className={`inline-block px-3 py-1 bg-black/30 backdrop-blur-sm text-gray-300 group-hover:text-gray-200 text-xs rounded-full border border-white/20 group-hover:border-white/30 transition-all duration-300 relative overflow-hidden opacity-0 group-hover:opacity-100 animate-in slide-in-from-bottom-${index + 1}`}
+                  className={`inline-block px-3 py-1 bg-black/30 backdrop-blur-sm text-dark-muted group-hover:text-dark-muted text-xs rounded-full border border-white/20 group-hover:border-white/30 transition-all duration-300 relative overflow-hidden opacity-0 group-hover:opacity-100 animate-in slide-in-from-bottom-${index + 1}`}
                 >
                   {/* Subtle shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 opacity-0 group-hover:animate-pulse"></div>
@@ -146,21 +146,21 @@ const CategoryCard: React.FC<{
               <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-full transition-all duration-500"></div>
             </h3>
             {category.description && (
-              <p className="text-sm text-gray-300 group-hover:text-gray-200 mt-1 line-clamp-2 transition-colors duration-300">
+              <p className="text-sm text-dark-muted group-hover:text-dark-muted mt-1 line-clamp-2 transition-colors duration-300">
                 {category.description}
               </p>
             )}
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all duration-500" />
+          <ChevronRight className="h-5 w-5 text-dark-muted group-hover:text-purple-400 group-hover:translate-x-1 transition-all duration-500" />
           <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
             <ChevronRight className="h-3 w-3 text-white" />
           </div>
         </div>
       </div>
       
-      <div className="relative flex items-center justify-between text-sm text-gray-400 group-hover:text-gray-300 mb-3 transition-colors duration-300">
+      <div className="relative flex items-center justify-between text-sm text-dark-muted group-hover:text-dark-muted mb-3 transition-colors duration-300">
         <span className="flex items-center space-x-1">
           <div className="w-1.5 h-1.5 rounded-full bg-purple-400 opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
           <span>{subcategoryCount} subcategories</span>
@@ -178,7 +178,7 @@ const CategoryCard: React.FC<{
             {category.children.slice(0, 3).map((sub, index) => (
               <span
                 key={sub.id}
-                className={`inline-block px-2 py-1 bg-black/30 backdrop-blur-sm text-gray-300 group-hover:text-gray-200 text-xs rounded-full border border-white/20 group-hover:border-white/30 transition-all duration-300 relative overflow-hidden opacity-0 group-hover:opacity-100 animate-in slide-in-from-bottom-${index + 1}`}
+                className={`inline-block px-2 py-1 bg-black/30 backdrop-blur-sm text-dark-muted group-hover:text-dark-muted text-xs rounded-full border border-white/20 group-hover:border-white/30 transition-all duration-300 relative overflow-hidden opacity-0 group-hover:opacity-100 animate-in slide-in-from-bottom-${index + 1}`}
               >
                 {/* Subtle shimmer effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 opacity-0 group-hover:animate-pulse"></div>
@@ -264,7 +264,7 @@ const CategoriesPage: React.FC = () => {
             <div className="text-center">
               <div className="bg-black/50 backdrop-blur-lg rounded-2xl p-8 border border-gray-800">
                 <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-white" />
-                <p className="text-gray-300">Loading categories...</p>
+                <p className="text-dark-muted">Loading categories...</p>
               </div>
             </div>
           </div>
@@ -275,11 +275,11 @@ const CategoriesPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-dark-900 via-black to-dark-900 flex items-center justify-center">
         <div className="text-center max-w-md">
           <div className="text-red-400 text-6xl mb-4">⚠️</div>
           <h1 className="text-2xl font-bold text-white mb-2">Error Loading Categories</h1>
-          <p className="text-gray-400 mb-6">{error}</p>
+          <p className="text-dark-muted mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 font-semibold"
@@ -292,7 +292,7 @@ const CategoriesPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-dark-900 via-black to-dark-900 relative overflow-hidden">
       {/* Background Orbs */}
       <div className="absolute top-1/4 left-1/4 w-80 h-80 opacity-20">
         <Orb hue={240} hoverIntensity={0.3} rotateOnHover={true} />
@@ -307,7 +307,7 @@ const CategoriesPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-purple-300 to-blue-300 bg-clip-text text-transparent mb-4">
             Service Categories
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             Discover our comprehensive range of professional services organized by category
           </p>
         </div>
@@ -324,20 +324,20 @@ const CategoriesPage: React.FC = () => {
             {/* Search Bar */}
             <div className="flex-1 relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-300" />
+                <Search className="h-5 w-5 text-dark-muted" />
               </div>
               <input
                 type="text"
                 placeholder="Search categories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white placeholder-gray-400 transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
+                className="w-full pl-10 pr-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white placeholder-dark-muted transition-all duration-300 hover:bg-white/15 focus:bg-white/15"
               />
             </div>
 
             {/* Sort Dropdown */}
             <div className="flex items-center space-x-3">
-              <Filter className="h-5 w-5 text-gray-300" />
+              <Filter className="h-5 w-5 text-dark-muted" />
               <select 
                 aria-label="Sort categories"
                 value={sortBy}
@@ -357,7 +357,7 @@ const CategoriesPage: React.FC = () => {
                 className={`p-3 rounded-xl transition-all duration-300 ${
                   viewMode === 'grid' 
                     ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg' 
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20'
+                    : 'bg-white/10 text-dark-muted hover:bg-white/20 border border-white/20'
                 }`}
                 aria-label="Grid view"
               >
@@ -368,7 +368,7 @@ const CategoriesPage: React.FC = () => {
                 className={`p-3 rounded-xl transition-all duration-300 ${
                   viewMode === 'list' 
                     ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg' 
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20'
+                    : 'bg-white/10 text-dark-muted hover:bg-white/20 border border-white/20'
                 }`}
                 aria-label="List view"
               >
@@ -379,7 +379,7 @@ const CategoriesPage: React.FC = () => {
 
           {/* Results Count */}
           <div className="mt-4 pt-4 border-t border-white/20">
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-dark-muted">
               Showing {filteredCategories.length} of {categories.length} categories
               {searchQuery && (
                 <span> matching "{searchQuery}"</span>
@@ -409,11 +409,11 @@ const CategoriesPage: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-red-600/5 to-orange-600/5 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
             
             <div className="relative">
-              <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <Search className="h-12 w-12 text-dark-muted mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">
                 No categories found
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-dark-muted mb-6">
                 {searchQuery 
                   ? `No categories match your search for "${searchQuery}"`
                   : 'No categories are available at the moment'
@@ -445,25 +445,25 @@ const CategoriesPage: React.FC = () => {
                 <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-2 group-hover/stat:scale-110 transition-transform duration-300">
                   {categories.length}
                 </div>
-                <div className="text-gray-300 text-sm">Main Categories</div>
+                <div className="text-dark-muted text-sm">Main Categories</div>
               </div>
               <div className="group/stat p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-400/30 hover:bg-white/10 transition-all duration-300">
                 <div className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2 group-hover/stat:scale-110 transition-transform duration-300">
                   {categories.reduce((sum, cat) => sum + (cat.children?.length || 0), 0)}
                 </div>
-                <div className="text-gray-300 text-sm">Subcategories</div>
+                <div className="text-dark-muted text-sm">Subcategories</div>
               </div>
               <div className="group/stat p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-400/30 hover:bg-white/10 transition-all duration-300">
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2 group-hover/stat:scale-110 transition-transform duration-300">
                   {categories.reduce((sum, cat) => sum + (cat._count?.services || 0), 0)}
                 </div>
-                <div className="text-gray-300 text-sm">Total Services</div>
+                <div className="text-dark-muted text-sm">Total Services</div>
               </div>
               <div className="group/stat p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-400/30 hover:bg-white/10 transition-all duration-300">
                 <div className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent mb-2 group-hover/stat:scale-110 transition-transform duration-300">
                   24/7
                 </div>
-                <div className="text-gray-300 text-sm">Support Available</div>
+                <div className="text-dark-muted text-sm">Support Available</div>
               </div>
             </div>
           </div>
@@ -474,3 +474,6 @@ const CategoriesPage: React.FC = () => {
 };
 
 export default CategoriesPage;
+
+
+

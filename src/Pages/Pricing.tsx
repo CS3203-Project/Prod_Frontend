@@ -19,7 +19,7 @@ const Pricing = () => {
       icon: Users,
       popular: false,
       buttonText: "Get Started Free",
-      gradient: "from-gray-400 to-gray-600"
+      gradient: "from-dark-muted to-dark-secondary"
     },
     {
       name: "Professional",
@@ -88,7 +88,7 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-purple-900">
+    <div className="min-h-screen bg-gradient-to-br from-black via-dark-900 to-purple-900">
       {/* Hero Section */}
       <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -99,7 +99,7 @@ const Pricing = () => {
               <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent"> Pricing</span>
             </h1>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+          <p className="text-xl text-dark-muted max-w-3xl mx-auto mb-12">
             Choose the perfect plan for your service business. Start free and scale as you grow.
           </p>
         </div>
@@ -133,10 +133,10 @@ const Pricing = () => {
                     <IconComponent className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                  <p className="text-gray-400 mb-4">{plan.description}</p>
+                  <p className="text-dark-muted mb-4">{plan.description}</p>
                   <div className="mb-4">
                     <span className="text-4xl font-bold text-white">{plan.price}</span>
-                    <span className="text-gray-400 ml-2">{plan.period}</span>
+                    <span className="text-dark-muted ml-2">{plan.period}</span>
                   </div>
                 </div>
 
@@ -144,7 +144,7 @@ const Pricing = () => {
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start space-x-3">
                       <Check className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-dark-muted">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -170,7 +170,7 @@ const Pricing = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Why Choose Our Platform?
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             We provide everything you need to succeed in the service marketplace
           </p>
         </div>
@@ -187,7 +187,7 @@ const Pricing = () => {
                   <IconComponent className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <p className="text-dark-muted">{feature.description}</p>
               </div>
             );
           })}
@@ -226,7 +226,7 @@ const Pricing = () => {
               className="bg-black/40 backdrop-blur-xl rounded-xl p-6 border border-white/10"
             >
               <h3 className="text-lg font-semibold text-white mb-2">{faq.question}</h3>
-              <p className="text-gray-300">{faq.answer}</p>
+              <p className="text-dark-muted">{faq.answer}</p>
             </div>
           ))}
         </div>
@@ -238,7 +238,7 @@ const Pricing = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-dark-muted mb-8">
             Join thousands of service providers already growing their business with us
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -256,3 +256,5 @@ const Pricing = () => {
 };
 
 export default Pricing;
+
+

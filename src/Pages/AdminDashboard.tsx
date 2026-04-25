@@ -50,20 +50,20 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl max-w-md w-full">
+      <div className="bg-dark-card rounded-xl max-w-md w-full border border-dark-primary">
         <div className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+            <h2 className="text-xl font-bold text-dark-primary">{title}</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-dark-muted hover:text-dark-secondary transition-colors"
             >
               <XCircle className="w-6 h-6" />
             </button>
           </div>
           
           <div className="mb-6">
-            <p className="text-gray-700">{message}</p>
+            <p className="text-dark-secondary">{message}</p>
           </div>
           
           <div className="flex justify-end space-x-3">
@@ -97,16 +97,16 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon, trend, subtitle, color }) => (
-  <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-shadow admin-stat-card">
+  <div className="bg-dark-card rounded-xl shadow-lg p-6 border border-dark-primary hover:shadow-xl transition-shadow admin-stat-card">
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-sm font-medium text-gray-600">{title}</p>
-        <p className="text-3xl font-bold text-gray-900 mt-2">{value.toLocaleString()}</p>
+        <p className="text-sm font-medium text-dark-secondary">{title}</p>
+        <p className="text-3xl font-bold text-dark-primary mt-2">{value.toLocaleString()}</p>
         {subtitle && (
-          <p className="text-sm text-gray-500 mt-1">{subtitle}</p>
+          <p className="text-sm text-dark-muted mt-1">{subtitle}</p>
         )}
         {trend !== undefined && (
-          <div className={`flex items-center mt-2 ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          <div className={`flex items-center mt-2 ${trend >= 0 ? 'text-green-600' : 'text-red-400'}`}>
             <TrendingUp className={`w-4 h-4 mr-1 ${trend < 0 ? 'rotate-180' : ''}`} />
             <span className="text-sm font-medium">{Math.abs(trend)}% this month</span>
           </div>
@@ -127,24 +127,24 @@ interface ProviderCardProps {
 }
 
 const ProviderCard: React.FC<ProviderCardProps> = ({ provider, onApprove, onViewDetails }) => (
-  <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-shadow admin-provider-card">
+  <div className="bg-dark-card rounded-xl shadow-lg p-6 border border-dark-primary hover:shadow-xl transition-shadow admin-provider-card">
     <div className="flex items-start space-x-4">
       <div className="flex-shrink-0">
         <img
-          src={provider.user.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(provider.user.firstName + ' ' + provider.user.lastName)}&size=64&background=e5e7eb&color=374151`}
+          src={provider.user.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(provider.user.firstName + ' ' + provider.user.lastName)}&size=64&background=1e1e1e&color=e5e5e5`}
           alt={`${provider.user.firstName} ${provider.user.lastName}`}
-          className="w-16 h-16 rounded-full object-cover border-2 border-gray-200 admin-profile-image"
+          className="w-16 h-16 rounded-full object-cover border-2 border-dark-primary admin-profile-image"
         />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900 truncate">
+          <h3 className="text-lg font-semibold text-dark-primary truncate">
             {provider.user.firstName} {provider.user.lastName}
           </h3>
           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
             provider.isVerified 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-yellow-100 text-yellow-800'
+              ? 'bg-dark-tertiary text-green-400' 
+              : 'bg-dark-tertiary text-yellow-400'
           }`}>
             {provider.isVerified ? (
               <CheckCircle className="w-3 h-3 mr-1" />
@@ -156,18 +156,18 @@ const ProviderCard: React.FC<ProviderCardProps> = ({ provider, onApprove, onView
         </div>
         
         <div className="mt-2 space-y-1">
-          <div className="flex items-center text-sm text-gray-600">
+          <div className="flex items-center text-sm text-dark-secondary">
             <Mail className="w-4 h-4 mr-2" />
             {provider.user.email}
           </div>
           {provider.user.phone && (
-            <div className="flex items-center text-sm text-gray-600">
+            <div className="flex items-center text-sm text-dark-secondary">
               <Phone className="w-4 h-4 mr-2" />
               {provider.user.phone}
             </div>
           )}
           {provider.user.location && (
-            <div className="flex items-center text-sm text-gray-600">
+            <div className="flex items-center text-sm text-dark-secondary">
               <MapPin className="w-4 h-4 mr-2" />
               {provider.user.location}
             </div>
@@ -175,23 +175,23 @@ const ProviderCard: React.FC<ProviderCardProps> = ({ provider, onApprove, onView
         </div>
 
         {provider.bio && (
-          <p className="mt-3 text-sm text-gray-600 line-clamp-2">{provider.bio}</p>
+          <p className="mt-3 text-sm text-dark-secondary line-clamp-2">{provider.bio}</p>
         )}
 
         {provider.skills.length > 0 && (
           <div className="mt-3">
-            <p className="text-xs font-medium text-gray-700 mb-1">Skills:</p>
+            <p className="text-xs font-medium text-dark-secondary mb-1">Skills:</p>
             <div className="flex flex-wrap gap-1">
               {provider.skills.slice(0, 3).map((skill, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center px-2 py-1 rounded text-xs bg-blue-100 text-blue-800"
+                  className="inline-flex items-center px-2 py-1 rounded text-xs bg-dark-tertiary text-blue-400"
                 >
                   {skill}
                 </span>
               ))}
               {provider.skills.length > 3 && (
-                <span className="inline-flex items-center px-2 py-1 rounded text-xs bg-gray-100 text-gray-600">
+                <span className="inline-flex items-center px-2 py-1 rounded text-xs bg-dark-tertiary text-dark-secondary">
                   +{provider.skills.length - 3} more
                 </span>
               )}
@@ -203,12 +203,12 @@ const ProviderCard: React.FC<ProviderCardProps> = ({ provider, onApprove, onView
         <div className="mt-3 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             {provider.averageRating && provider.totalReviews && (
-              <div className="flex items-center text-sm text-gray-600">
+              <div className="flex items-center text-sm text-dark-secondary">
                 <Star className="w-4 h-4 mr-1 text-yellow-500 fill-current" />
                 {provider.averageRating.toFixed(1)} ({provider.totalReviews} reviews)
               </div>
             )}
-            <div className="flex items-center text-sm text-gray-600">
+            <div className="flex items-center text-sm text-dark-secondary">
               <ShoppingBag className="w-4 h-4 mr-1" />
               {provider._count.services} services
             </div>
@@ -216,7 +216,7 @@ const ProviderCard: React.FC<ProviderCardProps> = ({ provider, onApprove, onView
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-dark-muted">
             Applied: {new Date(provider.createdAt).toLocaleDateString()}
           </div>
           <div className="flex space-x-2">
@@ -275,13 +275,13 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto admin-modal">
-        <div className="p-6 border-b border-gray-200">
+      <div className="bg-dark-card rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto admin-modal border border-dark-primary">
+        <div className="p-6 border-b border-dark-secondary">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-gray-900">Provider Application Details</h2>
+            <h2 className="text-2xl font-bold text-dark-primary">Provider Application Details</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-dark-muted hover:text-dark-secondary transition-colors"
             >
               <XCircle className="w-6 h-6" />
             </button>
@@ -290,26 +290,26 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
 
         <div className="p-6 space-y-6">
           {/* Basic Information */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
+          <div className="bg-dark-secondary rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-dark-primary mb-4">Basic Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                <p className="mt-1 text-sm text-gray-900">
+                <label className="block text-sm font-medium text-dark-secondary">Full Name</label>
+                <p className="mt-1 text-sm text-dark-primary">
                   {provider.user.firstName} {provider.user.lastName}
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Email</label>
-                <p className="mt-1 text-sm text-gray-900">{provider.user.email}</p>
+                <label className="block text-sm font-medium text-dark-secondary">Email</label>
+                <p className="mt-1 text-sm text-dark-primary">{provider.user.email}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Phone</label>
-                <p className="mt-1 text-sm text-gray-900">{provider.user.phone || 'Not provided'}</p>
+                <label className="block text-sm font-medium text-dark-secondary">Phone</label>
+                <p className="mt-1 text-sm text-dark-primary">{provider.user.phone || 'Not provided'}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Location</label>
-                <p className="mt-1 text-sm text-gray-900">{provider.user.location || 'Not provided'}</p>
+                <label className="block text-sm font-medium text-dark-secondary">Location</label>
+                <p className="mt-1 text-sm text-dark-primary">{provider.user.location || 'Not provided'}</p>
               </div>
             </div>
           </div>
@@ -317,20 +317,20 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
           {/* Bio */}
           {provider.bio && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Bio</h3>
-              <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{provider.bio}</p>
+              <h3 className="text-lg font-semibold text-dark-primary mb-2">Bio</h3>
+              <p className="text-dark-secondary bg-dark-secondary p-4 rounded-lg">{provider.bio}</p>
             </div>
           )}
 
           {/* Skills */}
           {provider.skills.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Skills</h3>
+              <h3 className="text-lg font-semibold text-dark-primary mb-2">Skills</h3>
               <div className="flex flex-wrap gap-2">
                 {provider.skills.map((skill, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                    className="px-3 py-1 bg-dark-tertiary text-blue-400 rounded-full text-sm"
                   >
                     {skill}
                   </span>
@@ -342,12 +342,12 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
           {/* Qualifications */}
           {provider.qualifications.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Qualifications</h3>
+              <h3 className="text-lg font-semibold text-dark-primary mb-2">Qualifications</h3>
               <div className="space-y-2">
                 {provider.qualifications.map((qualification, index) => (
-                  <div key={index} className="flex items-center p-3 bg-gray-50 rounded-lg">
+                  <div key={index} className="flex items-center p-3 bg-dark-secondary rounded-lg">
                     <Star className="w-4 h-4 text-yellow-500 mr-2" />
-                    <span className="text-gray-700">{qualification}</span>
+                    <span className="text-dark-secondary">{qualification}</span>
                   </div>
                 ))}
               </div>
@@ -357,14 +357,14 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
           {/* Services */}
           {provider.services.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Services ({provider.services.length})</h3>
+              <h3 className="text-lg font-semibold text-dark-primary mb-2">Services ({provider.services.length})</h3>
               <div className="space-y-3">
                 {provider.services.map((service) => (
-                  <div key={service.id} className="border border-gray-200 rounded-lg p-4">
+                  <div key={service.id} className="border border-dark-secondary rounded-lg p-4">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="text-sm font-medium text-gray-900">{service.title}</h4>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <h4 className="text-sm font-medium text-dark-primary">{service.title}</h4>
+                        <p className="text-xs text-dark-muted mt-1">
                           {service.category.name} • Created {new Date(service.createdAt).toLocaleDateString()}
                         </p>
                         <div className="flex items-center mt-2 space-x-4">
@@ -373,8 +373,8 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
                           </span>
                           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                             service.isActive 
-                              ? 'bg-green-100 text-green-800' 
-                              : 'bg-gray-100 text-gray-800'
+                              ? 'bg-dark-tertiary text-green-400' 
+                              : 'bg-dark-tertiary text-dark-primary'
                           }`}>
                             {service.isActive ? 'Active' : 'Inactive'}
                           </span>
@@ -388,43 +388,43 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
           )}
 
           {/* Rating and Statistics */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Statistics</h3>
+          <div className="bg-dark-secondary rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-dark-primary mb-2">Statistics</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{provider._count.services}</p>
-                <p className="text-sm text-gray-600">Services</p>
+                <p className="text-2xl font-bold text-dark-primary">{provider._count.services}</p>
+                <p className="text-sm text-dark-secondary">Services</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{provider._count.schedules}</p>
-                <p className="text-sm text-gray-600">Bookings</p>
+                <p className="text-2xl font-bold text-dark-primary">{provider._count.schedules}</p>
+                <p className="text-sm text-dark-secondary">Bookings</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-2xl font-bold text-dark-primary">
                   {provider.averageRating ? provider.averageRating.toFixed(1) : 'N/A'}
                 </p>
-                <p className="text-sm text-gray-600">Rating</p>
+                <p className="text-sm text-dark-secondary">Rating</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-gray-900">{provider.totalReviews || 0}</p>
-                <p className="text-sm text-gray-600">Reviews</p>
+                <p className="text-2xl font-bold text-dark-primary">{provider.totalReviews || 0}</p>
+                <p className="text-sm text-dark-secondary">Reviews</p>
               </div>
             </div>
           </div>
 
           {/* Documents */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Verification Documents</h3>
+            <h3 className="text-lg font-semibold text-dark-primary mb-2">Verification Documents</h3>
             <div className="space-y-3">
               {provider.IDCardUrl && (
-                <div className="border border-gray-200 rounded-lg p-4">
+                <div className="border border-dark-secondary rounded-lg p-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">ID Card Document</span>
+                    <span className="text-sm font-medium text-dark-secondary">ID Card Document</span>
                     <a
                       href={provider.IDCardUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-blue-600 hover:text-blue-800 text-sm"
+                      className="flex items-center text-blue-600 hover:text-blue-400 text-sm"
                     >
                       <ExternalLink className="w-4 h-4 mr-1" />
                       View Document
@@ -433,14 +433,14 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
                 </div>
               )}
               {provider.logoUrl && (
-                <div className="border border-gray-200 rounded-lg p-4">
+                <div className="border border-dark-secondary rounded-lg p-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">Logo/Profile Image</span>
+                    <span className="text-sm font-medium text-dark-secondary">Logo/Profile Image</span>
                     <a
                       href={provider.logoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-blue-600 hover:text-blue-800 text-sm"
+                      className="flex items-center text-blue-600 hover:text-blue-400 text-sm"
                     >
                       <ExternalLink className="w-4 h-4 mr-1" />
                       View Image
@@ -452,9 +452,9 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
           </div>
 
           {/* Application Timeline */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Application Timeline</h3>
-            <div className="space-y-2 text-sm text-gray-600">
+          <div className="bg-dark-secondary rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-dark-primary mb-2">Application Timeline</h3>
+            <div className="space-y-2 text-sm text-dark-secondary">
               <div className="flex items-center">
                 <Calendar className="w-4 h-4 mr-2" />
                 Applied: {new Date(provider.createdAt).toLocaleString()}
@@ -468,7 +468,7 @@ const ProviderDetailsModal: React.FC<ProviderDetailsModalProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="p-6 border-t border-gray-200 flex justify-end space-x-3">
+        <div className="p-6 border-t border-dark-secondary flex justify-end space-x-3">
           <Button
             onClick={onClose}
             variant="outline"
@@ -562,25 +562,25 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
 
   if (!profile) {
     return (
-      <div className="bg-white rounded-xl shadow-lg p-6">
+      <div className="bg-dark-card rounded-xl shadow-lg p-6">
         <div className="animate-pulse">
-          <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
-          <div className="h-8 bg-gray-200 rounded w-1/2"></div>
+          <div className="h-4 bg-dark-tertiary rounded w-1/4 mb-4"></div>
+          <div className="h-8 bg-dark-tertiary rounded w-1/2"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <div className="bg-dark-card rounded-xl shadow-lg p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Admin Profile</h2>
+        <h2 className="text-xl font-semibold text-dark-primary">Admin Profile</h2>
         <div className="flex items-center space-x-2">
           <Button
             onClick={onLogout}
             variant="outline"
             size="sm"
-            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="text-red-400 hover:text-red-700 hover:bg-red-50"
           >
             <LogOut className="w-4 h-4 mr-2" />
             Logout
@@ -600,7 +600,7 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-dark-secondary mb-1">
                 First Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -608,12 +608,12 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
                 value={formData.firstName}
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 style={{ colorScheme: 'light' }}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-gray-900 focus:border-gray-700"
+                className="w-full px-3 py-3 border border-dark-primary rounded-lg bg-dark-card text-dark-primary focus:ring-2 focus:ring-dark-primary focus:border-dark-secondary"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-dark-secondary mb-1">
                 Last Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -621,14 +621,14 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 style={{ colorScheme: 'light' }}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-gray-900 focus:border-gray-700"
+                className="w-full px-3 py-3 border border-dark-primary rounded-lg bg-dark-card text-dark-primary focus:ring-2 focus:ring-dark-primary focus:border-dark-secondary"
                 required
               />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-dark-secondary mb-1">
                 Username <span className="text-red-500">*</span>
               </label>
               <input
@@ -636,12 +636,12 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
                 value={formData.username}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 style={{ colorScheme: 'light' }}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-gray-900 focus:border-gray-700"
+                className="w-full px-3 py-3 border border-dark-primary rounded-lg bg-dark-card text-dark-primary focus:ring-2 focus:ring-dark-primary focus:border-dark-secondary"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-dark-secondary mb-1">
                 New Password
               </label>
               <input
@@ -649,14 +649,14 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 style={{ colorScheme: 'light' }}
-                className="w-full px-3 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-gray-900 focus:border-gray-700"
+                className="w-full px-3 py-3 border border-dark-primary rounded-lg bg-dark-card text-dark-primary focus:ring-2 focus:ring-dark-primary focus:border-dark-secondary"
                 placeholder="Leave empty to keep current password"
               />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-dark-secondary mb-1">
                 Confirm Password
               </label>
               <input
@@ -664,18 +664,18 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                 style={{ colorScheme: 'light' }}
-                className={`w-full px-3 py-3 border rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-gray-900 focus:border-gray-700 ${
+                className={`w-full px-3 py-3 border rounded-lg bg-dark-card text-dark-primary focus:ring-2 focus:ring-dark-primary focus:border-dark-secondary ${
                   formData.confirmPassword && !passwordsMatch 
                     ? 'border-red-300 bg-red-50' 
                     : formData.confirmPassword && passwordsMatch
                     ? 'border-green-300 bg-green-50'
-                    : 'border-gray-300'
+                    : 'border-dark-primary'
                 }`}
                 placeholder="Confirm your new password"
                 disabled={!formData.password}
               />
               {formData.confirmPassword && !passwordsMatch && (
-                <p className="mt-1 text-sm text-red-600">Passwords do not match</p>
+                <p className="mt-1 text-sm text-red-400">Passwords do not match</p>
               )}
               {formData.confirmPassword && passwordsMatch && formData.password && (
                 <p className="mt-1 text-sm text-green-600">Passwords match</p>
@@ -703,30 +703,30 @@ const AdminProfileSection: React.FC<AdminProfileSectionProps> = ({ profile, onUp
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
             <div>
-              <h3 className="text-lg font-medium text-gray-900">
+              <h3 className="text-lg font-medium text-dark-primary">
                 {profile.firstName} {profile.lastName}
               </h3>
-              <p className="text-gray-600">@{profile.username}</p>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-1">
+              <p className="text-dark-secondary">@{profile.username}</p>
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-dark-tertiary text-blue-400 mt-1">
                 {profile.role || 'ADMIN'}
               </span>
             </div>
           </div>
           
           {profile.lastLogin && (
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-dark-secondary">
               Last login: {new Date(profile.lastLogin).toLocaleString()}
             </div>
           )}
           
           {profile.permissions && profile.permissions.length > 0 && (
             <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Permissions</h4>
+              <h4 className="text-sm font-medium text-dark-secondary mb-2">Permissions</h4>
               <div className="flex flex-wrap gap-2">
                 {profile.permissions.map((permission, index) => (
                   <span
                     key={index}
-                    className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs"
+                    className="px-2 py-1 bg-dark-tertiary text-dark-secondary rounded text-xs"
                   >
                     {permission}
                   </span>
@@ -945,10 +945,10 @@ const AdminDashboard: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-dark-secondary flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading admin dashboard...</p>
+          <p className="mt-4 text-dark-secondary">Loading admin dashboard...</p>
         </div>
       </div>
     );
@@ -956,11 +956,11 @@ const AdminDashboard: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-dark-secondary flex items-center justify-center">
         <div className="text-center">
           <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Error Loading Dashboard</h2>
-          <p className="text-gray-600 mb-4">{error}</p>
+          <h2 className="text-xl font-semibold text-dark-primary mb-2">Error Loading Dashboard</h2>
+          <p className="text-dark-secondary mb-4">{error}</p>
           <Button onClick={fetchDashboardData}>
             Try Again
           </Button>
@@ -970,14 +970,14 @@ const AdminDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-dark-secondary">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
+      <div className="bg-dark-card shadow-sm border-b border-dark-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-              <p className="text-sm text-gray-600">
+              <h1 className="text-2xl font-bold text-dark-primary">Admin Dashboard</h1>
+              <p className="text-sm text-dark-secondary">
                 Welcome back, {adminProfile?.firstName || 'Admin'}
               </p>
             </div>
@@ -986,7 +986,7 @@ const AdminDashboard: React.FC = () => {
                 variant="outline" 
                 size="sm"
                 onClick={handleLogout}
-                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                className="text-red-400 hover:text-red-700 hover:bg-red-50"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Logout
@@ -1003,7 +1003,7 @@ const AdminDashboard: React.FC = () => {
 
       {/* Navigation Tabs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="border-b border-gray-200">
+        <div className="border-b border-dark-secondary">
           <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             {[
               { id: 'overview', label: 'Overview', icon: TrendingUp },
@@ -1015,8 +1015,8 @@ const AdminDashboard: React.FC = () => {
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
                 className={`${
                   activeTab === tab.id
-                    ? 'border-black text-black'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-black text-dark-primary'
+                    : 'border-transparent text-dark-muted hover:text-dark-secondary hover:border-dark-primary'
                 } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center`}
               >
                 <tab.icon className="w-4 h-4 mr-2" />
@@ -1061,8 +1061,8 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
+            <div className="bg-dark-card rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-dark-primary mb-4">Quick Actions</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Button
                   onClick={() => setActiveTab('providers')}
@@ -1072,7 +1072,7 @@ const AdminDashboard: React.FC = () => {
                   <UserCheck className="w-5 h-5 mr-3" />
                   Review Provider Applications
                   {(serviceProviders?.filter(p => !p.isVerified).length || 0) > 0 && (
-                    <span className="ml-auto bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs">
+                    <span className="ml-auto bg-dark-tertiary text-red-400 px-2 py-1 rounded-full text-xs">
                       {serviceProviders?.filter(p => !p.isVerified).length || 0}
                     </span>
                   )}
@@ -1081,13 +1081,13 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Analytics Dashboard */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+            <div className="bg-dark-card rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-dark-primary mb-4 flex items-center">
                 <TrendingUp className="w-5 h-5 mr-2 text-indigo-600" />
                 Analytics Dashboard
               </h2>
               <div className="space-y-4">
-                <p className="text-gray-600">
+                <p className="text-dark-secondary">
                   View graphical charts and performance metrics for comprehensive business insights.
                 </p>
                 <button
@@ -1102,13 +1102,13 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Report Generator */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+            <div className="bg-dark-card rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-dark-primary mb-4 flex items-center">
                 <ShoppingBag className="w-5 h-5 mr-2 text-blue-600" />
                 Report Generator
               </h2>
               <div className="space-y-4">
-                <p className="text-gray-600">
+                <p className="text-dark-secondary">
                   Generate comprehensive reports for customers, providers, and services. Download as PDF.
                 </p>
                 <button
@@ -1123,11 +1123,11 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent Activity</h2>
+            <div className="bg-dark-card rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-semibold text-dark-primary mb-4">Recent Activity</h2>
               <div className="space-y-4">
                 {(serviceProviders || []).slice(0, 3).map((provider) => (
-                  <div key={provider.id} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                  <div key={provider.id} className="flex items-center justify-between py-3 border-b border-dark-primary last:border-b-0">
                     <div className="flex items-center space-x-3">
                       <img
                         src={provider.user.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(provider.user.firstName + ' ' + provider.user.lastName)}&size=40&background=e5e7eb&color=374151`}
@@ -1135,25 +1135,25 @@ const AdminDashboard: React.FC = () => {
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-dark-primary">
                           {provider.user.firstName} {provider.user.lastName} applied to become a provider
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-dark-muted">
                           {new Date(provider.createdAt).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                       provider.isVerified 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-yellow-100 text-yellow-800'
+                        ? 'bg-dark-tertiary text-green-400' 
+                        : 'bg-dark-tertiary text-yellow-400'
                     }`}>
                       {provider.isVerified ? 'Verified' : 'Pending Review'}
                     </span>
                   </div>
                 ))}
                 {(serviceProviders?.length || 0) === 0 && (
-                  <p className="text-gray-500 text-center py-4">No recent activity</p>
+                  <p className="text-dark-muted text-center py-4">No recent activity</p>
                 )}
               </div>
             </div>
@@ -1165,18 +1165,18 @@ const AdminDashboard: React.FC = () => {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Service Providers</h2>
-                <p className="text-gray-600">Manage and review all service providers</p>
+                <h2 className="text-2xl font-bold text-dark-primary">Service Providers</h2>
+                <p className="text-dark-secondary">Manage and review all service providers</p>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="relative">
-                  <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-muted" />
                   <input
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search providers..."
-                    className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                    className="pl-10 pr-4 py-2 border border-dark-primary rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                   />
                 </div>
                 <div className="relative filter-dropdown-container">
@@ -1188,22 +1188,22 @@ const AdminDashboard: React.FC = () => {
                     <Filter className="w-4 h-4 mr-2" />
                     Filter
                     {filterStatus !== 'all' && (
-                      <span className="ml-2 bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full text-xs">
+                      <span className="ml-2 bg-dark-tertiary text-blue-600 px-2 py-0.5 rounded-full text-xs">
                         {filterStatus === 'verified' ? 'Verified' : 'Pending'}
                       </span>
                     )}
                   </Button>
                   
                   {showFilterDropdown && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-10">
+                    <div className="absolute right-0 mt-2 w-48 bg-dark-card rounded-lg shadow-lg border z-10">
                       <div className="py-1">
                         <button
                           onClick={() => {
                             setFilterStatus('all');
                             setShowFilterDropdown(false);
                           }}
-                          className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                            filterStatus === 'all' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-dark-tertiary ${
+                            filterStatus === 'all' ? 'bg-blue-50 text-blue-600' : 'text-dark-secondary'
                           }`}
                         >
                           All Providers
@@ -1213,8 +1213,8 @@ const AdminDashboard: React.FC = () => {
                             setFilterStatus('verified');
                             setShowFilterDropdown(false);
                           }}
-                          className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                            filterStatus === 'verified' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-dark-tertiary ${
+                            filterStatus === 'verified' ? 'bg-blue-50 text-blue-600' : 'text-dark-secondary'
                           }`}
                         >
                           Verified Only
@@ -1224,8 +1224,8 @@ const AdminDashboard: React.FC = () => {
                             setFilterStatus('pending');
                             setShowFilterDropdown(false);
                           }}
-                          className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                            filterStatus === 'pending' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-dark-tertiary ${
+                            filterStatus === 'pending' ? 'bg-blue-50 text-blue-600' : 'text-dark-secondary'
                           }`}
                         >
                           Pending Only
@@ -1238,12 +1238,12 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {(filteredProviders?.length || 0) === 0 ? (
-              <div className="bg-white rounded-xl shadow-lg p-12 text-center">
-                <UserCheck className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <div className="bg-dark-card rounded-xl shadow-lg p-12 text-center">
+                <UserCheck className="w-12 h-12 text-dark-muted mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-dark-primary mb-2">
                   {searchTerm || filterStatus !== 'all' ? 'No Matching Providers' : 'No Service Providers'}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-dark-secondary">
                   {searchTerm || filterStatus !== 'all' 
                     ? 'No providers match your current search or filter criteria.'
                     : 'No service providers found in the system.'
@@ -1274,7 +1274,7 @@ const AdminDashboard: React.FC = () => {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-dark-secondary">
                   Showing {filteredProviders.length} of {serviceProviders?.length || 0} providers
                   {(searchTerm || filterStatus !== 'all') && (
                     <span className="ml-2">
@@ -1305,8 +1305,8 @@ const AdminDashboard: React.FC = () => {
         {activeTab === 'profile' && (
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Admin Profile</h2>
-              <p className="text-gray-600">Manage your admin account settings</p>
+              <h2 className="text-2xl font-bold text-dark-primary">Admin Profile</h2>
+              <p className="text-dark-secondary">Manage your admin account settings</p>
             </div>
             <AdminProfileSection
               profile={adminProfile}
@@ -1360,3 +1360,7 @@ const AdminDashboard: React.FC = () => {
 };
 
 export default AdminDashboard;
+
+
+
+

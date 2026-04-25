@@ -141,7 +141,7 @@ export default function SuccessStories() {
               <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent"> Inspire</span>
             </h1>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+          <p className="text-xl text-dark-muted max-w-3xl mx-auto mb-12">
             Discover how our platform has transformed businesses and careers. Real stories from real people achieving extraordinary results.
           </p>
           
@@ -171,7 +171,7 @@ export default function SuccessStories() {
               </div>
               <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
               <div className="text-lg font-semibold text-gray-200 mb-1">{stat.label}</div>
-              <div className="text-gray-400 text-sm">{stat.description}</div>
+              <div className="text-dark-muted text-sm">{stat.description}</div>
             </div>
           ))}
         </div>
@@ -189,7 +189,7 @@ export default function SuccessStories() {
                 className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 relative overflow-hidden group ${
                   selectedCategory === category.id
                     ? 'bg-gradient-to-r from-purple-500 to-blue-600 text-white shadow-lg'
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white border border-white/20 hover:border-white/30'
+                    : 'bg-white/10 text-dark-muted hover:bg-white/20 hover:text-white border border-white/20 hover:border-white/30'
                 }`}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
@@ -211,7 +211,7 @@ export default function SuccessStories() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {selectedCategory === 'all' ? 'All Success Stories' : `${categories.find(c => c.id === selectedCategory)?.name} Stories`}
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-dark-muted max-w-2xl mx-auto">
             Real projects, real results, real impact on businesses and careers
           </p>
         </div>
@@ -250,18 +250,18 @@ export default function SuccessStories() {
                   {story.projectTitle}
                 </h3>
                 
-                <p className="text-gray-300 mb-4 text-sm line-clamp-3">
+                <p className="text-dark-muted mb-4 text-sm line-clamp-3">
                   {story.description}
                 </p>
                 
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="bg-white/5 rounded-lg p-3 border border-white/10">
                     <div className="text-lg font-bold text-green-400">{story.projectValue}</div>
-                    <div className="text-xs text-gray-400">Project Value</div>
+                    <div className="text-xs text-dark-muted">Project Value</div>
                   </div>
                   <div className="bg-white/5 rounded-lg p-3 border border-white/10">
                     <div className="text-lg font-bold text-blue-400">{story.duration}</div>
-                    <div className="text-xs text-gray-400">Duration</div>
+                    <div className="text-xs text-dark-muted">Duration</div>
                   </div>
                 </div>
                 
@@ -269,7 +269,7 @@ export default function SuccessStories() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-medium text-white text-sm">{story.clientName}</p>
-                      <p className="text-xs text-gray-400">{story.company}</p>
+                      <p className="text-xs text-dark-muted">{story.company}</p>
                     </div>
                     <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-400 to-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <ArrowRight className="w-4 h-4 text-white" />
@@ -302,7 +302,7 @@ export default function SuccessStories() {
                 {/* Left Column */}
                 <div>
                   <div className="h-80 bg-gradient-to-br from-purple-500/20 to-blue-600/20 rounded-2xl mb-8 border border-white/10 flex items-center justify-center">
-                    <span className="text-gray-300 font-medium">Project Showcase</span>
+                    <span className="text-dark-muted font-medium">Project Showcase</span>
                   </div>
                   
                   <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
@@ -312,7 +312,7 @@ export default function SuccessStories() {
                     </div>
                     <ul className="space-y-3">
                       {selectedStory.results.map((result: string, index: number) => (
-                        <li key={index} className="flex items-center text-gray-300">
+                        <li key={index} className="flex items-center text-dark-muted">
                           <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
                           {result}
                         </li>
@@ -342,7 +342,7 @@ export default function SuccessStories() {
                       {[...Array(selectedStory.rating)].map((_, i) => (
                         <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                       ))}
-                      <span className="ml-3 text-gray-300 font-medium">5.0 stars</span>
+                      <span className="ml-3 text-dark-muted font-medium">5.0 stars</span>
                     </div>
                     
                     <div className="bg-gradient-to-r from-blue-500/20 to-purple-600/20 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20">
@@ -350,7 +350,7 @@ export default function SuccessStories() {
                       <p className="text-white italic text-lg mb-4">"{selectedStory.testimonial}"</p>
                       <div className="border-t border-white/20 pt-4">
                         <p className="font-semibold text-white">{selectedStory.clientName}</p>
-                        <p className="text-gray-300">{selectedStory.clientTitle}, {selectedStory.company}</p>
+                        <p className="text-dark-muted">{selectedStory.clientTitle}, {selectedStory.company}</p>
                       </div>
                     </div>
                   </div>
@@ -358,11 +358,11 @@ export default function SuccessStories() {
                   <div className="grid grid-cols-2 gap-6 mb-8">
                     <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10">
                       <div className="text-3xl font-bold text-green-400 mb-2">{selectedStory.projectValue}</div>
-                      <div className="text-gray-400">Project Value</div>
+                      <div className="text-dark-muted">Project Value</div>
                     </div>
                     <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10">
                       <div className="text-3xl font-bold text-blue-400 mb-2">{selectedStory.duration}</div>
-                      <div className="text-gray-400">Duration</div>
+                      <div className="text-dark-muted">Duration</div>
                     </div>
                   </div>
 
@@ -379,7 +379,7 @@ export default function SuccessStories() {
                       </div>
                       <div>
                         <p className="font-semibold text-white text-lg">{selectedStory.freelancerName}</p>
-                        <p className="text-gray-300">{selectedStory.freelancerTitle}</p>
+                        <p className="text-dark-muted">{selectedStory.freelancerTitle}</p>
                       </div>
                     </div>
                   </div>
@@ -403,7 +403,7 @@ export default function SuccessStories() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Write Your Success Story?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-dark-muted mb-8">
             Join thousands of professionals who have transformed their careers and businesses on our platform
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

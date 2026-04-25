@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 export default function DottedSurfaceDemo() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-dark-primary dark:bg-black relative overflow-hidden">
       <DottedSurface className="size-full" />
       <div className="absolute inset-0 flex items-center justify-center">
         <div
@@ -14,10 +14,12 @@ export default function DottedSurfaceDemo() {
             'blur-[30px]',
           )}
         />
-        <h1 className="font-mono text-4xl font-semibold text-black dark:text-white z-10">
+        <h1 className="font-mono text-4xl font-semibold text-dark-primary dark:text-white z-10">
           Dotted Surface
         </h1>
       </div>
     </div>
   );
 }
+
+
