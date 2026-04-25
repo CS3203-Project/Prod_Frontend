@@ -25,6 +25,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({ className = 
   const [deletingConversation, setDeletingConversation] = useState<string | null>(null);
   const [userProfiles, setUserProfiles] = useState<Map<string, UserProfile>>(new Map());
   const [loadingProfiles, setLoadingProfiles] = useState<Set<string>>(new Set());
+  const [retrySeed, setRetrySeed] = useState(0);
 
   const handleSelectConversation = async (conversation: ConversationWithLastMessage) => {
     await selectConversation(conversation);
@@ -44,13 +45,15 @@ export const ConversationList: React.FC<ConversationListProps> = ({ className = 
     setShowNewConversation(false);
   };
 
+  const missingUserIds = conversations
+    .map(conv => conv.userIds.find(id => id !== currentUserId))
+    .filter((id): id is string => id !== undefined)
+    .filter(id => !userProfiles.has(id) && !loadingProfiles.has(id));
+
   // Fetch user profiles for conversations
   useEffect(() => {
     const fetchUserProfiles = async () => {
-      const userIds = conversations
-        .map(conv => conv.userIds.find(id => id !== currentUserId))
-        .filter((id): id is string => id !== undefined)
-        .filter(id => !userProfiles.has(id) && !loadingProfiles.has(id));
+      const userIds = missingUserIds;
 
       if (userIds.length === 0) return;
 
@@ -106,7 +109,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({ className = 
     };
 
     fetchUserProfiles();
-  }, [conversations, currentUserId, userProfiles, loadingProfiles]);
+  }, [missingUserIds, retrySeed]);
 
   const getOtherParticipant = (conversation: ConversationWithLastMessage) => {
     return conversation.userIds.find(id => id !== currentUserId) || 'Unknown User';
@@ -146,7 +149,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({ className = 
       <div className={`p-4 text-white/80 bg-black/40 backdrop-blur-sm border border-white/20 rounded-xl ${className}`}>
         <p className="text-sm mb-3">Error: {error}</p>
         <button
-          onClick={() => window.location.reload()}
+          onClick={() => setRetrySeed((prev) => prev + 1)}
           className="px-4 py-2 bg-white/20 text-white rounded-xl hover:bg-white/30 transition-all duration-300 font-medium border border-white/30 hover:border-white/40 relative overflow-hidden group"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>

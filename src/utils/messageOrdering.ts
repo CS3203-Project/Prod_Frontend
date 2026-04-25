@@ -16,15 +16,26 @@ export function sortMessagesByTimestamp(messages: MessageResponse[]): MessageRes
  * Maintains the sorted order while adding a new message
  */
 export function insertMessageInOrder(messages: MessageResponse[], newMessage: MessageResponse): MessageResponse[] {
-  // Check if message already exists to avoid duplicates
-  const existsIndex = messages.findIndex(msg => msg.id === newMessage.id);
-  if (existsIndex !== -1) {
-    return messages; // Message already exists, return unchanged
+  if (messages.some((msg) => msg.id === newMessage.id)) {
+    return messages;
   }
-  
-  // Add the new message and sort by timestamp
-  const newMessages = [...messages, newMessage];
-  return sortMessagesByTimestamp(newMessages);
+
+  const targetTime = new Date(newMessage.createdAt).getTime();
+  let left = 0;
+  let right = messages.length;
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+    const midTime = new Date(messages[mid].createdAt).getTime();
+    if (midTime <= targetTime) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+
+  const next = [...messages];
+  next.splice(left, 0, newMessage);
+  return next;
 }
 
 /**
@@ -32,21 +43,14 @@ export function insertMessageInOrder(messages: MessageResponse[], newMessage: Me
  * Used for pagination when loading more messages
  */
 export function mergeMessagesInOrder(olderMessages: MessageResponse[], currentMessages: MessageResponse[]): MessageResponse[] {
-  // Sort both arrays to ensure they're in chronological order
-  const sortedOlder = sortMessagesByTimestamp(olderMessages);
-  const sortedCurrent = sortMessagesByTimestamp(currentMessages);
-  
-  // Combine and remove duplicates based on message ID
-  const combined = [...sortedOlder, ...sortedCurrent];
-  const uniqueMessages = combined.reduce((acc, message) => {
-    if (!acc.find(msg => msg.id === message.id)) {
-      acc.push(message);
-    }
-    return acc;
-  }, [] as MessageResponse[]);
-  
-  // Final sort to ensure perfect chronological order
-  return sortMessagesByTimestamp(uniqueMessages);
+  const deduped = new Map<string, MessageResponse>();
+  for (const message of olderMessages) {
+    deduped.set(message.id, message);
+  }
+  for (const message of currentMessages) {
+    deduped.set(message.id, message);
+  }
+  return sortMessagesByTimestamp(Array.from(deduped.values()));
 }
 
 /**

@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+export const getAccessToken = (): string | null =>
+  localStorage.getItem('authToken') || localStorage.getItem('token');
+
 // Create axios instance with base configuration
 const apiClient = axios.create({
   baseURL: import.meta.env.PROD 
@@ -15,7 +18,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     // Add auth tokens here if needed
-    const token = localStorage.getItem('token');
+    const token = getAccessToken();
     const adminToken = localStorage.getItem('adminToken');
     
     // Use admin token if available (for admin routes)

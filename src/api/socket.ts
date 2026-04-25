@@ -24,3 +24,7 @@ export const socket = io(URL, {
   // by some reverse proxies or hosting platforms (and was causing 400 responses).
   transports: ['websocket'],
 });
+
+export const setSocketAuthToken = (token: string | null) => {
+  socket.auth = token ? { token } : {};
+};

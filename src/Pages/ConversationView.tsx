@@ -154,11 +154,11 @@ const ConversationViewInner: React.FC<{
               setRatingType('service');
               setRatingModalOpen(true);
             } else {
-              alert('Service information not found for this conversation.');
+              setConversationError('Service information not found for this conversation.');
             }
           } catch (serviceError) {
             console.error('Failed to get service from conversation:', serviceError);
-            alert('Failed to get service information. Please try again.');
+            setConversationError('Failed to get service information. Please try again.');
           }
         } else if (currentUserRole === 'PROVIDER') {
           // Rate customer - modal will handle finding customer ID
@@ -166,10 +166,10 @@ const ConversationViewInner: React.FC<{
           setRatingModalOpen(true);
         }
       } else {
-        alert('Both customer and provider must confirm the booking before rating.');
+        setConversationError('Both customer and provider must confirm the booking before rating.');
       }
     } catch (error) {
-      alert('Failed to check confirmation status. Please try again.');
+      setConversationError('Failed to check confirmation status. Please try again.');
     }
   };
 
@@ -209,11 +209,11 @@ const ConversationViewInner: React.FC<{
                 <span className="relative z-10">Back to Hub</span>
               </button>
               <button 
-                onClick={() => window.location.reload()} 
+                onClick={handleBackToHub}
                 className="px-6 py-3 bg-white/20 text-white rounded-xl hover:bg-white/30 transition-all duration-300 font-medium border border-white/30 hover:border-white/40 relative overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 group-hover:animate-pulse"></div>
-                <span className="relative z-10">Retry</span>
+                <span className="relative z-10">Back to Hub</span>
               </button>
             </div>
           </div>

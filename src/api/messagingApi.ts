@@ -1,6 +1,7 @@
 
-const BASE_URL = import.meta.env.PROD ? import.meta.env.VITE_API_BASE_URL_MESSAGES_PROD : import.meta.env.VITE_API_BASE_URL_MESSAGES;
 import apiClient from './axios';
+import { getAccessToken } from './axios';
+const BASE_URL = import.meta.env.PROD ? import.meta.env.VITE_API_BASE_URL_MESSAGES_PROD : import.meta.env.VITE_API_BASE_URL_MESSAGES;
 
 export interface ConversationResponse {
   id: string;
@@ -55,10 +56,7 @@ export interface SearchUser {
 export const messagingApi = {
   // Conversation endpoints
   async createConversation(data: CreateConversationDto): Promise<ConversationResponse> {
-    const token = localStorage.getItem('authToken') || localStorage.getItem('token');
-    
-    console.log('Creating conversation with token:', token ? 'Token present' : 'No token');
-    console.log('Request data:', data);
+    const token = getAccessToken();
     
     const response = await fetch(`${BASE_URL}/conversations`, {
       method: 'POST',
@@ -69,19 +67,13 @@ export const messagingApi = {
       credentials: 'include',
       body: JSON.stringify(data),
     });
-    
-    console.log('Response status:', response.status);
-    console.log('Response headers:', response.headers);
-    
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error('API Error:', errorData);
       throw new Error(errorData.message || `HTTP ${response.status}: Failed to create conversation`);
     }
     
-    const result = await response.json();
-    console.log('Conversation created successfully:', result);
-    return result;
+    return response.json();
   },
 
   async getConversations(userId: string, page = 1, limit = 10): Promise<PaginatedResponse<ConversationResponse>> {
@@ -149,10 +141,7 @@ export const messagingApi = {
 
   // Message endpoints
   async sendMessage(data: CreateMessageDto): Promise<MessageResponse> {
-    const token = localStorage.getItem('authToken') || localStorage.getItem('token');
-    
-    console.log('Sending message with token:', token ? 'Token present' : 'No token');
-    console.log('Message data:', data);
+    const token = getAccessToken();
     
     const response = await fetch(`${BASE_URL}/messages`, {
       method: 'POST',
@@ -163,18 +152,13 @@ export const messagingApi = {
       credentials: 'include',
       body: JSON.stringify(data),
     });
-    
-    console.log('Message response status:', response.status);
-    
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error('Message API Error:', errorData);
       throw new Error(errorData.message || `HTTP ${response.status}: Failed to send message`);
     }
     
-    const result = await response.json();
-    console.log('Message sent successfully:', result);
-    return result;
+    return response.json();
   },
 
   async getMessages(conversationId: string, page = 1, limit = 20): Promise<PaginatedResponse<MessageResponse>> {

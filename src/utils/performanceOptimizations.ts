@@ -4,7 +4,7 @@
  * Helpers for optimizing React component rendering and data fetching
  */
 
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect, useState, type ComponentType, type RefObject } from 'react';
 
 /**
  * Debounce Hook
@@ -15,7 +15,7 @@ export const useDebounce = <T extends (...args: any[]) => any>(
   callback: T,
   delay: number
 ): T => {
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const debouncedCallback = useCallback(
     (...args: any[]) => {
@@ -50,7 +50,7 @@ export const useThrottle = <T extends (...args: any[]) => any>(
   delay: number
 ): T => {
   const lastRunRef = useRef<number>(Date.now());
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const throttledCallback = useCallback(
     (...args: any[]) => {
@@ -117,7 +117,7 @@ export const useVirtualScroller = (
  * Syncs updates with browser refresh rate
  */
 export const useRequestAnimationFrame = (callback: () => void) => {
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
 
   const animate = useCallback(() => {
     callback();
@@ -139,12 +139,12 @@ export const useRequestAnimationFrame = (callback: () => void) => {
  * Detects when element comes into view
  */
 export const useIntersectionObserver = (
-  ref: React.RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement>,
   options: IntersectionObserverInit = {}
 ): boolean => {
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       setIsVisible(entry.isIntersecting);
     }, {
@@ -171,9 +171,9 @@ export const useIntersectionObserver = (
  * Detects if page is visible to user
  */
 export const usePageVisibility = (): boolean => {
-  const [isVisible, setIsVisible] = React.useState(true);
+  const [isVisible, setIsVisible] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleVisibilityChange = () => {
       setIsVisible(document.visibilityState === 'visible');
     };
@@ -191,14 +191,14 @@ export const usePageVisibility = (): boolean => {
  * Lazy Load Component Hook
  * Loads code splitting components efficiently
  */
-export const useLazyComponent = <T extends React.ComponentType<any>>(
+export const useLazyComponent = <T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>
 ): [T | null, boolean, Error | null] => {
-  const [component, setComponent] = React.useState<T | null>(null);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<Error | null>(null);
+  const [component, setComponent] = useState<T | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     importFunc()
       .then(module => {
         setComponent(module.default);

@@ -5,7 +5,7 @@
  * Replace your current App.tsx with this version to enable lazy loading
  */
 
-import { BrowserRouter as Router, Routes, Route, Suspense } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { lazy, Suspense as SuspenseComponent } from "react";
 import './App.css'
 import { AuthProvider } from './contexts/AuthContext';

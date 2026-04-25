@@ -5,7 +5,7 @@ import { userApi } from '../../api/userApi';
 import type { ConversationWithLastMessage, MessageResponse } from '../../api/messagingApi';
 import { useWebSocket } from '../../hooks/useWebSocket';
 import { useAuth } from '../../contexts/AuthContext';
-import { sortMessagesByTimestamp, insertMessageInOrder, debugMessageOrder } from '../../utils/messageOrdering';
+import { sortMessagesByTimestamp, insertMessageInOrder, mergeMessagesInOrder } from '../../utils/messageOrdering';
 
 interface MessagingContextType {
   conversations: ConversationWithLastMessage[];
@@ -52,9 +52,6 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
 
   // WebSocket integration
   const webSocket = useWebSocket({
-    url: import.meta.env.PROD
-      ? import.meta.env.VITE_API_BASE_URL_MESSAGES_PROD
-      : import.meta.env.VITE_API_BASE_URL_MESSAGES,
     userId,
     autoConnect: true,
   });
@@ -106,7 +103,7 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
       
       // Leave previous conversation if any
       if (activeConversation && webSocket.isConnected) {
-        webSocket.emit('conversation:leave', { userId });
+        webSocket.emit('conversation:leave', {});
       }
       
       setActiveConversation(conversation);
@@ -116,7 +113,6 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
       // Enter new conversation
       if (webSocket.isConnected) {
         webSocket.emit('conversation:enter', { 
-          userId, 
           conversationId: conversation.id 
         });
       }
@@ -127,8 +123,6 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
       // CRITICAL FIX: Since backend now returns newest first, reverse to get chronological order
       // Backend returns: [newest...oldest], we need: [oldest...newest] for UI display
       const orderedMessages = sortMessagesByTimestamp(messagesData.data);
-      debugMessageOrder(orderedMessages, 'Initial Load - Latest Messages');
-      
       setMessages(orderedMessages);
       setHasMoreMessages(messagesData.totalPages > 1);
       
@@ -187,7 +181,6 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
         // Send via WebSocket with user data for email notifications
         webSocket.emit('message:send', {
           content,
-          fromId: userId,
           toId: recipientId,
           conversationId: activeConversation.id,
           // Include user data for email notifications
@@ -217,11 +210,7 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
         });
         
         // CRITICAL FIX: Use utility function to maintain chronological order
-        setMessages(prev => {
-          const updatedMessages = insertMessageInOrder(prev, newMessage);
-          debugMessageOrder(updatedMessages, 'REST API Send');
-          return updatedMessages;
-        });
+        setMessages(prev => insertMessageInOrder(prev, newMessage));
         
         // Update the conversation's last message
         setConversations(prev => 
@@ -323,7 +312,6 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
         // Use WebSocket for real-time read receipts
         webSocket.emit('conversation:mark-read', {
           conversationId,
-          userId,
         });
         
       } else {
@@ -390,11 +378,7 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
       
       // Use utility function to merge OLDER messages with current messages
       setMessages(prev => {
-        // Since we're loading OLDER messages, they should come BEFORE current messages
-        const mergedMessages = [...orderedNewMessages, ...prev];
-        const finalOrdered = sortMessagesByTimestamp(mergedMessages);
-        debugMessageOrder(finalOrdered, `Load More Messages - Page ${nextPage}`);
-        return finalOrdered;
+        return mergeMessagesInOrder(orderedNewMessages, prev);
       });
       
       setMessagesPage(nextPage);
@@ -424,10 +408,7 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
       // Add message to current conversation if it matches active conversation
       if (activeConversation && messageData.conversationId === activeConversation.id) {
         setMessages(prev => {
-          // CRITICAL FIX: Use utility function to maintain chronological order
-          const updatedMessages = insertMessageInOrder(prev, messageData);
-          debugMessageOrder(updatedMessages, 'Message Received');
-          return updatedMessages;
+          return insertMessageInOrder(prev, messageData);
         });
       }
       // Update conversations list with new last message
@@ -455,10 +436,7 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
       // Add message to current conversation if it matches active conversation
       if (activeConversation && messageData.conversationId === activeConversation.id) {
         setMessages(prev => {
-          // CRITICAL FIX: Use utility function to maintain chronological order
-          const updatedMessages = insertMessageInOrder(prev, messageData);
-          debugMessageOrder(updatedMessages, 'Message Sent');
-          return updatedMessages;
+          return insertMessageInOrder(prev, messageData);
         });
       }
       // Update conversations list with new last message
@@ -602,8 +580,8 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
   useEffect(() => {
     if (webSocket.isConnected && userId && activeConversation?.id) {
       console.log('🔌 Joining user and entering conversation:', userId, activeConversation.id);
-      webSocket.emit('user:join', { userId });
-      webSocket.emit('conversation:enter', { userId, conversationId: activeConversation.id });
+      webSocket.emit('user:join', {});
+      webSocket.emit('conversation:enter', { conversationId: activeConversation.id });
     }
   }, [webSocket.isConnected, userId, activeConversation?.id]); // Only depend on essential identifiers
 
@@ -611,7 +589,7 @@ export const MessagingProvider: React.FC<MessagingProviderProps> = ({ children, 
   useEffect(() => {
     return () => {
       if (activeConversation && webSocket.isConnected) {
-        webSocket.emit('conversation:leave', { userId });
+        webSocket.emit('conversation:leave', {});
       }
     };
   }, [userId]); // Only run when userId changes or component unmounts

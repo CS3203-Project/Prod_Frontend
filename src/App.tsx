@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
 import { AuthProvider } from './contexts/AuthContext';
@@ -5,47 +6,42 @@ import { LoaderProvider } from './components/LoaderContext';
 import Layout from './components/Layout';
 import { Chatbot } from './components/Chatbot';
 import FloatingTranslateIcon from './components/FloatingTranslateIcon';
-// import Homepage from './Pages/Homepage.js'
 import HomepageEnhanced from './Pages/HomepageEnhanced';
-import Support from './Pages/Support.jsx'
-import Articles from './Pages/Articles.jsx'
-import SucessStories from './Pages/SucessStories.jsx'
-import HowWorks from './Pages/HowWorks.jsx'
-
-import OnlineServiceProviderProfile from './Pages/OnlineServiceProviderProfile';
-import PrintingServiceProviderProfile from "./Pages/PrintingServiceProviderProfile";
-
-
 import Signup from './Pages/Signup.tsx'
 import SignIn from './Pages/SignIn.tsx'
-// import BrowseServices from './Pages/BrowseServices';
 import BrowseServicesEnhanced from './Pages/BrowseServicesEnhanced';
-import ServiceCategoryPage from './Pages/ServiceCategoryPage';
-import ServiceDetailPage from './Pages/ServiceDetailPage';
-// import SearchResultsPage from './Pages/SearchResultsPage';
-import SearchResultsPageEnhanced from './Pages/SearchResultsPageEnhanced';
-import Profile from "./Pages/Profile.tsx";
-import BecomeProvider from "./Pages/BecomeProvider.tsx";
-import Provider from "./Pages/Provider.tsx";
-import CreateService from "./Pages/CreateService.tsx";
-import MessagingPage from "./Pages/NewMessagingPage.tsx";
-import ConversationHub from "./Pages/ConversationHub.tsx";
-import ConversationView from "./Pages/ConversationView.tsx";
-import AdminDashboard from "./Pages/AdminDashboard.tsx";
-import RateCustomerPage from "./Pages/RateCustomerPage.tsx";
-import RateServicePage from "./Pages/RateServicePage.tsx";
 import AdminLogin from "./Pages/AdminLogin.tsx";
-import Pricing from "./Pages/Pricing.tsx";
-import EasySetup from "./Pages/EasySetup.tsx";
-import SecurePayments from "./Pages/SecurePayments.tsx";
-import CustomerManagement from "./Pages/CustomerManagement.tsx";
-import AnalyticsDashboard from "./Pages/AnalyticsDashboard.tsx";
-import PaymentHistory from "./Pages/PaymentHistory.tsx";
-import ProviderEarnings from "./Pages/ProviderEarnings.tsx";
-import CheckoutPage from "./Pages/CheckoutPage.tsx";
-import NotificationsPage from "./Pages/NotificationsPage";
-import ServiceRequestPage from "./Pages/ServiceRequestPage";
-import ServiceRequestMatchesPage from "./Pages/ServiceRequestMatchesPage";
+
+const Support = lazy(() => import('./Pages/Support.jsx'));
+const Articles = lazy(() => import('./Pages/Articles.jsx'));
+const SucessStories = lazy(() => import('./Pages/SucessStories.jsx'));
+const HowWorks = lazy(() => import('./Pages/HowWorks.jsx'));
+const OnlineServiceProviderProfile = lazy(() => import('./Pages/OnlineServiceProviderProfile'));
+const PrintingServiceProviderProfile = lazy(() => import('./Pages/PrintingServiceProviderProfile'));
+const ServiceCategoryPage = lazy(() => import('./Pages/ServiceCategoryPage'));
+const ServiceDetailPage = lazy(() => import('./Pages/ServiceDetailPage'));
+const SearchResultsPageEnhanced = lazy(() => import('./Pages/SearchResultsPageEnhanced'));
+const Profile = lazy(() => import('./Pages/Profile.tsx'));
+const BecomeProvider = lazy(() => import('./Pages/BecomeProvider.tsx'));
+const Provider = lazy(() => import('./Pages/Provider.tsx'));
+const CreateService = lazy(() => import('./Pages/CreateService.tsx'));
+const MessagingPage = lazy(() => import('./Pages/NewMessagingPage.tsx'));
+const ConversationHub = lazy(() => import('./Pages/ConversationHub.tsx'));
+const ConversationView = lazy(() => import('./Pages/ConversationView.tsx'));
+const AdminDashboard = lazy(() => import('./Pages/AdminDashboard.tsx'));
+const RateCustomerPage = lazy(() => import('./Pages/RateCustomerPage.tsx'));
+const RateServicePage = lazy(() => import('./Pages/RateServicePage.tsx'));
+const Pricing = lazy(() => import('./Pages/Pricing.tsx'));
+const EasySetup = lazy(() => import('./Pages/EasySetup.tsx'));
+const SecurePayments = lazy(() => import('./Pages/SecurePayments.tsx'));
+const CustomerManagement = lazy(() => import('./Pages/CustomerManagement.tsx'));
+const AnalyticsDashboard = lazy(() => import('./Pages/AnalyticsDashboard.tsx'));
+const PaymentHistory = lazy(() => import('./Pages/PaymentHistory.tsx'));
+const ProviderEarnings = lazy(() => import('./Pages/ProviderEarnings.tsx'));
+const CheckoutPage = lazy(() => import('./Pages/CheckoutPage.tsx'));
+const NotificationsPage = lazy(() => import('./Pages/NotificationsPage'));
+const ServiceRequestPage = lazy(() => import('./Pages/ServiceRequestPage'));
+const ServiceRequestMatchesPage = lazy(() => import('./Pages/ServiceRequestMatchesPage'));
 
 function App() {
   return (
@@ -53,6 +49,7 @@ function App() {
       <LoaderProvider>
         <Router>
           <Layout>
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-white/80">Loading...</div>}>
             <Routes>
             <Route path="/" element={<HomepageEnhanced />} />
             {/* <Route path="/homepage-original" element={<Homepage />} /> */}
@@ -97,6 +94,7 @@ function App() {
             <Route path="/service-request/:id/matches" element={<ServiceRequestMatchesPage />} />
                     
           </Routes>
+          </Suspense>
           
           {/* Global Chatbot - appears on all pages */}
           <Chatbot />

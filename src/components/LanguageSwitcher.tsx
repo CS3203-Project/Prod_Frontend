@@ -89,7 +89,7 @@ const LanguageSwitcher = () => {
                   <span>{language.name}</span>
                 </div>
                 {i18n.language === language.code && (
-                  <Check className="h-4 w-4 text-white-400" />
+                  <Check className="h-4 w-4 text-white/80" />
                 )}
               </button>
             ))}
@@ -106,7 +106,7 @@ const LanguageSwitcher = () => {
               <div className="flex items-center space-x-3">
                 <span>Translation Icon</span>
               </div>
-              <div className="text-xs bg-white-500/20 text-white-400 px-2 py-1 rounded">
+              <div className="text-xs bg-white/20 text-white/80 px-2 py-1 rounded">
                 {localStorage.getItem('floatingTranslateIconVisible') === 'false' ? 'Hidden' : 'Visible'}
               </div>
             </button>

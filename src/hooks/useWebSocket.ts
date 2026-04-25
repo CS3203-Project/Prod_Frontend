@@ -1,9 +1,8 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
-import { socket } from '../api/socket';
+import { setSocketAuthToken, socket } from '../api/socket';
 import type { Socket } from 'socket.io-client';
 
 export interface UseWebSocketOptions {
-  url: string;
   userId?: string;
   autoConnect?: boolean;
 }
@@ -19,7 +18,7 @@ export interface UseWebSocketReturn {
 }
 
 export const useWebSocket = (options: UseWebSocketOptions): UseWebSocketReturn => {
-  const { url, userId, autoConnect = true } = options;
+  const { userId, autoConnect = true } = options;
   // Use shared socket instance
   const socketRef = useRef<Socket | null>(socket);
   const [isConnected, setIsConnected] = useState(false);
@@ -51,11 +50,12 @@ export const useWebSocket = (options: UseWebSocketOptions): UseWebSocketReturn =
       return; // Already connected
     }
 
-    console.log('🔌 Connecting to WebSocket:', url);
+    const token = localStorage.getItem('authToken') || localStorage.getItem('token');
+    setSocketAuthToken(token);
     
     // Only connect if not already
     socketRef.current?.connect();
-  }, [url, userId]);
+  }, [userId]);
 
   const disconnect = useCallback(() => {
     if (socketRef.current) {
@@ -101,7 +101,7 @@ export const useWebSocket = (options: UseWebSocketOptions): UseWebSocketReturn =
   // Reconnect when userId changes
   useEffect(() => {
     if (socketRef.current?.connected && userId) {
-      socketRef.current.emit('user:join', { userId });
+      socketRef.current.emit('user:join');
     }
   }, [userId]);
 
