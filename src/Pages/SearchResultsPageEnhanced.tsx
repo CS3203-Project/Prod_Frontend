@@ -42,7 +42,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
       navigate('/services', { replace: true });
     } else {
       // Set initial location filter if search had location
-      if (state.location?.latitude && state.location?.longitude) {
+      if (state.location?.latitude !== undefined && state.location?.longitude !== undefined) {
         setLocationFilter({
           latitude: state.location.latitude,
           longitude: state.location.longitude,
@@ -332,7 +332,7 @@ const SearchResultsPageEnhanced: React.FC = () => {
             {/* Interactive Search Results Map */}
             <SearchResultsMap
               services={sortedResults}
-              userLocation={locationFilter && locationFilter.latitude && locationFilter.longitude ? {
+              userLocation={locationFilter && locationFilter.latitude !== undefined && locationFilter.longitude !== undefined ? {
                 latitude: locationFilter.latitude,
                 longitude: locationFilter.longitude
               } : undefined}

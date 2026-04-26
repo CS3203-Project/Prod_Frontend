@@ -70,7 +70,7 @@ const LocationPicker: React.FC<LocationPickerProps> = ({
   useEffect(() => {
     if (value?.address && value.address !== inputValue) {
       setInputValue(value.address);
-    } else if (value?.latitude && value?.longitude && !value.address) {
+    } else if (value?.latitude !== undefined && value?.longitude !== undefined && !value.address) {
       setInputValue(`${value.latitude.toFixed(4)}, ${value.longitude.toFixed(4)}`);
     }
   }, [value]);
@@ -391,7 +391,7 @@ const LocationPicker: React.FC<LocationPickerProps> = ({
       )}
 
       {/* Map Visualizer - Show when map is enabled and there's a location */}
-      {showMap && value && value.latitude && value.longitude && (
+      {showMap && value && value.latitude !== undefined && value.longitude !== undefined && (
         <div className="mt-4">
           <LocationPickerMap
             value={value}
@@ -404,7 +404,7 @@ const LocationPicker: React.FC<LocationPickerProps> = ({
       )}
 
       {/* Current Location Display */}
-      {value && (value.latitude || value.address) && (
+      {value && (value.latitude !== undefined || value.address) && (
         <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded-lg">
           <div className="flex items-center space-x-2 text-sm text-blue-800">
             <Target className="h-4 w-4 flex-shrink-0" />
@@ -412,7 +412,7 @@ const LocationPicker: React.FC<LocationPickerProps> = ({
               <div className="font-medium truncate">
                 {value.address || 'Selected location'}
               </div>
-              {value.latitude && value.longitude && (
+              {value.latitude !== undefined && value.longitude !== undefined && (
                 <div className="text-xs text-blue-600 truncate">
                   {value.latitude.toFixed(4)}, {value.longitude.toFixed(4)}
                   {showRadius && value.radius && ` • ${value.radius}km radius`}

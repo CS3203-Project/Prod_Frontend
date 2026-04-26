@@ -76,6 +76,12 @@ const GoogleMap: React.FC<{
     }
   }, []);
 
+  useEffect(() => {
+    if (!map) return;
+    map.setCenter({ lat: center.lat || 6.9271, lng: center.lng || 79.8612 });
+    map.setZoom(zoom || 10);
+  }, [map, center, zoom]);
+
   // Add markers for services
   useEffect(() => {
     if (!map) return;
@@ -89,7 +95,7 @@ const GoogleMap: React.FC<{
     const newMarkers: google.maps.Marker[] = [];
 
     services.forEach((service, index) => {
-      if (service.latitude && service.longitude) {
+      if (service.latitude !== undefined && service.latitude !== null && service.longitude !== undefined && service.longitude !== null) {
         const markerPosition: google.maps.LatLngLiteral = {
           lat: service.latitude,
           lng: service.longitude
@@ -239,7 +245,7 @@ const SearchResultsMap: React.FC<SearchResultsMapProps> = ({
     let validServices = 0;
 
     services.forEach(service => {
-      if (service.latitude && service.longitude) {
+      if (service.latitude !== undefined && service.latitude !== null && service.longitude !== undefined && service.longitude !== null) {
         totalLat += service.latitude;
         totalLng += service.longitude;
         validServices++;
@@ -262,7 +268,7 @@ const SearchResultsMap: React.FC<SearchResultsMapProps> = ({
 
     if (userLocation) {
       const distances = services
-        .filter(service => service.latitude && service.longitude)
+        .filter(service => service.latitude !== undefined && service.latitude !== null && service.longitude !== undefined && service.longitude !== null)
         .map(service => {
           const R = 6371; // Earth's radius in km
           const dLat = (service.latitude! - userLocation.latitude) * Math.PI / 180;
@@ -275,6 +281,7 @@ const SearchResultsMap: React.FC<SearchResultsMapProps> = ({
           return R * c;
         });
 
+      if (distances.length === 0) return 12;
       const maxDistance = Math.max(...distances);
 
       if (maxDistance < 5) return 13;
@@ -289,7 +296,7 @@ const SearchResultsMap: React.FC<SearchResultsMapProps> = ({
 
     let minLat = 90, maxLat = -90, minLng = 180, maxLng = -180;
     services.forEach(service => {
-      if (service.latitude && service.longitude) {
+      if (service.latitude !== undefined && service.latitude !== null && service.longitude !== undefined && service.longitude !== null) {
         minLat = Math.min(minLat, service.latitude);
         maxLat = Math.max(maxLat, service.latitude);
         minLng = Math.min(minLng, service.longitude);
@@ -345,7 +352,9 @@ const SearchResultsMap: React.FC<SearchResultsMapProps> = ({
     );
   };
 
-  const servicesWithLocation = services.filter(service => service.latitude && service.longitude);
+  const servicesWithLocation = services.filter(
+    service => service.latitude !== undefined && service.latitude !== null && service.longitude !== undefined && service.longitude !== null
+  );
 
   return (
     <div className={`space-y-4 ${className}`}>

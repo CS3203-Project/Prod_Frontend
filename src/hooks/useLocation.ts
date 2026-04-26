@@ -133,7 +133,7 @@ export const useLocation = (options: UseLocationOptions = {}): UseLocationResult
       const info = await LocationService.getLocationFromIP();
       setLocationInfo(info);
       
-      if (info.latitude && info.longitude) {
+      if (info.latitude !== undefined && info.longitude !== undefined) {
         setCoordinates({
           latitude: info.latitude,
           longitude: info.longitude
@@ -157,7 +157,7 @@ export const useLocation = (options: UseLocationOptions = {}): UseLocationResult
       const info = await LocationService.geocodeAddress(address);
       setLocationInfo(info);
       
-      if (info.latitude && info.longitude) {
+      if (info.latitude !== undefined && info.longitude !== undefined) {
         setCoordinates({
           latitude: info.latitude,
           longitude: info.longitude

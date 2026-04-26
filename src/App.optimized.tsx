@@ -11,8 +11,6 @@ import './App.css'
 import { AuthProvider } from './contexts/AuthContext';
 import { LoaderProvider } from './components/LoaderContext';
 import Layout from './components/Layout';
-import { Chatbot } from './components/Chatbot';
-import FloatingTranslateIcon from './components/FloatingTranslateIcon';
 
 // Loading Spinner Component
 const RouteLoadingSpinner = () => (
@@ -126,11 +124,8 @@ function App() {
               </Routes>
             </SuspenseComponent>
             
-            {/* Global Chatbot - appears on all pages */}
-            <Chatbot />
 
-            {/* Global Translation Icon - appears on all pages */}
-            <FloatingTranslateIcon />
+
           </Layout>
         </Router>
       </LoaderProvider>

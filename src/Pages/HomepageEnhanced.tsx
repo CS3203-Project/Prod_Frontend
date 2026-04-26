@@ -35,7 +35,7 @@ export default function Homepage() {
 
   const doSearch = async () => {
     const hasQuery = searchQuery.trim().length > 0;
-    const hasLocation = locationFilter?.latitude && locationFilter?.longitude;
+    const hasLocation = locationFilter?.latitude !== undefined && locationFilter?.longitude !== undefined;
 
     // Allow search with just query OR just location OR both
     if (!hasQuery && !hasLocation) {
@@ -190,7 +190,7 @@ export default function Homepage() {
                         // Auto-search after a short delay to allow state to update
                         setTimeout(() => {
                           const hasQuery = search.trim().length > 0;
-                          const hasLocation = locationFilter?.latitude && locationFilter?.longitude;
+                          const hasLocation = locationFilter?.latitude !== undefined && locationFilter?.longitude !== undefined;
                           
                           if (hasQuery || hasLocation) {
                             doSearch();

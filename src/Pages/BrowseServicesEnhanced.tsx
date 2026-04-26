@@ -123,7 +123,7 @@ const BrowseServicesEnhanced: React.FC = () => {
   useEffect(() => {
     const performSearch = async () => {
       const hasQuery = state.searchTerm.trim().length >= 3;
-      const hasLocation = state.locationFilter?.latitude && state.locationFilter?.longitude;
+      const hasLocation = state.locationFilter?.latitude !== undefined && state.locationFilter?.longitude !== undefined;
 
       if (hasQuery || hasLocation) {
         await performHybridSearch();

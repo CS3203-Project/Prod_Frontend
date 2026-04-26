@@ -34,7 +34,6 @@ See `.env.example`. Core variables:
 - `VITE_API_BASE_URL_MESSAGES`, `VITE_API_BASE_URL_MESSAGES_PROD`
 - `VITE_STRIPE_PUBLISHABLE_KEY`
 - `VITE_GOOGLE_MAPS_API_KEY`
-- `VITE_GEMINI_API_KEY`
 
 ## Docker
 
@@ -54,7 +53,7 @@ This builds static assets and serves them from Nginx on port `8080`.
 ## Deployment Notes
 
 - Point production API URLs to backend ingress endpoints.
-- Keep Stripe/Google/Gemini keys environment-specific.
+- Keep Stripe and Google keys environment-specific.
 - Prefer immutable static asset serving with SPA fallback.
 
 ## License

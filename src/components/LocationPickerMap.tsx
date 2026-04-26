@@ -176,6 +176,7 @@ const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
   const [zoom, setZoom] = useState(13); // Increased zoom level for better detail
   const [showRadiusInput, setShowRadiusInput] = useState(false);
   const [manualRadius, setManualRadius] = useState<string>('');
+  const [mapsReady, setMapsReady] = useState(false);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
@@ -212,11 +213,17 @@ const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
     if (value?.address && value.address !== searchQuery && showSearch) {
       setSearchQuery(value.address);
     }
-    if (value?.latitude && value?.longitude) {
+    if (value?.latitude !== undefined && value?.longitude !== undefined) {
       setMapCenter({ lat: value.latitude, lng: value.longitude });
       setZoom(value.radius && value.radius > 0 ? 11 : 15);
     }
   }, [value, searchQuery, showSearch]);
+
+  useEffect(() => {
+    if (mapsReady) {
+      initializeAutocomplete();
+    }
+  }, [mapsReady, initializeAutocomplete]);
 
   const toggleSearch = () => {
     setShowSearch(!showSearch);
@@ -240,7 +247,7 @@ const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
   const handleMarkerDrag = (position: google.maps.LatLngLiteral) => {
     const location: LocationParams = {
       latitude: position.lat,
-      longitude: position.lat,
+      longitude: position.lng,
       address: value?.address || `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`,
       radius: value?.radius
     };
@@ -271,9 +278,9 @@ const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
         </div>
       );
     }
-
-    // Initialize autocomplete after Google Maps loads
-    setTimeout(initializeAutocomplete, 100);
+    if (!mapsReady) {
+      setMapsReady(true);
+    }
 
     return (
       <GoogleMap
@@ -281,7 +288,7 @@ const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
         zoom={zoom}
         onMapClick={handleMapClick}
         onMarkerDrag={handleMarkerDrag}
-        markerPosition={value?.latitude && value?.longitude ? { lat: value.latitude, lng: value.longitude } : undefined}
+        markerPosition={value?.latitude !== undefined && value?.longitude !== undefined ? { lat: value.latitude, lng: value.longitude } : undefined}
         showRadius={showRadiusInput && manualRadius ? true : false}
         radius={manualRadius ? parseFloat(manualRadius) : undefined}
         className="border border-gray-300"

@@ -80,7 +80,7 @@ export const hybridSearchApi = {
     }
     
     // Add location parameters
-    if (params.location?.latitude && params.location?.longitude) {
+    if (params.location?.latitude !== undefined && params.location?.longitude !== undefined) {
       searchParams.append('latitude', params.location.latitude.toString());
       searchParams.append('longitude', params.location.longitude.toString());
     } else if (params.location?.address) {

@@ -4,8 +4,6 @@ import './App.css'
 import { AuthProvider } from './contexts/AuthContext';
 import { LoaderProvider } from './components/LoaderContext';
 import Layout from './components/Layout';
-import { Chatbot } from './components/Chatbot';
-import FloatingTranslateIcon from './components/FloatingTranslateIcon';
 import HomepageEnhanced from './Pages/HomepageEnhanced';
 import Signup from './Pages/Signup.tsx'
 import SignIn from './Pages/SignIn.tsx'
@@ -96,11 +94,8 @@ function App() {
           </Routes>
           </Suspense>
           
-          {/* Global Chatbot - appears on all pages */}
-          <Chatbot />
 
-          {/* Global Translation Icon - appears on all pages */}
-          <FloatingTranslateIcon />
+
         </Layout>
       </Router>
       </LoaderProvider>
